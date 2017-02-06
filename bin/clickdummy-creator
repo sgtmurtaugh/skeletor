@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+'use strict';
+
+//TODO
+
+var nopt              = require('nopt');
+var fs                = require('fs');
+var clickdummycreator = require('../lib');
+
+// import gulp              from 'gulp';
+// import plugins           from 'gulp-load-plugins';
+// import nopt              from 'nopt';
+// import fs                from 'fs';
+// import path              from 'path';
+// import yargs             from 'yargs';
+// import promise           from 'es6-promise';
+// import isRoot            from 'is-root';
+// import clickdummycreator from '../lib';
+
+// // Load all Gulp plugins into one variable
+// const $ = plugins();
+
+// Check for --production flag
+// const PRODUCTION = !!(yargs.argv.production);
+
+// Load settings from settings.yml
+// const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
+// const config = loadConfig();
+const config = clickdummycreator.utils.functions.loadConfig();
+
+
+
+// Options that can be passed to commands
+var options = {
+    "directory": String,
+    "frameworks": Boolean,
+    "install": Boolean
+};
+
+// Shorthands for the above commands
+var shorthands = {
+    "v": "--version",
+    "h": "--help",
+    "d": "--directory",
+    "f": "--frameworks",
+    "i": "--install"
+};
+
+var parsed = nopt(options, shorthands, process.argv);
+
+// cmd.args contains basic commands like "new" and "help"
+// cmd.opts contains options, like --libsass and --version
+var cmd = {
+    args: parsed.argv.remain,
+    opts: parsed
+};
+
+
+// No other arguments given
+if (typeof cmd.args[0] === 'undefined') {
+    // If -v or --version was passed, show the version of the CLI
+    if (typeof cmd.opts.version !== 'undefined') {
+        process.stdout.write("click-dummy-creator version " + require('../package.json').version + '\n');
+    }
+    // Otherwise, just show the help screen
+    else {
+        clickdummycreator.help();
+    }
+}
+
+// Arguments given
+else {
+    // If the command typed in doesn't exist, show the help screen
+    if (typeof cmd.args[0] == 'undefined') {
+        clickdummycreator.help();
+    }
+    // Otherwise, just run it already!
+    else {
+        clickdummycreator.clone(cmd, config);
+    }
+}
+
