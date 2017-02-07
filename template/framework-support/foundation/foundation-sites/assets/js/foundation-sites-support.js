@@ -1,2 +1,1 @@
-//Testkommentar
 $(document).foundation();

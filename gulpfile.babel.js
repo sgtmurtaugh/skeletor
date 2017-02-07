@@ -122,7 +122,7 @@ function installCloneDependencies(cb) {
         return gulp.src(
             path.join(installVariables.projectFolder, "**/*")
         )
-            .pipe($.install({ args: ['only=dev']}));
+            .pipe($.install());
     }
     else {
         cb();
