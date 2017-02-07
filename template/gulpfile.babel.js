@@ -5,8 +5,8 @@ import plugins  from 'gulp-load-plugins';
 import fs       from 'fs';
 import path     from 'path';
 import yargs    from 'yargs';
-// import yaml     from 'js-yaml';
 import nsg      from 'node-sprite-generator';
+import svgsg    from 'svg-sprite';
 import promise  from 'es6-promise';
 import browser  from 'browser-sync';
 
@@ -99,7 +99,76 @@ function generateSprite(folder) {
         padding: 30
       }
     }, function (err) {
-      console.log('Sprite for \'' + folder + '\' generated!');
+        if (null == err) {
+            console.log('Sprite for \'' + folder + '\' generated!');
+        }
+        else {
+            console.log('Sprite generation failed.' + err);
+            console.log(err);
+        }
+    });
+    resolve();
+  });
+}
+
+
+/**
+ * Task-Function
+ * Determines all sprite folders inside the sprite-src folder and
+ * runs the generateSprite function on each of them.
+ */
+function generateSVGSprites(done) {
+    var spriter = svgsg({
+        log: 'debug',
+        dest: config.svgsg.sprite_target
+    });
+
+    var folders = getFolders(config.svgsg.sprite_src);
+    folders.forEach( function (folder) {
+        return generateSVGSprite(spriter, folder);
+    });
+    done();
+}
+
+/**
+ * TODO
+ * Creates and runs the Node-Sprite-Generator on the given folder.
+ * Only PNG files will be used for the sprite. The output is a sprite PNG and a
+ * SASS source file with all containing image informations.
+ * @param spriter
+ * @param folder
+ * @returns {*}
+ */
+function generateSVGSprite(spriter, folder) {
+  return new Promise(function(resolve, reject) {
+    console.log('Start generating SVG-sprite for \'' + folder + '\' ...');
+//TODO
+    svgsg.compile({
+      css: {
+        sprite: config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg',
+        layout: 'packed',
+        dimensions: true,
+        render: {
+            css: true,
+            scss: true
+        }
+      }
+    }, function(error, result, cssData) {
+      if (null == err) {
+        for (var type in result.css) {
+          console.log('type: ' + type);
+          console.log('path: ' + result.css[type].path);
+          // TODO
+          //mkdirp.sync(path.dirname(result.css[type].path));
+          //fs.writeFileSync(result.css[type].path, result.css[type].contents);
+
+          console.log('SVG-Sprite for \'' + folder + '\' generated!');
+        }
+      }
+      else {
+        console.log('SVG-Sprite generation failed.' + err);
+        console.log(err);
+      }
     });
     resolve();
   });
@@ -224,6 +293,14 @@ function watch(done) {
  */
 gulp.task('generate-sprites',
     generateSprites
+);
+
+/**
+ * Task: generate-svg-sprites
+ * runs: generateSVGSprites function
+ */
+gulp.task('generate-svg-sprites',
+    generateSVGSprites
 );
 
 /**

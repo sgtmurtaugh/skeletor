@@ -10,6 +10,9 @@
   "author": "Carsten Kraus <sgt_murtaugh@gmx.de>",
   "license": "GNU GENERAL PUBLIC LICENSE",
   "devDependencies": {
+    "browser-sync": "^2.15.0",
+    "node-sprite-generator": "^0.10.2",
+    "svg-sprite": "^1.3.6"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.3.13",
