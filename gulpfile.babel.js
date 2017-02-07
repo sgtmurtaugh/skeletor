@@ -78,7 +78,7 @@ function addBaseTemplates() {
  * @param cb
  * @return {*}
  * <p>When a clone with the given name doesn't exists, the sources will be copied to the destination folder.
- * Furthermore all 'click-dummy-creator-placeholder'-placeholders will be replaced in files and file- / folder-names by
+ * Furthermore all 'clickdummy-creator-placeholder'-placeholders will be replaced in files and file- / folder-names by
  * the clone name.
  */
 function cloneTemplate(cb) {
@@ -98,17 +98,17 @@ function cloneTemplate(cb) {
         dot: true
     })
         .pipe($.rename(function (file) {
-            if (file.basename.match(/click-dummy-creator-placeholder/)) {
-                file.basename = file.basename.replace(/click-dummy-creator-placeholder/, installVariables.name);
+            if (file.basename.match(/clickdummy-creator-placeholder/)) {
+                file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
             }
 
-            if (file.dirname.match(/click-dummy-creator-placeholder/)) {
-                file.dirname = file.dirname.replace(/click-dummy-creator-placeholder/, installVariables.name);
+            if (file.dirname.match(/clickdummy-creator-placeholder/)) {
+                file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
             }
 
             return file;
         }))
-        .pipe($.replace("click-dummy-creator-placeholder", installVariables.name))
+        .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
         .pipe(gulp.dest(installVariables.projectFolder));
 }
 
@@ -221,17 +221,17 @@ function addFrameworkTemplates(cb) {
     else {
         return gulpSrc
             .pipe($.rename(function (file) {
-                if (file.basename.match(/click-dummy-creator-placeholder/)) {
-                    file.basename = file.basename.replace(/click-dummy-creator-placeholder/, installVariables.name);
+                if (file.basename.match(/clickdummy-creator-placeholder/)) {
+                    file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
                 }
 
-                if (file.dirname.match(/click-dummy-creator-placeholder/)) {
-                    file.dirname = file.dirname.replace(/click-dummy-creator-placeholder/, installVariables.name);
+                if (file.dirname.match(/clickdummy-creator-placeholder/)) {
+                    file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
                 }
 
                 return file;
             }))
-            .pipe($.replace("click-dummy-creator-placeholder", installVariables.name))
+            .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
             .pipe(gulp.dest(dest));
     }
 }
