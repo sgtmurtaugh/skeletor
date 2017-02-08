@@ -9,7 +9,7 @@
 [node-canvas]
 
 ##### Installing dependencies
-`$ su -c 'yum install gcc gcc_c++ cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel'`
+`$ su -c 'dnf install gcc gcc-c++ cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel'`
 in centos some font will not be installed by default, so need install it yourself
 
 `yum search arial`

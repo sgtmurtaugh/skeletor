@@ -2,8 +2,10 @@
 
 import gulp     from 'gulp';
 import plugins  from 'gulp-load-plugins';
+import glob     from 'glob';
 import fs       from 'fs';
 import path     from 'path';
+import mkdirp   from 'mkdirp';
 import yargs    from 'yargs';
 import nsg      from 'node-sprite-generator';
 import svgsg    from 'svg-sprite';
@@ -53,6 +55,16 @@ function getFolders(dir) {
       .filter(function (file) {
         return fs.statSync(path.join(dir, file)).isDirectory();
       });
+}
+
+/**
+ * Determines all files of a given directory
+ */
+function getFiles(dir) {
+    return fs.readdirSync(dir)
+        .filter(function (file) {
+            return fs.statSync(path.join(dir, file)).isFile();
+        });
 }
 
 /* ------------------------------
@@ -124,9 +136,28 @@ function generateSVGSprites(done) {
     });
 
     var folders = getFolders(config.svgsg.sprite_src);
-    folders.forEach( function (folder) {
-        return generateSVGSprite(spriter, folder);
-    });
+
+    if (null != folders) {
+        folders.forEach( function (folder) {
+            if (null != folder) {
+                var cwd = path.join(config.svgsg.sprite_src, folder);
+                var files = glob.glob.sync('**/*.svg', {cwd: cwd});
+
+                if (null != files) {
+                    files.forEach(function(file) {
+                        if (null != file) {
+                            spriter.add(
+                                path.resolve(path.join(cwd, file)),
+                                file,
+                                fs.readFileSync(path.join(cwd, file), {encoding: 'utf-8'})
+                            );
+                        }
+                    });
+                }
+                return generateSVGSprite(spriter, folder);
+            }
+        });
+    }
     done();
 }
 
@@ -140,38 +171,35 @@ function generateSVGSprites(done) {
  * @returns {*}
  */
 function generateSVGSprite(spriter, folder) {
-  return new Promise(function(resolve, reject) {
-    console.log('Start generating SVG-sprite for \'' + folder + '\' ...');
-//TODO
-    svgsg.compile({
-      css: {
-        sprite: config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg',
-        layout: 'packed',
-        dimensions: true,
-        render: {
-            css: true,
-            scss: true
-        }
-      }
-    }, function(error, result, cssData) {
-      if (null == err) {
-        for (var type in result.css) {
-          console.log('type: ' + type);
-          console.log('path: ' + result.css[type].path);
-          // TODO
-          //mkdirp.sync(path.dirname(result.css[type].path));
-          //fs.writeFileSync(result.css[type].path, result.css[type].contents);
+    return new Promise(function(resolve, reject) {
+        console.log('Start generating SVG-sprite for \'' + folder + '\' ...');
 
-          console.log('SVG-Sprite for \'' + folder + '\' generated!');
-        }
-      }
-      else {
-        console.log('SVG-Sprite generation failed.' + err);
-        console.log(err);
-      }
+        spriter.compile({
+            css: {
+                sprite: config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg',
+                layout: 'packed',
+                dimensions: true,
+                render: {
+                    css: true,
+                    scss: true
+                }
+            }
+        }, function(err, result, cssData) {
+            if (null == err) {
+                for (var type in result.css) {
+                    mkdirp.sync(path.dirname(result.css[type].path));
+                    fs.writeFileSync(result.css[type].path, result.css[type].contents);
+
+                    console.log('SVG-Sprite for \'' + folder + '\' generated!');
+                }
+            }
+            else {
+                console.log('SVG-Sprite generation failed.' + err);
+                console.log(err);
+            }
+        });
+        resolve();
     });
-    resolve();
-  });
 }
 
 /* ------------------------------
