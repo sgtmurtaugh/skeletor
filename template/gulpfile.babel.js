@@ -57,15 +57,6 @@ function getFolders(dir) {
       });
 }
 
-/**
- * Determines all files of a given directory
- */
-function getFiles(dir) {
-    return fs.readdirSync(dir)
-        .filter(function (file) {
-            return fs.statSync(path.join(dir, file)).isFile();
-        });
-}
 
 /* ------------------------------
  *  ## Sprite Functions
@@ -173,6 +164,7 @@ function generateSVGSprites(done) {
 function generateSVGSprite(spriter, folder) {
     return new Promise(function(resolve, reject) {
         console.log('Start generating SVG-sprite for \'' + folder + '\' ...');
+console.log('path-info: ' + config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg');
 
         spriter.compile({
             css: {
@@ -182,14 +174,19 @@ function generateSVGSprite(spriter, folder) {
                 render: {
                     css: true,
                     scss: true
-                }
+                },
+
+                prefix: config.svgsg.sprite_prefix,
+                bust: false
             }
         }, function(err, result, cssData) {
             if (null == err) {
                 for (var type in result.css) {
                     mkdirp.sync(path.dirname(result.css[type].path));
                     fs.writeFileSync(result.css[type].path, result.css[type].contents);
-
+console.log('type: ' + type);
+console.log('css-type' + result.css[type]);
+console.log('css-type-path: ' + result.css[type].path);
                     console.log('SVG-Sprite for \'' + folder + '\' generated!');
                 }
             }
