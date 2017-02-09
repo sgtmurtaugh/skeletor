@@ -108,7 +108,7 @@ function cloneTemplate(cb) {
 
             return file;
         }))
-        .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
+        .pipe($.replace("clickdummy-creator-placeholder", installVariables.name, { skipBinary: true }))
         .pipe(gulp.dest(installVariables.projectFolder));
 }
 
