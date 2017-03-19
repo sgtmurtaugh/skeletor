@@ -24,7 +24,8 @@ const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from settings.yml
 // const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
-const config = loadConfig();
+const config = loadCoreConfig();
+const spriteConfig = loadConfig('sprite.config.json');
 
 
 
@@ -39,12 +40,23 @@ const config = loadConfig();
 /**
  * Load the JSON Config
  */
-function loadConfig() {
-  // let ymlFile = fs.readFileSync('config.yml', 'utf8');
-  // return yaml.load(ymlFile);
+function loadCoreConfig() {
+    return loadConfig('config.json');
+}
 
-  let configFile = fs.readFileSync('config.json', 'utf-8');
-  return JSON.parse(configFile);
+/**
+ * Load the JSON Config file
+ */
+function loadConfig(file) {
+    let json = null;
+    if ( null != file ) {
+        let configFile = fs.readFileSync(file, 'utf-8');
+
+        if ( null != configFile ) {
+            json = JSON.parse(configFile);
+        }
+    }
+    return json;
 }
 
 /**
@@ -166,20 +178,30 @@ function generateSVGSprite(spriter, folder) {
         console.log('Start generating SVG-sprite for \'' + folder + '\' ...');
 console.log('path-info: ' + config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg');
 
-        spriter.compile({
-            css: {
-                sprite: config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg',
-                layout: 'packed',
-                dimensions: true,
-                render: {
-                    css: true,
-                    scss: true
-                },
 
-                prefix: config.svgsg.sprite_prefix,
-                bust: false
-            }
-        }, function(err, result, cssData) {
+// var sprite_config = loadConfig('sprite.config');
+// if ( null == sprite_config ) {
+//     sprite_config = {};
+// }
+//         sprite_config.sprite = config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg';
+
+        spriter.compile(
+            {
+                css: {
+                    sprite: config.svgsg.sprite_prefix + folder + config.svgsg.sprite_suffix + '.svg',
+                    layout: 'packed',
+                    dimensions: true,
+                    render: {
+                        css: true,
+                        scss: true
+                    },
+
+                    prefix: config.svgsg.sprite_prefix,
+                    bust: false
+                }
+            },
+            // sprite_config,
+            function(err, result, cssData) {
             if (null == err) {
                 for (var type in result.css) {
                     mkdirp.sync(path.dirname(result.css[type].path));

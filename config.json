@@ -39,7 +39,7 @@
       "css": "dist/assets/css",
       "images": "dist/assets/images",
       "javascript": "dist/assets/js",
-      "template": "../"
+      "template": "../test"
     },
     "frameworks": {
       "foundation_sites": {
@@ -94,6 +94,9 @@
       "apps": "^1.2.0",
       "emails": "^2.2.1",
       "sites": "^6.2.3"
+    },
+    "minimal": {
+
     }
   },
 
@@ -105,24 +108,6 @@
       "base": "site",
       "basic": "basic",
       "zurb": "zurb"
-    }
-  },
-
-  "themes": {
-    "basetheme": "core",
-    "activated": [
-      "core",
-      "theme_A",
-      "theme_B"
-    ],
-    "dependencies": {
-      "core": [
-      ],
-      "theme_A": [
-        "core"
-      ],
-      "theme_B": [
-      ]
     }
   }
 }

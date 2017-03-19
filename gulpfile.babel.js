@@ -21,14 +21,18 @@ var installVariables = {
     directory: null,
     frameworkSupport: null,
     framework: null,
+    frameworkVersion: null,
     bootstrap: null,
     foundation: null,
     preprocessorSupport: null,
-    less: null,
-    sass: null,
-    projectFolder: null,
-    installDependencies: null
+    preprocessors: null,
+    spriteGeneratorSupport: null,
+    spriteGenerators: null,
+    installDependencies: null,
+    projectFolder: null
 };
+// less: null,
+// sass: null,
 
 
 
@@ -137,15 +141,48 @@ function installCloneDependencies(cb) {
 function promptQuestions() {
     return gulp.src(process.cwd())
         .pipe($.prompt.prompt(questions(), function (answers) {
-                // The variables we need either came from the prompts, or the console arguments
+                // 1. question: Clone Name (name)
                 installVariables.name = answers.name;
+
+                // 2. question: Installation Directory (directory)
                 installVariables.directory = answers.directory;
+
+                // 3. question: Framework Support (frameworkSupport)
                 installVariables.frameworkSupport = answers.frameworkSupport;
+
+                // 4. question: Framework (framework)
                 installVariables.framework = answers.framework;
+
+                // 4a. / 4b question: Bootstrap Version (version) // Foundation Version (version)
+                installVariables.version = answers.version;
+
+                // 5a. question: Bootstrap Installation (bootstrap)
                 installVariables.bootstrap = answers.bootstrap;
+
+                // 5b. question: Foundation Installation (foundation)
                 installVariables.foundation = answers.foundation;
-                installVariables.projectFolder = path.join(installVariables.directory, installVariables.name);
+
+                // 6. question: Preprocessor Support (preprocessorSupport)
+                installVariables.preprocessorSupport = answers.preprocessorSupport;
+
+                // 7. question: Preprocessors (preprocessors)
+                installVariables.preprocessors = answers.preprocessors;
+
+                // 8. question: Sprite Generator Support (spriteGeneratorSupport)
+                installVariables.spriteGeneratorSupport = answers.spriteGeneratorSupport;
+
+                // 9. question: Sprite Generator List (spriteGenerators)
+                installVariables.spriteGenerators = answers.spriteGenerators;
+
+                // 10. question: Dependencies Installation (installDependencies)
                 installVariables.installDependencies = answers.installDependencies;
+
+                // Concatenated ProjectFolder
+                installVariables.projectFolder = path.join(
+                    installVariables.directory,
+                    installVariables.name
+                );
+
                 //TODO messages = utils.messages(name);
             })
         );
@@ -407,11 +444,11 @@ function addPreprocessorSupport(cb) {
             devDependencies: {}
         };
 
-        if (installVariables.less) {
+        if (installVariables.preprocessors.indexOf('less')) {
             bAddPreprocessor = addLESSSupport(packageJson);
         }
 
-        if (installVariables.sass) {
+        if (installVariables.preprocessors.indexOf('sass')) {
             bAddPreprocessor = addSASSSupport(packageJson);
         }
     }
