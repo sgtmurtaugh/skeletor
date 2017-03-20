@@ -19,16 +19,16 @@ var config = loadJSONConfig();
 var installVariables = {
     name: null,
     directory: null,
-    frameworkSupport: null,
+    frameworkSupport: false,
     framework: null,
     frameworkVersion: null,
     bootstrap: null,
     foundation: null,
-    preprocessorSupport: null,
+    preprocessorSupport: false,
     preprocessors: null,
-    spriteGeneratorSupport: null,
+    spriteGeneratorSupport: false,
     spriteGenerators: null,
-    installDependencies: null,
+    installDependencies: false,
     projectFolder: null
 };
 // less: null,
@@ -134,13 +134,13 @@ function installCloneDependencies(cb) {
 }
 
 /**
- * prompt
+ * promptQuestions
  * <p>Prompts the cloning configurations to the user
  * @return {*}
  */
 function promptQuestions() {
     return gulp.src(process.cwd())
-        .pipe($.prompt.prompt(questions(), function (answers) {
+        .pipe($.prompt.prompt(questions(config), function (answers) {
                 // 1. question: Clone Name (name)
                 installVariables.name = answers.name;
 
@@ -153,8 +153,8 @@ function promptQuestions() {
                 // 4. question: Framework (framework)
                 installVariables.framework = answers.framework;
 
-                // 4a. / 4b question: Bootstrap Version (version) // Foundation Version (version)
-                installVariables.version = answers.version;
+                // 4a. / 4b question: Bootstrap Version (frameworkVersion) // Foundation Version (frameworkVersion)
+                installVariables.frameworkVersion = answers.frameworkVersion;
 
                 // 5a. question: Bootstrap Installation (bootstrap)
                 installVariables.bootstrap = answers.bootstrap;
@@ -210,10 +210,10 @@ function addFrameworkSupport(cb) {
 
     if ( null != installVariables.frameworkSupport ) {
         if (null != installVariables.frameworkSupport) {
-            if (installVariables.bootstrap) {
+            if (installVariables.framework == 'bootstrap') {
                 bAddFramework = addBootstrapSupport(packageJson);
             }
-            else if (null != installVariables.foundation) {
+            else if (installVariables.foundation == 'foundation') {
                 bAddFramework = addFoundationSupport(packageJson);
             }
         }
@@ -285,7 +285,8 @@ function addBootstrapSupport(packageJson) {
     if ( null != installVariables.frameworkSupport ) {
         if ( installVariables.bootstrap ) {
             bAddFramework = true;
-            packageJson.devDependencies.bootstrap = config.frameworks.bootstrap.bootstrap;
+console.log(config.frameworks.bootstrap.bootstrap[installVariables.frameworkVersion]);
+            packageJson.devDependencies.bootstrap = config.frameworks.bootstrap.bootstrap[installVariables.frameworkVersion];
         }
     }
     return bAddFramework;
@@ -308,7 +309,7 @@ function addFoundationSupport(packageJson) {
                         case "emails":
                         case "sites":
                             bAddFramework = true;
-                            packageJson.devDependencies['foundation-'+foundationType] = config.frameworks.foundation[foundationType];
+                            packageJson.devDependencies['foundation-'+foundationType] = config.frameworks.foundation[foundationType][installVariables.frameworkVersion];
                             break;
 
                         default:
@@ -435,25 +436,31 @@ function addFoundationTemplates() {
  * addPreprocessorSupport
  * <p>Delegates to separate preprocessor specific addPreprocessor-Methods
  */
-// TODO
 function addPreprocessorSupport(cb) {
-    let bAddPreprocessor = false;
+    let bAddPreprocessors = false;
+    let packageJson = null;
 
     if ( null != installVariables.preprocessorSupport ) {
-        let packageJson = {
+        packageJson = {
             devDependencies: {}
         };
+        let bAddPreprocessor = false;
 
-        if (installVariables.preprocessors.indexOf('less')) {
-            bAddPreprocessor = addLESSSupport(packageJson);
+        // 1. LESS
+        bAddPreprocessor = addLESSSupport(packageJson);
+        if ( !bAddPreprocessor ) {
+            bAddPreprocessors = bAddPreprocessor;
         }
 
-        if (installVariables.preprocessors.indexOf('sass')) {
-            bAddPreprocessor = addSASSSupport(packageJson);
+        // 2. SASS
+        bAddPreprocessor = addSASSSupport(packageJson);
+        if ( !bAddPreprocessor ) {
+            bAddPreprocessors = bAddPreprocessor;
         }
     }
 
-    if ( bAddPreprocessor ) {
+    // if bAddPreprocessor is true, add specific json informations to the package.json
+    if ( bAddPreprocessors ) {
         return gulp.src(
             path.join(installVariables.projectFolder, 'package.json')
         )
@@ -474,7 +481,10 @@ function addPreprocessorSupport(cb) {
 function addLESSSupport(packageJson) {
     let bAddPreprocessor = false;
 
-    if ( null == installVariables.frameworkSupport ) {
+    if ( installVariables.preprocessorSupport
+        && null != installVariables.preprocessors
+        && installVariables.preprocessors.indexOf('less') ) {
+
         bAddPreprocessor = true;
         packageJson.devDependencies.less = config.preprocessors.less;
     }
@@ -490,11 +500,92 @@ function addLESSSupport(packageJson) {
 function addSASSSupport(packageJson) {
     let bAddPreprocessor = false;
 
-    if ( null == installVariables.frameworkSupport ) {
+    if ( installVariables.preprocessorSupport
+            && null != installVariables.preprocessors
+            && installVariables.preprocessors.indexOf('sass') ) {
+
         bAddPreprocessor = true;
         packageJson.devDependencies.sass = config.preprocessors.sass;
     }
     return bAddPreprocessor;
+}
+
+/**
+ * addSpriteGeneratorSupport
+ * <p>Delegates to separate sprite generator specific addSpriteGenerator-Methods
+ */
+function addSpriteGeneratorSupport(cb) {
+    let bAddSpriteGenerators = false;
+    let packageJson = null;
+
+    if ( null != installVariables.spriteGeneratorSupport ) {
+        packageJson = {
+            devDependencies: {}
+        };
+        let bAddSpriteGenerator = false;
+
+        // 1. node-sprite-generator
+        bAddSpriteGenerator = addNodeSpriteGeneratorSupport(packageJson);
+        if ( !bAddSpriteGenerators ) {
+            bAddSpriteGenerators = bAddSpriteGenerator;
+        }
+
+        // 2. svg sprite
+        bAddSpriteGenerator = addSVGSpriteSupport(packageJson);
+        if ( !bAddSpriteGenerators ) {
+            bAddSpriteGenerators = bAddSpriteGenerator;
+        }
+    }
+
+    // if bAddPreprocessor is true, add specific json informations to the package.json
+    if ( bAddSpriteGenerators ) {
+        return gulp.src(
+            path.join(installVariables.projectFolder, 'package.json')
+        )
+            .pipe($.jsonEditor( packageJson ))
+            .pipe(gulp.dest( installVariables.projectFolder ));
+    }
+    else {
+        cb();
+    }
+}
+
+/**
+ * addNodeSpriteGeneratorSupport
+ * @param packageJson
+ * @returns
+ * <p>Adds node-sprite-generator specific package information to the given json config.
+ */
+function addNodeSpriteGeneratorSupport(packageJson) {
+    let bAddSpriteGenerator = false;
+
+    if ( installVariables.spriteGeneratorSupport
+        && null != installVariables.spriteGenerators
+        && installVariables.spriteGenerators.indexOf('nsg') ) {
+
+        bAddSpriteGenerator = true;
+        packageJson.devDependencies.nsg = config.spritegenerators.nsg;
+    }
+    return bAddSpriteGenerator;
+}
+
+/**
+ * addSVGSpriteSupport
+ * @param packageJson
+ * @returns
+ * <p>Adds SVG-Sprite specific package information to the given json config.
+ */
+function addSVGSpriteSupport(packageJson) {
+    let bAddSpriteGenerator = false;
+
+    if ( installVariables.spriteGeneratorSupport
+        && null != installVariables.spriteGenerators
+        && installVariables.spriteGenerators.indexOf('svg') ) {
+
+        bAddSpriteGenerator = true;
+        packageJson.devDependencies.svg = config.spritegenerators.svg;
+    }
+    return bAddSpriteGenerator;
 }
 
 
@@ -520,7 +611,16 @@ gulp.task('add-framework-support',
     gulp.series(
         addFrameworkTemplates,
         addFrameworkSupport,
+        addPreprocessorSupport,
     )
+);
+
+/**
+ * Task: install-clone-dependencies
+ * runs: installCloneDependencies function
+ */
+gulp.task('add-sprite-generator-support',
+    addSpriteGeneratorSupport
 );
 
 /**
@@ -541,6 +641,7 @@ gulp.task('default',
         promptQuestions,
         'clone-template',
         'add-framework-support',
+        'add-sprite-generator-support',
         'install-clone-dependencies',
     )
 );
