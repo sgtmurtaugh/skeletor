@@ -86,6 +86,17 @@
     }
   },
 
+  "templates": {
+    "base": "foundation-templates",
+    "apps": "apps",
+    "emails": "emails",
+    "sites": {
+      "base": "site",
+      "basic": "basic",
+      "zurb": "zurb"
+    }
+  },
+
   "frameworks": {
     "bootstrap": {
       "v3.x": "^3.3.7",
@@ -99,17 +110,6 @@
     },
     "foundation-sites": {
       "v6.x": "^6.2.3"
-    }
-  },
-
-  "templates": {
-    "base": "foundation-templates",
-    "apps": "apps",
-    "emails": "emails",
-    "sites": {
-      "base": "site",
-      "basic": "basic",
-      "zurb": "zurb"
     }
   },
 

@@ -26,7 +26,7 @@ let installVariables = {
     frameworkVersion: null,
 
     preprocessorSupport: false,
-    preprocessors: null,
+    preprocessor: null,
 
     spriteGeneratorSupport: false,
     spriteGenerators: null,
@@ -154,8 +154,8 @@ function promptQuestions() {
             // 6. question: Preprocessor Support (preprocessorSupport)
             installVariables.preprocessorSupport = answers.preprocessorSupport;
 
-            // 7. question: Preprocessors (preprocessors)
-            installVariables.preprocessors = answers.preprocessors;
+            // 7. question: Preprocessor (preprocessor)
+            installVariables.preprocessor = answers.preprocessor;
 
             // 8. question: Sprite Generator Support (spriteGeneratorSupport)
             installVariables.spriteGeneratorSupport = answers.spriteGeneratorSupport;
@@ -446,8 +446,8 @@ console.log(config.frameworks.bootstrap.bootstrap[installVariables.frameworkVers
 //     let bAddPreprocessor = false;
 //
 //     if ( installVariables.preprocessorSupport
-//             && null !== installVariables.preprocessors
-//             && installVariables.preprocessors.indexOf('less') ) {
+//             && null !== installVariables.preprocessor
+//             && installVariables.preprocessor.indexOf('less') ) {
 //
 //         bAddPreprocessor = true;
 //         packageJson.devDependencies.less = config.preprocessors.less;
@@ -465,8 +465,8 @@ console.log(config.frameworks.bootstrap.bootstrap[installVariables.frameworkVers
 //     let bAddPreprocessor = false;
 //
 //     if ( installVariables.preprocessorSupport
-//             && null !== installVariables.preprocessors
-//             && installVariables.preprocessors.indexOf('sass') ) {
+//             && null !== installVariables.preprocessor
+//             && installVariables.preprocessor.indexOf('sass') ) {
 //
 //         bAddPreprocessor = true;
 //         packageJson.devDependencies.sass = config.preprocessors.sass;
