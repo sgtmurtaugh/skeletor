@@ -88,21 +88,17 @@
 
   "frameworks": {
     "bootstrap": {
-      "bootstrap": {
-        "v3.x": "^3.3.7",
-        "v4.x": "^4.0.0"
-      }
+      "v3.x": "^3.3.7",
+      "v4.x": "^4.0.0"
     },
-    "foundation": {
-      "apps": {
-        "v1.x": "^1.2.0"
-      },
-      "emails": {
-        "v2.x": "^2.2.1"
-      },
-      "sites": {
-        "v6.x": "^6.2.3"
-      }
+    "foundation-apps": {
+      "v1.x": "^1.2.0"
+    },
+    "foundation-emails": {
+      "v2.x": "^2.2.1"
+    },
+    "foundation-sites": {
+      "v6.x": "^6.2.3"
     }
   },
 
@@ -127,10 +123,10 @@
   },
 
   "spritegenerators": {
-    "nsg": {
+    "node-sprite-generator": {
       "node-sprite-generator": "^0.10.2"
     },
-    "svg": {
+    "svg-sprite": {
       "svg-sprite": "^1.3.6"
     }
   }
