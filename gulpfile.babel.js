@@ -8,28 +8,37 @@ import isRoot from 'is-root';
 import messages from './src/messages';
 import questions from './src/questions';
 
+// load Gulp Plugins
 const $ = gulpLoadPlugins();
+
+// load JSON config
 const config = loadJSONConfig();
+
 const REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR = /clickdummy-creator-placeholder/;
 const PLACEHOLDER_CLICKDUMMY_CREATOR = 'clickdummy-creator-placeholder';
 
-let installVariables = {
-    directory: null,
-    name: null,
-    projectFolder: null,
+// container variable for all installation params (mapped answers object)
 
-    frameworkSupport: false,
-    framework: null,
-    frameworkVersion: null,
-
-    preprocessorSupport: false,
-    preprocessor: null,
-
-    spriteGeneratorSupport: false,
-    spriteGenerators: null,
-
-    installDependencies: false
-};
+/**
+ * installVariables
+ * @type {{}}
+ * installVariables.directory: installation directory
+ * installVariables.name: new template name
+ * installVariables.projectFolder: concatenated path of directory and name
+ *
+ * installVariables.frameworkSupport: boolean flag
+ * installVariables.framework: chosen framework name
+ * installVariables.frameworkVersion: chosen framework version
+ *
+ * installVariables.preprocessorSupport: boolean flag, true if preprocessor is configured and chosen
+ * installVariables.preprocessor: chosen preprocessor
+ *
+ * installVariables.spriteGeneratorSupport: boolean flag, true if spritegenerators are configured and chosen
+ * installVariables.spriteGenerators: array for with chosen spritegenerators
+ *
+ * installVariables.installDependencies: boolean flag
+ */
+let installVariables = {};
 
 
 
@@ -43,7 +52,7 @@ let installVariables = {
  * <p>Loads the config.json file
  */
 function loadJSONConfig() {
-    let configFile = fs.readFileSync(process.cwd() + '/config.json', 'utf-8');
+    let configFile = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8');
     return JSON.parse(configFile);
 }
 
@@ -75,22 +84,8 @@ function cloneTemplate(cb) {
         }
     });
 
-    let src = [ path.join(config.paths.src.template, '/**/*') ];
-
-    return gulp.src(src, { dot: true })
-        .pipe($.rename(function (file) {
-            if (file.basename.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
-                file.basename = file.basename.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
-            }
-
-            if (file.dirname.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
-                file.dirname = file.dirname.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
-            }
-
-            return file;
-        }))
-        .pipe($.replace(PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name, { skipBinary: true }))
-        .pipe(gulp.dest(installVariables.projectFolder));
+    let src = [ path.join(config.paths.template, config.paths.recursive) ];
+    return copyTemplatesSourcesToProjectFolder(src, installVariables.projectFolder, cb);
 }
 
 /**
@@ -100,7 +95,7 @@ function cloneTemplate(cb) {
  */
 function installCloneDependencies(cb) {
     if (installVariables.installDependencies) {
-        return gulp.src(path.join(installVariables.projectFolder, '/**/*'))
+        return gulp.src(path.join(installVariables.projectFolder, config.paths.recursive))
             .pipe($.install());
     }
     else {
@@ -116,41 +111,13 @@ function installCloneDependencies(cb) {
 function promptQuestions() {
     return gulp.src(process.cwd())
         .pipe($.prompt.prompt(questions($.prompt.inq, config), function (answers) {
-            // 1. question: Installation Directory (directory)
-            installVariables.directory = answers.directory;
+            // assign user answers to installVariables object
+            installVariables = answers;
 
-            // 2. question: Clone Name (name)
-            installVariables.name = answers.name;
-
-            // Concatenated ProjectFolder
+            // add projectFolder variable (concatenated path for directory and name)
             installVariables.projectFolder = path.join( installVariables.directory, installVariables.name );
 
-
-            // 3. question: Framework Support (frameworkSupport)
-            installVariables.frameworkSupport = answers.frameworkSupport;
-
-            // 4. question: Framework (framework)
-            installVariables.framework = answers.framework;
-
-            // 5. question: Framework Version (frameworkVersion)
-            installVariables.frameworkVersion = answers.frameworkVersion;
-
-            // 6. question: Preprocessor Support (preprocessorSupport)
-            installVariables.preprocessorSupport = answers.preprocessorSupport;
-
-            // 7. question: Preprocessor (preprocessor)
-            installVariables.preprocessor = answers.preprocessor;
-
-            // 8. question: Sprite Generator Support (spriteGeneratorSupport)
-            installVariables.spriteGeneratorSupport = answers.spriteGeneratorSupport;
-
-            // 9. question: Sprite Generator List (spriteGenerators)
-            installVariables.spriteGenerators = answers.spriteGenerators;
-
-            // 10. question: Dependencies Installation (installDependencies)
-            installVariables.installDependencies = answers.installDependencies;
-
-            //TODO messages = utils.messages(name);
+            // //TODO messages = utils.messages(name);
         })
     );
 }
@@ -196,14 +163,14 @@ function copyFrameworkTemplates(cb) {
     if (installVariables.frameworkSupport) {
         src = [
             path.join(
-                config.paths.src.frameworks,
+                config.paths.frameworks,
                 installVariables.framework,
                 installVariables.frameworkVersion,
-                '/**/*'
+                config.paths.recursive
             )
         ];
     }
-    return copyTemplatesSourcesToProjectFolder(src, cb);
+    return copyTemplatesSourcesToProjectFolder(src, null, cb);
 }
 
 
@@ -226,9 +193,11 @@ function addPreprocessorSupport(cb) {
             // the preprocessor key is an alias name, so we must iterate over the chosen preprocessor key  values to
             // get the real npm project names with its versions.
             for (let npmConfigKey in config.preprocessors[installVariables.preprocessor]) {
-                // and add the entry in devDependencies
-                packageJson.devDependencies[npmConfigKey] =
-                    config.preprocessors[installVariables.preprocessor][npmConfigKey];
+                if (config.preprocessors[installVariables.preprocessor].hasOwnProperty(npmConfigKey)) {
+                    // and add the entry in devDependencies
+                    packageJson.devDependencies[npmConfigKey] =
+                        config.preprocessors[installVariables.preprocessor][npmConfigKey];
+                }
             }
 
             // add preprocessor definition to package.json
@@ -244,18 +213,21 @@ function addPreprocessorSupport(cb) {
  */
 function copyPreprocessorTemplates(cb) {
     let src = null;
+    let dest = null;
 
     // when preprocessor support is enabled
     if (installVariables.preprocessorSupport) {
         src = [
             path.join(
-                config.paths.src.preprocessors,
+                config.paths.preprocessors,
                 installVariables.preprocessor,
-                '/**/*'
+                config.paths.recursive
             )
         ];
+
+        dest = path.join(installVariables.projectFolder, config.paths.assets, installVariables.preprocessor);
     }
-    return copyTemplatesSourcesToProjectFolder(src, cb);
+    return copyTemplatesSourcesToProjectFolder(src, dest, cb);
 }
 
 
@@ -279,9 +251,11 @@ function addSpriteGeneratorSupport(cb) {
             // values to get the real npm project names with its versions.
             for (let spriteGeneratorAlias of installVariables.spriteGenerators) {
                 for (let npmConfigKey in config.spritegenerators[spriteGeneratorAlias]) {
-                    // and add the entry in devDependencies
-                    packageJson.devDependencies[npmConfigKey] =
-                        config.spritegenerators[spriteGeneratorAlias][npmConfigKey];
+                    if (config.spritegenerators[spriteGeneratorAlias].hasOwnProperty(npmConfigKey)) {
+                        // and add the entry in devDependencies
+                        packageJson.devDependencies[npmConfigKey] =
+                            config.spritegenerators[spriteGeneratorAlias][npmConfigKey];
+                    }
                 }
             }
 
@@ -307,14 +281,14 @@ function copySpriteGeneratorTemplates(cb) {
         for (let spriteGenerator of installVariables.spriteGenerators) {
             src.push(
                 path.join(
-                    config.paths.src.spritegenerators,
+                    config.paths.spritegenerators,
                     spriteGenerator,
-                    '/**/*'
+                    config.paths.recursive
                 )
             );
         }
     }
-    return copyTemplatesSourcesToProjectFolder(src, cb);
+    return copyTemplatesSourcesToProjectFolder(src, null, cb);
 }
 
 
@@ -330,7 +304,7 @@ function copySpriteGeneratorTemplates(cb) {
 function addJSONConfigToPackageConfiguration(packageJson) {
     let gulpStream = null;
     if (null !== packageJson) {
-        gulpStream = gulp.src(path.join(installVariables.projectFolder, 'package.json'))
+        gulpStream = gulp.src(path.join(installVariables.projectFolder, config.paths.packageJson))
             .pipe($.jsonEditor(packageJson))
             .pipe(gulp.dest(installVariables.projectFolder));
     }
@@ -340,28 +314,32 @@ function addJSONConfigToPackageConfiguration(packageJson) {
 /**
  * copyTemplatesSourcesToProjectFolder
  * @param src
- * @param target
+ * @param dest
+ * @param cb
  * @return {*}
  * <p>Copy given src to target destination and replaces all 'clickdummy-creator-placeholder' placeholder in file- and
  * dirnames and inside files.
  */
-function copyTemplatesSourcesToProjectFolder(src, cb) {
+function copyTemplatesSourcesToProjectFolder(src, dest, cb) {
     if (null !== src) {
-        let dest = path.join(installVariables.projectFolder, '/src');
+        // set default destination (src folder inside projectFolder)
+        if (null === dest) {
+            dest = path.join(installVariables.projectFolder, config.paths.src);
+        }
 
         return gulp.src(src, { dot: true })
             .pipe($.rename(function (file) {
-                if (file.basename.match(/clickdummy-creator-placeholder/)) {
-                    file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
+                if (file.basename.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
+                    file.basename = file.basename.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
                 }
 
-                if (file.dirname.match(/clickdummy-creator-placeholder/)) {
-                    file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
+                if (file.dirname.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
+                    file.dirname = file.dirname.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
                 }
 
                 return file;
             }))
-            .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
+            .pipe($.replace(PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name, { skipBinary: true }))
             .pipe(gulp.dest(dest));
     }
     cb();
