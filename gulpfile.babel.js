@@ -2,23 +2,20 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
-
 import fs from 'fs';
 import path from 'path';
-
 import isRoot from 'is-root';
-import merge from 'merge2';
-
-import messages from './lib/messages';
-import questions from './lib/questions';
-
+import messages from './src/messages';
+import questions from './src/questions';
 
 const $ = gulpLoadPlugins();
 const config = loadJSONConfig();
+const REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR = /clickdummy-creator-placeholder/;
+const PLACEHOLDER_CLICKDUMMY_CREATOR = 'clickdummy-creator-placeholder';
 
 let installVariables = {
-    name: null,
     directory: null,
+    name: null,
     projectFolder: null,
 
     frameworkSupport: false,
@@ -64,15 +61,6 @@ function preflight(cb) {
 }
 
 /**
- * addBaseTemplates
- * @return string
- * <p>Returns the source path for the custom templates folder without framework support
- */
-function addBaseTemplates() {
-    return gulp.src( config.paths.src.framework_support.none + '/**/*', { dot: true } );
-}
-
-/**
  * cloneTemplate
  * @param cb
  * @return {*}
@@ -87,25 +75,21 @@ function cloneTemplate(cb) {
         }
     });
 
-    let src = [
-        config.paths.src.template,
-        '!' + config.paths.src.framework_support.base,
-        '!' + config.paths.src.framework_support.base + '/**'
-    ];
+    let src = [ path.join(config.paths.src.template, '/**/*') ];
 
     return gulp.src(src, { dot: true })
         .pipe($.rename(function (file) {
-            if (file.basename.match(/clickdummy-creator-placeholder/)) {
-                file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
+            if (file.basename.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
+                file.basename = file.basename.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
             }
 
-            if (file.dirname.match(/clickdummy-creator-placeholder/)) {
-                file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
+            if (file.dirname.match(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR)) {
+                file.dirname = file.dirname.replace(REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name);
             }
 
             return file;
         }))
-        .pipe($.replace("clickdummy-creator-placeholder", installVariables.name, { skipBinary: true }))
+        .pipe($.replace(PLACEHOLDER_CLICKDUMMY_CREATOR, installVariables.name, { skipBinary: true }))
         .pipe(gulp.dest(installVariables.projectFolder));
 }
 
@@ -116,7 +100,7 @@ function cloneTemplate(cb) {
  */
 function installCloneDependencies(cb) {
     if (installVariables.installDependencies) {
-        return gulp.src(path.join(installVariables.projectFolder, "**/*"))
+        return gulp.src(path.join(installVariables.projectFolder, '/**/*'))
             .pipe($.install());
     }
     else {
@@ -132,11 +116,11 @@ function installCloneDependencies(cb) {
 function promptQuestions() {
     return gulp.src(process.cwd())
         .pipe($.prompt.prompt(questions($.prompt.inq, config), function (answers) {
-            // 1. question: Clone Name (name)
-            installVariables.name = answers.name;
-
-            // 2. question: Installation Directory (directory)
+            // 1. question: Installation Directory (directory)
             installVariables.directory = answers.directory;
+
+            // 2. question: Clone Name (name)
+            installVariables.name = answers.name;
 
             // Concatenated ProjectFolder
             installVariables.projectFolder = path.join( installVariables.directory, installVariables.name );
@@ -172,8 +156,6 @@ function promptQuestions() {
 }
 
 
-
-
 /* ==============================
  *  # Functions (FRAMEWORKS)
  * ============================== */
@@ -183,372 +165,207 @@ function promptQuestions() {
  * @param cb
  * <p>Delegates to separate framework specific addFramework-Methods
  */
-// TODO!!!!
 function addFrameworkSupport(cb) {
-    let bAddFramework = false;
-    let packageJson = {
-        devDependencies: {}
-    };
-
     // when framework support is enabled
-    if ( null !== installVariables.frameworkSupport
-            && installVariables.frameworkSupport ) {
+    if (installVariables.frameworkSupport) {
+        let packageJson = {
+            devDependencies: {}
+        };
 
         // when framework selected
         if (null !== installVariables.framework) {
-            // framework bootstrap
-            if (installVariables.framework === 'bootstrap') {
-                bAddFramework = addBootstrapSupport(packageJson);
-            }
-            // framework foundation
-            // else if (installVariables.foundation === 'foundation') {
-            //     bAddFramework = addFoundationSupport(packageJson);
-            // }
-            else {
-                // TODO: log framework support enabled, but no specific definition found!
-            }
+            // add framework entry in devDependencies
+            packageJson.devDependencies[installVariables.framework] =
+                config.frameworks[installVariables.framework][installVariables.frameworkVersion];
+
+            // add framework definition to package.json
+            return addJSONConfigToPackageConfiguration(packageJson);
         }
     }
-
-    // when framework definition should be added to package.json
-    if ( bAddFramework ) {
-        return gulp.src( path.join( installVariables.projectFolder, 'package.json') )
-            .pipe( $.jsonEditor( packageJson ))
-            .pipe( gulp.dest( installVariables.projectFolder ) );
-    }
-    else {
-        cb();
-    }
+    cb();
 }
 
-// /**
-//  * addFrameworkTemplates
-//  * @param cb
-//  */
-// function addFrameworkTemplates(cb) {
-//     let gulpSrc = null;
-//     let dest = installVariables.projectFolder + '/src';
-//
-//     if ( installVariables.frameworkSupport ) {
-//         if ( installVariables.bootstrap ) {
-//             gulpSrc = addBootstrapTemplates();
-//         }
-//         else
-//         if ( null !== installVariables.foundation ) {
-//             gulpSrc = addFoundationTemplates();
-//         }
-//     }
-//     else {
-//         gulpSrc = addBaseTemplates();
-//     }
-//
-//     if ( null === gulpSrc ) {
-//         cb();
-//     }
-//     else {
-//         return gulpSrc.pipe($.rename(function (file) {
-//                 if (file.basename.match(/clickdummy-creator-placeholder/)) {
-//                     file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
-//                 }
-//
-//                 if (file.dirname.match(/clickdummy-creator-placeholder/)) {
-//                     file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
-//                 }
-//
-//                 return file;
-//             }))
-//             .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
-//             .pipe(gulp.dest(dest));
-//     }
-// }
-//
 /**
- * addBootstrapSupport
- * @param packageJson
- * @returns
- * <p>Adds Bootstrap specific package information to the given json config.
+ * copyFrameworkTemplates
+ * @param cb
  */
-function addBootstrapSupport(packageJson) {
-    let bAddFramework = false;
+function copyFrameworkTemplates(cb) {
+    let src = null;
 
-    // framework support is enabled
-    if ( null !== installVariables.frameworkSupport
-            && installVariables.frameworkSupport ) {
-
-        // when framework
-        if ( installVariables.framework === 'bootstrap' ) {
-            bAddFramework = true;
-console.log(config.frameworks.bootstrap.bootstrap[installVariables.frameworkVersion]);
-            packageJson.devDependencies.bootstrap = config.frameworks.bootstrap.bootstrap[installVariables.frameworkVersion];
-        }
+    // when framework support is enabled
+    if (installVariables.frameworkSupport) {
+        src = [
+            path.join(
+                config.paths.src.frameworks,
+                installVariables.framework,
+                installVariables.frameworkVersion,
+                '/**/*'
+            )
+        ];
     }
-    return bAddFramework;
+    return copyTemplatesSourcesToProjectFolder(src, cb);
 }
 
-// /**
-//  * addFoundationSupport
-//  * @param packageJson
-//  * <p>Adds Foundation specific package information to the given json config.
-//  */
-// function addFoundationSupport(packageJson) {
-//     let bAddFramework = false;
-//
-//     if ( null !== installVariables.frameworkSupport ) {
-//         if ( null !== installVariables.foundation ) {
-//             if ( Array.isArray(installVariables.foundation) ) {
-//                 installVariables.foundation.forEach(function (foundationType, index, array) {
-//                     switch ( foundationType ) {
-//                         case "apps":
-//                         case "emails":
-//                         case "sites":
-//                             bAddFramework = true;
-//                             packageJson.devDependencies['foundation-'+foundationType] = config.frameworks.foundation[foundationType][installVariables.frameworkVersion];
-//                             break;
-//
-//                         default:
-//                             console.log("unknown foundation type: " + foundationType);
-//                     }
-//                 });
-//             }
-//         }
-//     }
-//     return bAddFramework;
-// }
-//
-// /**
-//  * addBootstrapTemplates
-//  * @return string
-//  * <p>Return the source path for the custom bootstrap templates folder
-//  */
-// function addBootstrapTemplates() {
-//     let gulpSrc = null;
-//
-//     if ( installVariables.frameworkSupport ) {
-//         if ( installVariables.bootstrap ) {
-//             gulpSrc = gulp.src( config.paths.src.framework_support.bootstrap + '/**/*', { dot: true } )
-//         }
-//     }
-//     return gulpSrc;
-// }
-//
-// /**
-//  * addFoundationTemplates
-//  * @return string array
-//  * <p>Return the source path for the custom foundation templates folder.
-//  */
-// function addFoundationTemplates() {
-//     let gulpSrc = null;
-//     let src = null;
-//     let supportImport = '';
-//
-//     // determine foundation src types and create an import string for these activated types
-//     if ( installVariables.frameworkSupport ) {
-//         if ( null !== installVariables.foundation ) {
-//             if ( Array.isArray(installVariables.foundation) ) {
-//                 src = [];
-//
-//                 installVariables.foundation.forEach(function (foundationType, index, array) {
-//                     switch ( foundationType ) {
-//                         case "apps":
-//                         case "emails":
-//                         case "sites":
-//                             src.push( config.paths.src.framework_support.foundation[foundationType] + '/**/*' );
-//
-//                             supportImport = supportImport + '@import "foundation-'+foundationType+'-support.scss";' + '\r\n';
-//                             break;
-//
-//                         default:
-//                             console.log("unknown foundation type: " + foundationType);
-//                     }
-//                 });
-//             }
-//         }
-//     }
-//
-//     // if foundation sources are available, then add the foundation common files source
-//     if ( null !== src && src.length > 0 ) {
-//         if ( src.length === 1 ) {
-//             src.push( config.paths.src.framework_support.foundation['common'] + '/**/*' );
-//             gulpSrc = gulp.src( src, { dot: true } );
-//         }
-//         else {
-//             gulpSrc = gulp.src( src, {
-//                 dot: true,
-//                 base: config.paths.src.framework_support.foundation['common'] + '/..'
-//             });
-//
-//             let additionalGulpSrc = gulp.src( config.paths.src.framework_support.foundation['common'] + '/**/*',
-//                 { dot: true } );
-//
-//             gulpSrc = merge( gulpSrc, additionalGulpSrc );
-//         }
-//
-//         // when the foundation import string is not empty, then create a foundation support file with the imports.
-//         if ( supportImport.length > 0 ) {
-//             $.file( '_foundation-support.scss', supportImport, { src: false } )
-//                 .pipe( gulp.dest(installVariables.projectFolder + '/src/assets/scss/') );
-//         }
-//     }
-//     return gulpSrc;
-// }
-//
-//
-//
-// /* ==============================
-//  *  # Functions (PREPROCESSOR)
-//  * ============================== */
-//
-// /**
-//  * addPreprocessorSupport
-//  * <p>Delegates to separate preprocessor specific addPreprocessor-Methods
-//  */
-// function addPreprocessorSupport(cb) {
-//     let bAddPreprocessors = false;
-//     let packageJson = null;
-//
-//     if ( null !== installVariables.preprocessorSupport ) {
-//         packageJson = {
-//             devDependencies: {}
-//         };
-//         let bAddPreprocessor;
-//
-//         // 1. LESS
-//         bAddPreprocessor = addLESSSupport(packageJson);
-//         if ( !bAddPreprocessors ) {
-//             bAddPreprocessors = bAddPreprocessor;
-//         }
-//
-//         // 2. SASS
-//         bAddPreprocessor = addSASSSupport(packageJson);
-//         if ( !bAddPreprocessors ) {
-//             bAddPreprocessors = bAddPreprocessor;
-//         }
-//     }
-//
-//     // if bAddPreprocessor is true, add specific json informations to the package.json
-//     if ( bAddPreprocessors ) {
-//         return gulp.src( path.join(installVariables.projectFolder, 'package.json') )
-//             .pipe($.jsonEditor( packageJson ))
-//             .pipe(gulp.dest( installVariables.projectFolder ));
-//     }
-//     else {
-//         cb();
-//     }
-// }
-//
-// /**
-//  * addLESSSupport
-//  * @param packageJson
-//  * @returns
-//  * <p>Adds LESS specific package information to the given json config.
-//  */
-// function addLESSSupport(packageJson) {
-//     let bAddPreprocessor = false;
-//
-//     if ( installVariables.preprocessorSupport
-//             && null !== installVariables.preprocessor
-//             && installVariables.preprocessor.indexOf('less') ) {
-//
-//         bAddPreprocessor = true;
-//         packageJson.devDependencies.less = config.preprocessors.less;
-//     }
-//     return bAddPreprocessor;
-// }
-//
-// /**
-//  * addSASSSupport
-//  * @param packageJson
-//  * @returns
-//  * <p>Adds SASS specific package information to the given json config.
-//  */
-// function addSASSSupport(packageJson) {
-//     let bAddPreprocessor = false;
-//
-//     if ( installVariables.preprocessorSupport
-//             && null !== installVariables.preprocessor
-//             && installVariables.preprocessor.indexOf('sass') ) {
-//
-//         bAddPreprocessor = true;
-//         packageJson.devDependencies.sass = config.preprocessors.sass;
-//     }
-//     return bAddPreprocessor;
-// }
-//
-// /**
-//  * addSpriteGeneratorSupport
-//  * <p>Delegates to separate sprite generator specific addSpriteGenerator-Methods
-//  */
-// function addSpriteGeneratorSupport(cb) {
-//     let bAddSpriteGenerators = false;
-//     let packageJson = null;
-//
-//     if ( null !== installVariables.spriteGeneratorSupport ) {
-//         packageJson = {
-//             devDependencies: {}
-//         };
-//         let bAddSpriteGenerator;
-//
-//         // 1. node-sprite-generator
-//         bAddSpriteGenerator = addNodeSpriteGeneratorSupport(packageJson);
-//         if ( !bAddSpriteGenerators ) {
-//             bAddSpriteGenerators = bAddSpriteGenerator;
-//         }
-//
-//         // 2. svg sprite
-//         bAddSpriteGenerator = addSVGSpriteSupport(packageJson);
-//         if ( !bAddSpriteGenerators ) {
-//             bAddSpriteGenerators = bAddSpriteGenerator;
-//         }
-//     }
-//
-//     // if bAddPreprocessor is true, add specific json informations to the package.json
-//     if ( bAddSpriteGenerators ) {
-//         return gulp.src( path.join(installVariables.projectFolder, 'package.json') )
-//             .pipe($.jsonEditor( packageJson ))
-//             .pipe(gulp.dest( installVariables.projectFolder ));
-//     }
-//     else {
-//         cb();
-//     }
-// }
-//
-// /**
-//  * addNodeSpriteGeneratorSupport
-//  * @param packageJson
-//  * @returns
-//  * <p>Adds node-sprite-generator specific package information to the given json config.
-//  */
-// function addNodeSpriteGeneratorSupport(packageJson) {
-//     let bAddSpriteGenerator = false;
-//
-//     if ( installVariables.spriteGeneratorSupport
-//             && null !== installVariables.spriteGenerators
-//             && installVariables.spriteGenerators.indexOf('nsg') ) {
-//
-//         bAddSpriteGenerator = true;
-//         packageJson.devDependencies.nsg = config.spritegenerators.nsg;
-//     }
-//     return bAddSpriteGenerator;
-// }
-//
-// /**
-//  * addSVGSpriteSupport
-//  * @param packageJson
-//  * @returns
-//  * <p>Adds SVG-Sprite specific package information to the given json config.
-//  */
-// function addSVGSpriteSupport(packageJson) {
-//     let bAddSpriteGenerator = false;
-//
-//     if ( installVariables.spriteGeneratorSupport
-//             && null !== installVariables.spriteGenerators
-//             && installVariables.spriteGenerators.indexOf('svg') ) {
-//
-//         bAddSpriteGenerator = true;
-//         packageJson.devDependencies.svg = config.spritegenerators.svg;
-//     }
-//     return bAddSpriteGenerator;
-// }
+
+/* ==============================
+ *  # Functions (PREPROCESSOR)
+ * ============================== */
+
+/**
+ * addPreprocessorSupport
+ * <p>Delegates to separate preprocessor specific addPreprocessor-Methods
+ */
+function addPreprocessorSupport(cb) {
+    // when preprocessor support is enabled
+    if (installVariables.preprocessorSupport) {
+        let packageJson = {
+            devDependencies: {}
+        };
+
+        if (null !== installVariables.preprocessor) {
+            // the preprocessor key is an alias name, so we must iterate over the chosen preprocessor key  values to
+            // get the real npm project names with its versions.
+            for (let npmConfigKey in config.preprocessors[installVariables.preprocessor]) {
+                // and add the entry in devDependencies
+                packageJson.devDependencies[npmConfigKey] =
+                    config.preprocessors[installVariables.preprocessor][npmConfigKey];
+            }
+
+            // add preprocessor definition to package.json
+            return addJSONConfigToPackageConfiguration(packageJson);
+        }
+    }
+    cb();
+}
+
+/**
+ * copyPreprocessorTemplates
+ * @param cb
+ */
+function copyPreprocessorTemplates(cb) {
+    let src = null;
+
+    // when preprocessor support is enabled
+    if (installVariables.preprocessorSupport) {
+        src = [
+            path.join(
+                config.paths.src.preprocessors,
+                installVariables.preprocessor,
+                '/**/*'
+            )
+        ];
+    }
+    return copyTemplatesSourcesToProjectFolder(src, cb);
+}
+
+
+/* ==============================
+ *  # Functions (SPRITEGENERATOR)
+ * ============================== */
+
+/**
+ * addSpriteGeneratorSupport
+ * <p>Delegates to separate sprite generator specific addSpriteGenerator-Methods
+ */
+function addSpriteGeneratorSupport(cb) {
+    // when spritegenerator support is enabled
+    if (installVariables.spriteGeneratorSupport) {
+        let packageJson = {
+            devDependencies: {}
+        };
+
+        if (null !== installVariables.spriteGenerators) {
+            // the sprite generator key is an alias name, so we must iterate over the chosen spriteGenerators key
+            // values to get the real npm project names with its versions.
+            for (let spriteGeneratorAlias of installVariables.spriteGenerators) {
+                for (let npmConfigKey in config.spritegenerators[spriteGeneratorAlias]) {
+                    // and add the entry in devDependencies
+                    packageJson.devDependencies[npmConfigKey] =
+                        config.spritegenerators[spriteGeneratorAlias][npmConfigKey];
+                }
+            }
+
+            // add sprite generator definition to package.json
+            return addJSONConfigToPackageConfiguration(packageJson);
+        }
+    }
+    cb();
+}
+
+/**
+ * copySpriteGeneratorTemplates
+ * @param cb
+ */
+function copySpriteGeneratorTemplates(cb) {
+    let src = null;
+
+    // when spriteGenerator support is enabled
+    if (installVariables.spriteGeneratorSupport) {
+        src = [];
+
+        // for each sprite generator add concatenated src path
+        for (let spriteGenerator of installVariables.spriteGenerators) {
+            src.push(
+                path.join(
+                    config.paths.src.spritegenerators,
+                    spriteGenerator,
+                    '/**/*'
+                )
+            );
+        }
+    }
+    return copyTemplatesSourcesToProjectFolder(src, cb);
+}
+
+
+
+
+
+
+/**
+ * addJSONConfigToPackageConfiguration
+ * @param packageJson
+ * @return {*}
+ */
+function addJSONConfigToPackageConfiguration(packageJson) {
+    let gulpStream = null;
+    if (null !== packageJson) {
+        gulpStream = gulp.src(path.join(installVariables.projectFolder, 'package.json'))
+            .pipe($.jsonEditor(packageJson))
+            .pipe(gulp.dest(installVariables.projectFolder));
+    }
+    return gulpStream;
+}
+
+/**
+ * copyTemplatesSourcesToProjectFolder
+ * @param src
+ * @param target
+ * @return {*}
+ * <p>Copy given src to target destination and replaces all 'clickdummy-creator-placeholder' placeholder in file- and
+ * dirnames and inside files.
+ */
+function copyTemplatesSourcesToProjectFolder(src, cb) {
+    if (null !== src) {
+        let dest = path.join(installVariables.projectFolder, '/src');
+
+        return gulp.src(src, { dot: true })
+            .pipe($.rename(function (file) {
+                if (file.basename.match(/clickdummy-creator-placeholder/)) {
+                    file.basename = file.basename.replace(/clickdummy-creator-placeholder/, installVariables.name);
+                }
+
+                if (file.dirname.match(/clickdummy-creator-placeholder/)) {
+                    file.dirname = file.dirname.replace(/clickdummy-creator-placeholder/, installVariables.name);
+                }
+
+                return file;
+            }))
+            .pipe($.replace("clickdummy-creator-placeholder", installVariables.name))
+            .pipe(gulp.dest(dest));
+    }
+    cb();
+}
 
 
 
@@ -567,23 +384,36 @@ gulp.task('clone-template',
 
 /**
  * Task: add-framework-support
- * runs: addFrameworkTemplates and addFrameworkSupport function
+ * runs: copyFrameworkTemplates and addFrameworkSupport function
  */
 gulp.task('add-framework-support',
-    // gulp.series(
-    //     addFrameworkTemplates,
-        addFrameworkSupport,
-        // addPreprocessorSupport,
-    // )
+    gulp.series(
+        copyFrameworkTemplates,
+        addFrameworkSupport
+    )
 );
 
 /**
- * Task: install-clone-dependencies
- * runs: installCloneDependencies function
+ * Task: add-preprocessor-support
+ * runs: copyPreprocessorTemplates and addPreprocessorSupport function
  */
-// gulp.task('add-sprite-generator-support',
-//     addSpriteGeneratorSupport
-// );
+gulp.task('add-preprocessor-support',
+    gulp.series(
+        copyPreprocessorTemplates,
+        addPreprocessorSupport,
+    )
+);
+
+/**
+ * Task: add-sprite-generator-support
+ * runs: copySpriteGeneratorTemplates and addSpriteGeneratorSupport function
+ */
+gulp.task('add-sprite-generator-support',
+    gulp.series(
+        copySpriteGeneratorTemplates,
+        addSpriteGeneratorSupport
+    )
+);
 
 /**
  * Task: install-clone-dependencies
@@ -603,7 +433,8 @@ gulp.task('default',
         promptQuestions,
         'clone-template',
         'add-framework-support',
-        // 'add-sprite-generator-support',
+        'add-preprocessor-support',
+        'add-sprite-generator-support',
         'install-clone-dependencies',
     )
 );
