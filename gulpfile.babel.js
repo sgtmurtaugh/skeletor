@@ -38,7 +38,23 @@ const PLACEHOLDER_CLICKDUMMY_CREATOR = 'clickdummy-creator-placeholder';
  *
  * installVariables.installDependencies: boolean flag
  */
-let installVariables = {};
+let installVariables = {
+    directory: null,
+    name: null,
+    projectFolder: null,
+
+    frameworkSupport: false,
+    framework: null,
+    frameworkVersion: null,
+
+    preprocessorSupport: false,
+    preprocessor: null,
+
+    spriteGeneratorSupport: false,
+    spriteGenerators: null,
+
+    installDependencies: false
+};
 
 
 
@@ -78,13 +94,31 @@ function preflight(cb) {
  * the clone name.
  */
 function cloneTemplate(cb) {
-    fs.stat(installVariables.projectFolder, function(err, stat) {
-        if (err === null) {
-            cb(new Error(messages(installVariables.name).projectExists));
+// TODO!!!! At the moment directories can be overwritten
+    fs.access(installVariables.projectFolder, function(err, stat) {
+        if (err !== null) {
+            // EACCES: Permission denied
+            // EADDRINUSE: Address already in use
+            // ECONNREFUSED: Connection refused
+            // ECONNRESET: Connection reset by peer
+            // EEXIST: File exists
+            // EISDIR: Is a directory
+            // EMFILE: Too many open files in system
+            // ENOENT: No such file or directory
+            // ENOTDIR: Not a directory
+            // ENOTEMPTY: Directory not empty
+            // EPERM: Operation not permitted
+            // EPIPE: Broken pipe
+            // ETIMEDOUT: Operation timed out
+
+           if (err.code === 'EEXIST') {
+                cb(new Error(messages(installVariables.name).projectExists));
+            }
         }
     });
 
     let src = [ path.join(config.paths.template, config.paths.recursive) ];
+
     return copyTemplatesSourcesToProjectFolder(src, installVariables.projectFolder, cb);
 }
 
@@ -98,9 +132,7 @@ function installCloneDependencies(cb) {
         return gulp.src(path.join(installVariables.projectFolder, config.paths.recursive))
             .pipe($.install());
     }
-    else {
-        cb();
-    }
+    cb();
 }
 
 /**
@@ -135,32 +167,72 @@ function promptQuestions() {
 function addFrameworkSupport(cb) {
     // when framework support is enabled
     if (installVariables.frameworkSupport) {
-        let packageJson = {
-            devDependencies: {}
-        };
-
-        // when framework selected
-        if (null !== installVariables.framework) {
-            // add framework entry in devDependencies
-            packageJson.devDependencies[installVariables.framework] =
-                config.frameworks[installVariables.framework][installVariables.frameworkVersion];
-
-            // add framework definition to package.json
-            return addJSONConfigToPackageConfiguration(packageJson);
+        // and framework selected
+        if (!isEmpty(installVariables.framework)) {
+            return addNPMEntryToPackageConfiguration(
+                config.frameworks[installVariables.framework][installVariables.frameworkVersion],
+                cb
+            );
         }
     }
     cb();
 }
 
 /**
+ * copyFrameworkDependencies
+ * @param cb
+ * <p>Copies the framework dependencies (e.g. preprocessor template).
+ */
+function copyFrameworkDependencies(cb) {
+    let src = null;
+// TODO!!!!!
+    // when framework support is enabled
+    if (installVariables.frameworkSupport) {
+        // check dependencies
+        let jsonDependencies = getOwnPropertyValue(
+            config.frameworks[installVariables.framework][installVariables.frameworkVersion],
+            'dependencies'
+        );
+
+        if (null !== jsonDependencies) {
+            for ( let jsonDependencyKey in jsonDependencies ) {
+                let jsonDependencyValue = getOwnPropertyValue(jsonDependencies, jsonDependencyKey);
+
+                if ( jsonDependencyKey === 'preprocessor' ) {
+// TODO!!!
+//                    copyPreprocessorTemplates(config.preprocessors[jsonDependencyValue], cb);
+                }
+            }
+        }
+
+
+
+        // // create framework src path variable with user selected framework informations
+        // src = [
+        //     path.join(
+        //         config.paths.frameworks,
+        //         installVariables.framework,
+        //         installVariables.frameworkVersion,
+        //         config.paths.recursive
+        //     )
+        // ];
+    }
+
+    // return copyTemplatesSourcesToProjectFolder(src, null, cb);
+cb();
+}
+
+/**
  * copyFrameworkTemplates
  * @param cb
+ * <p>Copies the framework template for the user selected framework type to the default installation directory.
  */
 function copyFrameworkTemplates(cb) {
     let src = null;
 
     // when framework support is enabled
     if (installVariables.frameworkSupport) {
+        // create framework src path variable with user selected framework informations
         src = [
             path.join(
                 config.paths.frameworks,
@@ -170,6 +242,7 @@ function copyFrameworkTemplates(cb) {
             )
         ];
     }
+
     return copyTemplatesSourcesToProjectFolder(src, null, cb);
 }
 
@@ -185,23 +258,12 @@ function copyFrameworkTemplates(cb) {
 function addPreprocessorSupport(cb) {
     // when preprocessor support is enabled
     if (installVariables.preprocessorSupport) {
-        let packageJson = {
-            devDependencies: {}
-        };
-
-        if (null !== installVariables.preprocessor) {
-            // the preprocessor key is an alias name, so we must iterate over the chosen preprocessor key  values to
-            // get the real npm project names with its versions.
-            for (let npmConfigKey in config.preprocessors[installVariables.preprocessor]) {
-                if (config.preprocessors[installVariables.preprocessor].hasOwnProperty(npmConfigKey)) {
-                    // and add the entry in devDependencies
-                    packageJson.devDependencies[npmConfigKey] =
-                        config.preprocessors[installVariables.preprocessor][npmConfigKey];
-                }
-            }
-
-            // add preprocessor definition to package.json
-            return addJSONConfigToPackageConfiguration(packageJson);
+        // and preprocessor selected
+        if (!isEmpty(installVariables.preprocessor)) {
+            return addNPMEntryToPackageConfiguration(
+                config.preprocessors[installVariables.preprocessor],
+                cb
+            );
         }
     }
     cb();
@@ -210,6 +272,8 @@ function addPreprocessorSupport(cb) {
 /**
  * copyPreprocessorTemplates
  * @param cb
+ * <p>Copies the preprocessor template for the user selected preprocessor type to the corresponding preprocessor folder
+ * inside the assets of the installation directory.
  */
 function copyPreprocessorTemplates(cb) {
     let src = null;
@@ -217,6 +281,7 @@ function copyPreprocessorTemplates(cb) {
 
     // when preprocessor support is enabled
     if (installVariables.preprocessorSupport) {
+        // create preprocessor src path variable with user selected preprocessor informations
         src = [
             path.join(
                 config.paths.preprocessors,
@@ -242,25 +307,13 @@ function copyPreprocessorTemplates(cb) {
 function addSpriteGeneratorSupport(cb) {
     // when spritegenerator support is enabled
     if (installVariables.spriteGeneratorSupport) {
-        let packageJson = {
-            devDependencies: {}
-        };
-
-        if (null !== installVariables.spriteGenerators) {
-            // the sprite generator key is an alias name, so we must iterate over the chosen spriteGenerators key
-            // values to get the real npm project names with its versions.
-            for (let spriteGeneratorAlias of installVariables.spriteGenerators) {
-                for (let npmConfigKey in config.spritegenerators[spriteGeneratorAlias]) {
-                    if (config.spritegenerators[spriteGeneratorAlias].hasOwnProperty(npmConfigKey)) {
-                        // and add the entry in devDependencies
-                        packageJson.devDependencies[npmConfigKey] =
-                            config.spritegenerators[spriteGeneratorAlias][npmConfigKey];
-                    }
-                }
-            }
-
-            // add sprite generator definition to package.json
-            return addJSONConfigToPackageConfiguration(packageJson);
+        // and spriteGenerators selected
+        if (!isEmpty(installVariables.spriteGenerators)) {
+            return addMultipleNPMEntriesToPackageConfiguration(
+                config.spritegenerators,
+                installVariables.spriteGenerators,
+                cb
+            );
         }
     }
     cb();
@@ -269,6 +322,8 @@ function addSpriteGeneratorSupport(cb) {
 /**
  * copySpriteGeneratorTemplates
  * @param cb
+ * <p>Copies the spriteGenerator templates for the user selected spriteGenerator types to the default installation
+ * directory.
  */
 function copySpriteGeneratorTemplates(cb) {
     let src = null;
@@ -279,6 +334,7 @@ function copySpriteGeneratorTemplates(cb) {
 
         // for each sprite generator add concatenated src path
         for (let spriteGenerator of installVariables.spriteGenerators) {
+            // add src folder for the current spriteGenerator
             src.push(
                 path.join(
                     config.paths.spritegenerators,
@@ -292,23 +348,80 @@ function copySpriteGeneratorTemplates(cb) {
 }
 
 
-
-
-
+/* ==============================
+ *  # Functions (Base Functionality)
+ * ============================== */
 
 /**
- * addJSONConfigToPackageConfiguration
- * @param packageJson
+ * addMultipleNPMEntriesToPackageConfiguration
+ * @param json
+ * @param keyList
+ * @param cb
  * @return {*}
  */
-function addJSONConfigToPackageConfiguration(packageJson) {
-    let gulpStream = null;
-    if (null !== packageJson) {
-        gulpStream = gulp.src(path.join(installVariables.projectFolder, config.paths.packageJson))
-            .pipe($.jsonEditor(packageJson))
-            .pipe(gulp.dest(installVariables.projectFolder));
+function addMultipleNPMEntriesToPackageConfiguration(json, keyList, cb) {
+    // when spritegenerator support is enabled
+    if (!isEmpty(json)
+            && !isEmpty(keyList)) {
+
+        let packageJson = {
+            devDependencies: {}
+        };
+
+        // add preprocessor entries in devDependencies (multiple values possible)
+        for (let key of keyList) {
+            if (hasOwnProperty(json, key)) {
+                if (hasOwnProperty(json[key], 'npm')) {
+                    // for each preprocessor npm dependency
+                    for (let npmConfigKey in json[key].npm) {
+                        if (hasOwnProperty(json[key].npm, npmConfigKey)) {
+                            packageJson.devDependencies[npmConfigKey] = json[key].npm[npmConfigKey];
+                        }
+                    }
+                }
+            }
+            else {
+                console.log('[warn] addMultipleNPMEntriesToPackageConfiguration: current key cannot be found in' +
+                    ' json. key: ' + key);
+            }
+        }
+
+        // add sprite generator definition to package.json
+        return writeJSONConfigToPackageConfiguration(packageJson, cb);
     }
-    return gulpStream;
+    else
+    if (null === jsonPart) {
+        console.log('[warn] addMultipleNPMEntriesToPackageConfiguration: jsonPart is null.');
+    }
+    else
+    if (null === keyList) {
+        console.log('[warn] addMultipleNPMEntriesToPackageConfiguration: keyList is null/empty.');
+    }
+    cb();
+}
+
+/**
+ * addNPMEntryToPackageConfiguration
+ * @param json
+ * @param cb
+ * @return {*}
+ */
+function addNPMEntryToPackageConfiguration(json, cb) {
+    // when preprocessor support is enabled
+    if (null !== json) {
+        let packageJson = {
+            devDependencies: {}
+        };
+
+        if (hasOwnProperty(json, 'npm')) {
+            // add preprocessor entry in devDependencies
+            packageJson.devDependencies = json.npm;
+
+            // add framework definition to package.json
+            return writeJSONConfigToPackageConfiguration(packageJson, cb);
+        }
+    }
+    cb();
 }
 
 /**
@@ -345,7 +458,172 @@ function copyTemplatesSourcesToProjectFolder(src, dest, cb) {
     cb();
 }
 
+/**
+ * getOwnPropertyValue
+ * @param json
+ * @param key
+ * <p>Delegates to <code>hasOwnProperty(json, key) and if the check is true the key used as json access key and the
+ * return value will be returned.</code>
+ */
+function getOwnPropertyValue(json, key) {
+    if (hasOwnProperty(json, key)) {
+        return json[key];
+    }
+    return null;
+}
 
+/**
+ * hasOwnProperty
+ * @param json
+ * @param key
+ * <p>When both parameters are not null/empty the <code>hasOwnProperty(key)</code> is called on the json parameter with
+ * the key as parameter.
+ * The boolean return value will also returned. If the initial empty check fails false is returned.
+ */
+function hasOwnProperty(json, key) {
+    if (!isEmpty(json)
+            && !isEmpty(key)) {
+
+        return json.hasOwnProperty(key);
+    }
+    else {
+        if (isEmpty(json)) {
+            console.log('[warn] hasOwnProperty: json parameter is null/empty.');
+        }
+        if (isEmpty(key)) {
+            console.log('[warn] hasOwnProperty: key parameter is null/empty.');
+        }
+    }
+    return false;
+}
+
+/**
+ * hasOwnPropertyValue
+ * @param json
+ * @param key
+ * <p>Delegate to <code>getOwnPropertyValue(json, key)</code> and determines the return type. This value is delegated
+ * to <code>isEmpty(obj)</code> analyse for emptyness. The inverted boolean is returned.
+ */
+function hasOwnPropertyValue(json, key) {
+    return (! isEmpty( getOwnPropertyValue(json, key)));
+}
+
+/**
+ * writeJSONConfigToPackageConfiguration
+ * @param packageJson
+ * @param cb
+ * @return {*}
+ * <p>Adds the json snippet parameter to the package.json file in the installation directory.
+ */
+function writeJSONConfigToPackageConfiguration(packageJson, cb) {
+    if (null !== packageJson) {
+        return gulp.src(path.join(installVariables.projectFolder, config.paths.packageJson))
+            .pipe($.jsonEditor(packageJson))
+            .pipe(gulp.dest(installVariables.projectFolder));
+    }
+    cb();
+}
+
+/**
+ * getType
+ * @param obj
+ * @return {string}
+ * <p>Checks the type of the given parameter. Returns four different values:
+ * <dl>
+ *  <dt>'array'</dt>
+ *  <dd>If the obj is not null and the method <code>Array.isArray()</code> returns true the String 'array' is returned.</dd>
+ *
+ *  <dt>'object'</dt>
+ *  <dd>If the obj is null or of type Object the String 'object' is returned.</dd>
+ *
+ *  <dt>'other'</dt>
+ *  <dd>If the obj is not null and not one of the types Array, Object and String the value 'other' is returned.</dd>
+ *
+ *  <dt>'string'</dt>
+ *  <dd>If the obj is null or of type String the String 'string' is returned.</dd>
+ * </dl>
+ */
+function getType(obj) {
+    let type = 'object';
+
+    if (null !== obj) {
+        if (Array.isArray(obj)) {
+            type = 'array';
+        }
+        else
+        if (typeof obj === 'string') {
+            type = 'string';
+        }
+        else
+        if (typeof obj !== 'object') {
+            type = 'other';
+        }
+    }
+    return type;
+}
+
+/**
+ * isTypeArray
+ * @param obj
+ * @return {boolean}
+ * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
+ */
+function isTypeArray(obj) {
+    return ('array' === getType(obj));
+}
+
+/**
+ * isTypeObject
+ * @param obj
+ * @return {boolean}
+ * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
+ */
+function isTypeObject(obj) {
+    return ('object' === getType(obj));
+}
+
+/**
+ * isTypeOther
+ * @param obj
+ * @return {boolean}
+ * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
+ */
+function isTypeOther(obj) {
+    return ('other' === getType(obj));
+}
+
+/**
+ * isTypeString
+ * @param obj
+ * @return {boolean}
+ * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
+ */
+function isTypeString(obj) {
+    return ('string' === getType(obj));
+}
+
+/**
+ * isEmpty
+ * @param obj
+ * @return {boolean}
+ * <p>Checks the value depending on the type of the parameter object. Returns true, if the obj is null/'undefined', an
+ * empty Array or an empty String, otherwise true will be returned.
+ */
+function isEmpty(obj) {
+    if (null === obj
+            || obj === 'undefined') {
+        return true;
+    }
+    else
+    if (isTypeArray(obj)) {
+        return (obj.length === 0);
+    }
+    else
+    if (isTypeString(obj)) {
+        return (obj.trim().length === 0);
+    }
+    return false;
+}
 
 /* ==============================
  *  # Tasks
@@ -366,6 +644,7 @@ gulp.task('clone-template',
  */
 gulp.task('add-framework-support',
     gulp.series(
+        copyFrameworkDependencies,
         copyFrameworkTemplates,
         addFrameworkSupport
     )

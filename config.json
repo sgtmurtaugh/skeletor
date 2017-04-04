@@ -1,42 +1,89 @@
 {
   "project": {
-    "name": "click-dummy-creator",
+    "name": "clickdummy-creator",
     "version": "0.1.0"
   },
 
+
   "frameworks": {
     "bootstrap": {
-      "v3.x": "^3.3.7",
-      "v4.x": "^4.0.0"
+      "v3.x": {
+        "npm": {
+          "bootstrap": "^3.3.7"
+        },
+        "dependencies": {
+          "preprocessor": "less"
+        }
+      },
+      "v4.x": {
+        "npm": {
+          "bootstrap": "^4.0.0"
+        },
+        "dependencies": {
+          "preprocessor": "sass"
+        }
+      }
     },
     "foundation-apps": {
-      "v1.x": "^1.2.0"
+      "v1.x": {
+        "npm": {
+          "foundation-apps": "^1.2.0"
+        },
+        "dependencies": {
+          "preprocessor": "sass"
+        }
+      }
     },
     "foundation-emails": {
-      "v2.x": "^2.2.1"
+      "v2.x": {
+        "npm": {
+          "foundation-emails": "^2.2.1"
+        },
+        "dependencies": {
+          "preprocessor": "sass"
+        }
+      }
     },
     "foundation-sites": {
-      "v6.x": "^6.2.3"
+      "v6.x": {
+        "npm": {
+          "foundation-sites": "^6.2.3"
+        },
+        "dependencies": {
+          "preprocessor": "sass"
+        }
+      }
     }
   },
+
 
   "preprocessors": {
     "less": {
-      "gulp-less": "^3.3.0"
+      "npm": {
+        "gulp-less": "^3.3.0"
+      }
     },
     "sass": {
-      "gulp-sass": "^2.3.2"
+      "npm": {
+        "gulp-sass": "^2.3.2"
+      }
     }
   },
 
+
   "spritegenerators": {
     "node-sprite-generator": {
-      "node-sprite-generator": "^0.10.2"
+      "npm": {
+        "node-sprite-generator": "^0.10.2"
+      }
     },
     "svg-sprite": {
-      "svg-sprite": "^1.3.6"
+      "npm": {
+        "svg-sprite": "^1.3.6"
+      }
     }
   },
+
 
   "paths": {
     "packageJson": "package.json",
