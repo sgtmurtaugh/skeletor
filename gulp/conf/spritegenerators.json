@@ -1,0 +1,12 @@
+{
+  "node-sprite-generator": {
+    "npm": {
+      "node-sprite-generator": "^0.10.2"
+    }
+  },
+  "svg-sprite": {
+    "npm": {
+      "svg-sprite": "^1.3.6"
+    }
+  }
+}

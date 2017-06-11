@@ -1,0 +1,10 @@
+{
+  "packageJson": "package.json",
+  "template": "template",
+  "frameworks": "frameworks",
+  "preprocessors": "preprocessors",
+  "spritegenerators": "sprite-generators",
+  "recursive": "**/*",
+  "src": "src",
+  "assets": "src/assets"
+}

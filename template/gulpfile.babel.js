@@ -49,10 +49,10 @@ function loadCoreConfig() {
  */
 function loadConfig(file) {
     let json = null;
-    if ( null != file ) {
+    if ( null !== file ) {
         let configFile = fs.readFileSync(file, 'utf-8');
 
-        if ( null != configFile ) {
+        if ( null !== configFile ) {
             json = JSON.parse(configFile);
         }
     }
@@ -80,7 +80,7 @@ function getFolders(dir) {
  * runs the generateSprite function on each of them.
  */
 function generateSprites(done) {
-  var folders = getFolders(config.nsg.sprite_src);
+  let folders = getFolders(config.nsg.sprite_src);
   folders.forEach( function (folder) {
     return generateSprite(folder);
   });
@@ -114,7 +114,7 @@ function generateSprite(folder) {
         padding: 30
       }
     }, function (err) {
-        if (null == err) {
+        if (null === err) {
             console.log('Sprite for \'' + folder + '\' generated!');
         }
         else {
@@ -133,22 +133,22 @@ function generateSprite(folder) {
  * runs the generateSprite function on each of them.
  */
 function generateSVGSprites(done) {
-    var spriter = svgsg({
+    let spriter = svgsg({
         log: 'debug',
         dest: config.svgsg.sprite_target
     });
 
-    var folders = getFolders(config.svgsg.sprite_src);
+    let folders = getFolders(config.svgsg.sprite_src);
 
-    if (null != folders) {
+    if (null !== folders) {
         folders.forEach( function (folder) {
-            if (null != folder) {
-                var cwd = path.join(config.svgsg.sprite_src, folder);
-                var files = glob.glob.sync('**/*.svg', {cwd: cwd});
+            if (null !== folder) {
+                let cwd = path.join(config.svgsg.sprite_src, folder);
+                let files = glob.glob.sync('**/*.svg', {cwd: cwd});
 
-                if (null != files) {
+                if (null !== files) {
                     files.forEach(function(file) {
-                        if (null != file) {
+                        if (null !== file) {
                             spriter.add(
                                 path.resolve(path.join(cwd, file)),
                                 file,
@@ -202,8 +202,8 @@ console.log('path-info: ' + config.svgsg.sprite_prefix + folder + config.svgsg.s
             },
             // sprite_config,
             function(err, result, cssData) {
-            if (null == err) {
-                for (var type in result.css) {
+            if (null === err) {
+                for (let type in result.css) {
                     mkdirp.sync(path.dirname(result.css[type].path));
                     fs.writeFileSync(result.css[type].path, result.css[type].contents);
 console.log('type: ' + type);
