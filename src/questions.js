@@ -64,6 +64,11 @@ module.exports = function(inq, config) {
             let choices = [];
             let frameworks = config.frameworks;
 
+            choices.push({
+                name: 'none',
+                value: null
+            });
+
             for (let frameworkKey in frameworks) {
                 if (frameworkKey !== null
                         && frameworks.hasOwnProperty(frameworkKey)) {
@@ -115,24 +120,28 @@ module.exports = function(inq, config) {
                     });
                 }
             }
-
             return choices;
-        },
-        validate: function (frameworkVersion) {
-            return (frameworkVersion !== null && frameworkVersion.length > 0);
         },
         when: function (answers) {
             let bShowFrameworkVersionQuestion = answers.frameworkSupport;
             // if true, at least one framework is configured
             if (bShowFrameworkVersionQuestion) {
-                // when more than one framework is configured prompt question
-                // otherwise autoselect the only configured one.
-                let keys = Object.keys(config.frameworks[answers.framework]);
-                bShowFrameworkVersionQuestion = (keys.length > 1);
+                // check selected framework for null
+                let bHasFramework = (answers.framework !== null);
+                if (bHasFramework) {
+                    // when more than one framework is configured prompt question
+                    // otherwise autoselect the only configured one.
+                    let keys = Object.keys(config.frameworks[answers.framework]);
+                    bShowFrameworkVersionQuestion = (keys.length > 1);
 
-                if (!bShowFrameworkVersionQuestion) {
-                    // autoselect only configured one
-                    answers.frameworkVersion = keys[0];
+                    if (!bShowFrameworkVersionQuestion) {
+                        // autoselect only configured one
+                        answers.frameworkVersion = keys[0];
+                    }
+                }
+                else {
+                    // if framework value is null upate frameworkSupport answer!
+                    answers.frameworkSupport = bShowFrameworkVersionQuestion = false;
                 }
             }
             return bShowFrameworkVersionQuestion;
@@ -171,6 +180,11 @@ module.exports = function(inq, config) {
             let choices = [];
             let preprocessors = config.preprocessors;
 
+            choices.push({
+                name: 'none',
+                value: null
+            });
+
             for (let preprocessorKey in preprocessors) {
                 if ( preprocessorKey !== null
                         && preprocessors.hasOwnProperty(preprocessorKey)) {
@@ -182,9 +196,6 @@ module.exports = function(inq, config) {
             }
 
             return choices;
-        },
-        validate: function (preprocessors) {
-            return (preprocessors !== null && preprocessors.length > 0);
         },
         when: function (answers) {
             let bShowPreprocessorQuestion = answers.preprocessorSupport;
@@ -214,6 +225,11 @@ module.exports = function(inq, config) {
         type: 'confirm',
         default: true,
         when: function (answers) {
+            // When preprocessor is null (none option) update preprocessorSupport answer!
+            if ( answers.preprocessor === null ) {
+                answers.preprocessorSupport = false;
+            }
+
             return hasSpriteGeneratorSupport(answers);
         }
     });
@@ -226,6 +242,7 @@ module.exports = function(inq, config) {
         name: 'spriteGenerators',
         message: 'Choose Sprite Generators:',
         type: 'checkbox',
+        default: [],
         choices: function (answers) {
             let choices = [];
             let spriteGenerators = config.spritegenerators;
@@ -242,8 +259,11 @@ module.exports = function(inq, config) {
 
             return choices;
         },
-        validate: function (spriteGenerators) {
-            return (spriteGenerators !== null && spriteGenerators.length > 0);
+        validate: function (spriteGenerators, answers) {
+            if ( spriteGenerators === null || spriteGenerators.length === 0 ) {
+                answers.spriteGeneratorSupport = false;
+            }
+            return true;
         },
         when: function (answers) {
             let bShowSpriteGeneratorQuestion = answers.spriteGeneratorSupport;
