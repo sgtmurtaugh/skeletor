@@ -8,11 +8,14 @@ import isRoot from 'is-root';
 import messages from './src/messages';
 import questions from './src/questions';
 
+var requireDir = require('require-dir');
+
 // load Gulp Plugins
 const $ = gulpLoadPlugins();
 
 // load JSON config
-const config = loadJSONConfig();
+// const config = loadJSONConfig();
+const config = loadSeparatedConfigs();
 
 const REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR = /clickdummy-creator-placeholder/;
 const PLACEHOLDER_CLICKDUMMY_CREATOR = 'clickdummy-creator-placeholder';
@@ -70,6 +73,14 @@ let installVariables = {
 function loadJSONConfig() {
     let configFile = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf-8');
     return JSON.parse(configFile);
+}
+
+/**
+ * loadSeparatedConfigs
+ * <p>Loads recursivly the config file under gulp/config
+ */
+function loadSeparatedConfigs() {
+    return requireDir('./gulp/conf', {'recursive': true});
 }
 
 /**
@@ -164,7 +175,7 @@ function promptQuestions() {
  * @param cb
  * <p>Delegates to separate framework specific addFramework-Methods
  */
-function addFrameworkSupport(cb) {
+function addNPMFrameworkSupport(cb) {
     // when framework support is enabled
     if (installVariables.frameworkSupport) {
         // and framework selected
@@ -174,6 +185,9 @@ function addFrameworkSupport(cb) {
                 cb
             );
         }
+    }
+    else {
+        console.info('skipped!');
     }
     cb();
 }
@@ -217,6 +231,9 @@ function copyFrameworkDependencies(cb) {
         //     )
         // ];
     }
+    else {
+        console.info('skipped!');
+    }
 
     // return copyTemplatesSourcesToProjectFolder(src, null, cb);
 cb();
@@ -242,6 +259,9 @@ function copyFrameworkTemplates(cb) {
             )
         ];
     }
+    else {
+        console.info('skipped!');
+    }
 
     return copyTemplatesSourcesToProjectFolder(src, null, cb);
 }
@@ -252,10 +272,10 @@ function copyFrameworkTemplates(cb) {
  * ============================== */
 
 /**
- * addPreprocessorSupport
+ * addNPMPreprocessorSupport
  * <p>Delegates to separate preprocessor specific addPreprocessor-Methods
  */
-function addPreprocessorSupport(cb) {
+function addNPMPreprocessorSupport(cb) {
     // when preprocessor support is enabled
     if (installVariables.preprocessorSupport) {
         // and preprocessor selected
@@ -265,6 +285,9 @@ function addPreprocessorSupport(cb) {
                 cb
             );
         }
+    }
+    else {
+        console.info('skipped!');
     }
     cb();
 }
@@ -292,6 +315,10 @@ function copyPreprocessorTemplates(cb) {
 
         dest = path.join(installVariables.projectFolder, config.paths.assets, installVariables.preprocessor);
     }
+    else {
+        console.info('skipped!');
+    }
+
     return copyTemplatesSourcesToProjectFolder(src, dest, cb);
 }
 
@@ -301,10 +328,10 @@ function copyPreprocessorTemplates(cb) {
  * ============================== */
 
 /**
- * addSpriteGeneratorSupport
+ * addNPMSpriteGeneratorSupport
  * <p>Delegates to separate sprite generator specific addSpriteGenerator-Methods
  */
-function addSpriteGeneratorSupport(cb) {
+function addNPMSpriteGeneratorSupport(cb) {
     // when spritegenerator support is enabled
     if (installVariables.spriteGeneratorSupport) {
         // and spriteGenerators selected
@@ -315,6 +342,9 @@ function addSpriteGeneratorSupport(cb) {
                 cb
             );
         }
+    }
+    else {
+        console.info('skipped!');
     }
     cb();
 }
@@ -344,6 +374,10 @@ function copySpriteGeneratorTemplates(cb) {
             );
         }
     }
+    else {
+        console.info('skipped!');
+    }
+
     return copyTemplatesSourcesToProjectFolder(src, null, cb);
 }
 
@@ -640,13 +674,13 @@ gulp.task('clone-template',
 
 /**
  * Task: add-framework-support
- * runs: copyFrameworkTemplates and addFrameworkSupport function
+ * runs: copyFrameworkDependencies, copyFrameworkTemplates and addFrameworkSupport function
  */
 gulp.task('add-framework-support',
     gulp.series(
         copyFrameworkDependencies,
         copyFrameworkTemplates,
-        addFrameworkSupport
+        addNPMFrameworkSupport
     )
 );
 
@@ -657,7 +691,7 @@ gulp.task('add-framework-support',
 gulp.task('add-preprocessor-support',
     gulp.series(
         copyPreprocessorTemplates,
-        addPreprocessorSupport,
+        addNPMPreprocessorSupport,
     )
 );
 
@@ -668,7 +702,7 @@ gulp.task('add-preprocessor-support',
 gulp.task('add-sprite-generator-support',
     gulp.series(
         copySpriteGeneratorTemplates,
-        addSpriteGeneratorSupport
+        addNPMSpriteGeneratorSupport
     )
 );
 
