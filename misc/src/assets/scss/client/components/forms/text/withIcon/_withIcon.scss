@@ -1,0 +1,21 @@
+@include breakpoint($breakpoint-fms-desktop-only) {
+
+}
+
+@include breakpoint($breakpoint-fms-mobile-only) {
+
+  .ffw_segmentInstance {
+    .lbl__info,
+    .lbl__document {
+
+    }
+
+    .lbl__info {
+
+    }
+
+    .lbl__document {
+
+    }
+  }
+}
