@@ -1,3 +1,5 @@
+var path = require('path');
+
 var gulp;
 var plugins;
 var app;
