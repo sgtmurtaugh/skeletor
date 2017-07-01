@@ -1,0 +1,149 @@
+{
+	"dest": "src/assets/img/svg-sprites/svg",
+
+	"log": "debug",
+
+	"shape": {
+		"id": {
+			"separator": "--",
+			"generator": "icon-%s",
+			"pseudo": "~",
+			"whitespace": "_"
+		},
+		"dimensions": {
+			"maxWidth": 2000,
+			"maxHeight": 2000,
+			"precision": 2,
+			"attributes": false
+		},
+		"spacing": {
+			"padding": 0,
+			"box": "content"
+		},
+		"transform": ["svgo"],
+		"sort": "function(shape1, shape2) {}",
+		"_meta": "src/assets/img/svg-sprites-src/meta/meta.html",
+		"_align": "src/assets/img/svg-sprites-src/meta/align.html",
+		"_dest": "src/assets/img/svg-sprites-src/intermediates"
+	},
+
+	"svg": {
+		"xmlDeclaration": true,
+		"doctypeDeclaration": true,
+		"namespaceIDs": true,
+		"namespaceClassnames": true,
+		"dimensionAttributes": true,
+		"rootAttributes": {},
+		"precision": -1,
+		"transform": []
+	},
+
+	"variables": {
+		"meineEigeneVariable": "super!"
+	},
+
+	"mode": {
+		"css": {
+			"dest": "css",
+			"prefix": ".svg-%s",
+			"dimensions": true,
+			"dimensions": "-dims",
+			"sprite": "svg-sprite-generated-sprite-css.svg",
+			"bust": false,
+			"render": {
+			  "css": true,
+			  "scss": true,
+			  "less": true,
+			  "styl": true
+			},
+			"_example": {
+				"template": "src/assets/img/svg-sprites-src/tmpl/css/sprite.html",
+				"dest": "src/partials/svg-sprites/css/sprite.css.html"
+			},
+			"layout": "packed",
+			"common": "",
+			"mixin": ""
+		},
+
+		"_view": {
+			"dest": "view",
+			"prefix": ".svg-%s",
+			"dimensions": true,
+			"dimensions": "-dims",
+			"sprite": "svg-sprite-generated-sprite-view.svg",
+			"bust": false,
+			"render": {
+			  "css": true,
+			  "scss": true,
+			  "less": true,
+			  "styl": true
+			},
+			"_example": {
+				"template": "src/assets/img/svg-sprites-src/tmpl/view/sprite.html",
+				"dest": "src/partials/svg-sprites/view/sprite.view.html"
+			},
+			"layout": "packed",
+			"common": "",
+			"mixin": ""
+		},
+		
+		"_defs": {
+			"dest": "defs",
+			"prefix": ".svg-%s",
+			"dimensions": true,
+			"dimensions": "-dims",
+			"sprite": "svg-sprite-generated-sprite-defs.svg",
+			"bust": false,
+			"render": {
+			  "css": true,
+			  "scss": true,
+			  "less": true,
+			  "styl": true
+			},
+			"_example": {
+				"template": "src/assets/img/svg-sprites-src/tmpl/defs/sprite.html",
+				"dest": "src/partials/svg-sprites/defs/sprite.defs.html"
+			},
+			"inline": "false"
+		},
+		
+		"_symbol": {
+			"dest": "symbol",
+			"prefix": ".svg-%s",
+			"dimensions": true,
+			"dimensions": "-dims",
+			"sprite": "svg-sprite-generated-sprite-symbol.svg",
+			"bust": false,
+			"render": {
+			  "css": true,
+			  "scss": true,
+			  "less": true,
+			  "styl": true
+			},
+			"_example": {
+				"template": "src/assets/img/svg-sprites-src/tmpl/symbol/sprite.html",
+				"dest": "src/partials/svg-sprites/symbol/sprite.symbol.html"
+			},
+			"inline": "false"
+		},
+
+		"_stack": {
+			"dest": "stack",
+			"prefix": ".svg-%s",
+			"dimensions": true,
+			"dimensions": "-dims",
+			"sprite": "svg-sprite-generated-sprite-stack.svg",
+			"bust": false,
+			"render": {
+			  "css": true,
+			  "scss": true,
+			  "less": true,
+			  "styl": true
+			},
+			"_example": {
+				"template": "src/assets/img/svg-sprites-src/tmpl/stack/sprite.html",
+				"dest": "src/partials/svg-sprites/stack/sprite.stack.html"
+			}
+		}
+	}
+}
