@@ -3,16 +3,18 @@
     "path": "src",
     "assets": [
       "src/assets/**/*",
-      "!src/assets/{img,js,scss}/**/*"
+      "!src/assets/{img,img/**/*}",
+      "!src/assets/{js,js/**/*}",
+      "!src/assets/{scss,scss/**/*}"
     ],
     "images": {
       "path": "src/assets/img"
     },
     "javascript": [
-      "src/assets/js/app.js"
+      "src/assets/js/*.js"
     ],
     "sass": [
-      "src/assets/scss/app.scss"
+      "src/assets/scss/*.scss"
     ]
   },
 
