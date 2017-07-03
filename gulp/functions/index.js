@@ -1,3 +1,6 @@
+var fs = require('fs');
+var path = require('path');
+
 var gulp;
 var plugins;
 var app;
@@ -8,6 +11,9 @@ module.exports = function (_gulp, _plugins, _app) {
     app = _app;
 
     return {
+        'fs' : fs,
+        'path' : path,
+
         'config' : require('./config-utils'),
         'messages' : require('./messages'),
         'npm' : require('./npm-utils'),

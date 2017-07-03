@@ -41,30 +41,21 @@ module.exports = function ( _gulp, _plugins, _app ) {
          */
         'copyPreprocessorTemplates' : function (cb) {
             let src = null;
-            let dest = null;
 
             // when preprocessor support is enabled
             if (app.wizard.preprocessorSupport) {
                 // create preprocessor src path variable with user selected preprocessor informations
-                src = [
-                    path.join(
-                        app.config.paths.preprocessors,
-                        app.wizard.preprocessor,
-                        app.config.paths.recursive
-                    )
-                ];
-
-                dest = path.join(
-                    app.wizard.projectFolder,
-                    app.config.paths.assets,
-                    app.wizard.preprocessor
+                src = path.join(
+                    app.config.paths.preprocessors,
+                    app.wizard.preprocessor,
+                    app.config.paths.recursive
                 );
             }
             else {
                 console.info('skipped!');
             }
 
-            return app.fn.template.copyTemplatesSourcesToProjectFolder(src, dest, cb);
+            return app.fn.template.copyTemplatesSourcesToProjectFolder(src, null, cb);
         }
 
     };

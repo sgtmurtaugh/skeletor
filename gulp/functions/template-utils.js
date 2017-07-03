@@ -24,10 +24,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             if (null !== src) {
                 // set default destination (src folder inside projectFolder)
                 if (null === dest) {
-                    dest = path.join(
-                        app.wizard.projectFolder,
-                        app.config.paths.src
-                    );
+                    dest = app.wizard.projectFolder;
                 }
 
                 return gulp.src(

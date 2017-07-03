@@ -17,7 +17,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
 
         'loadTaskConfigs': function () {
-            return requireDir('../tasks', {recurse: true});
+            return requireDir('../tasks', {recurse: true, duplicates: true});
         },
 
 
@@ -65,7 +65,18 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
 
-        'lookupTasknames' : function (jsonTasks) {
+        'showTasknames' : function (jsonTasks) {
+            let tasknames = this.lookupTasknames(jsonTasks);
+
+            if (tasknames !== null) {
+                for (let task of tasknames) {
+                    console.log('- ' + task);
+                }
+            }
+            else {
+                console.log('no task defined!');
+            }
+
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
             if ( typechecks.isTypeObject( jsonTasks ) ) {
 
@@ -73,13 +84,82 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     let taskvalue = jsonTasks[taskname];
 
                     if ( typechecks.isTypeFunction(taskvalue) ) {
-                        console.log( ' - ' + taskname );
+                        tasknames.push(taskname);
                     }
                     else {
-                        this.lookupTasknames(taskvalue);
+                        tasknames = tasknames.concat(
+                            this.lookupTasknames(taskvalue)
+                        );
                     }
                 }
             }
+            return tasknames;
+        },
+
+
+        'lookupTasknames' : function (jsonTasks) {
+            let tasknames = [];
+
+            // Wenn das uebergebene jsonTasks Objekt nicht null ist
+            if ( typechecks.isTypeObject( jsonTasks ) ) {
+
+                for ( let taskname in jsonTasks ) {
+                    let taskvalue = jsonTasks[taskname];
+
+                    if ( typechecks.isTypeFunction(taskvalue) ) {
+                        tasknames.push(taskname);
+                    }
+                    else {
+                        tasknames = tasknames.concat(
+                            this.lookupTasknames(taskvalue)
+                        );
+                    }
+                }
+            }
+            return tasknames;
+        },
+
+
+        'lookupDependentTasknames': function (jsonTasks, taskname) {
+            let tasknames = [];
+console.log('jsonTasks');
+console.log(jsonTasks);
+console.log('taskname');
+console.log(taskname);
+            // Wenn das uebergebene jsonTasks Objekt nicht null ist
+            if ( typechecks.isTypeObject( jsonTasks ) ) {
+                if ( taskname !== null ) {
+                    if ( jsonTasks.hasOwnProperty(taskname) ) {
+                        let taskvalue = jsonTasks[taskname];
+
+                        if ( typechecks.isTypeFunction(taskvalue) ) {
+                            tasknames.push(taskname);
+                        }
+                        else
+                        if ( typechecks.isTypeObject(taskvalue) ) {
+                            tasknames.push(
+                                this.lookupDependentTasknames(taskvalue, null)
+                            );
+                        }
+                    }
+                }
+                else {
+                    for (let jsonKey in jsonTasks) {
+                        let taskvalue = jsonTasks[jsonKey];
+
+                        if ( typechecks.isTypeFunction(taskvalue) ) {
+                            tasknames.push(taskname);
+                        }
+                        else
+                        if ( typechecks.isTypeObject(taskvalue) ) {
+                            tasknames.push(
+                                this.lookupDependentTasknames(taskvalue, null)
+                            );
+                        }
+                    }
+                }
+            }
+            return tasknames;
         },
 
 

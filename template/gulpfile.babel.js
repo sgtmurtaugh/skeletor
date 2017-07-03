@@ -1,9 +1,8 @@
 'use strict';
 
-import gulp     from 'gulp';
-import plugins  from 'gulp-load-plugins';
-import yargs    from 'yargs';
-// import promise  from 'es6-promise';
+var gulp = require('gulp');
+var plugins = require('gulp-load-plugins');
+var yargs = require('yargs');
 
 var fn = require('./gulp/functions');
 

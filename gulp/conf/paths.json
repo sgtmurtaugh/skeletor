@@ -5,6 +5,7 @@
   "preprocessors": "preprocessors",
   "spritegenerators": "sprite-generators",
   "recursive": "**/*",
+  "gulp": "gulp",
   "src": "src",
   "assets": "src/assets"
 }

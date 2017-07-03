@@ -49,7 +49,7 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
      */
     'isTypeArray': function (obj) {
-        return ('array' === module.exports.getType(obj));
+        return ('array' === this.getType(obj));
     },
 
     /*
@@ -59,7 +59,7 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'function' otherwise false.
      */
     'isTypeFunction': function (obj) {
-        return ('function' === module.exports.getType(obj));
+        return ('function' === this.getType(obj));
     },
 
     /*
@@ -69,7 +69,7 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
      */
     'isTypeObject': function isTypeObject(obj) {
-        return ('object' === module.exports.getType(obj));
+        return ('object' === this.getType(obj));
     },
 
     /*
@@ -79,7 +79,7 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
      */
     'isTypeOther': function isTypeOther(obj) {
-        return ('other' === module.exports.getType(obj));
+        return ('other' === this.getType(obj));
     },
 
     /*
@@ -89,7 +89,7 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
      */
     'isTypeString': function isTypeString(obj) {
-        return ('string' === module.exports.getType(obj));
+        return ('string' === this.getType(obj));
     },
 
     /*
@@ -105,11 +105,11 @@ module.exports = {
             return true;
         }
         else
-        if (module.exports.isTypeArray(obj)) {
+        if (this.isTypeArray(obj)) {
             return (obj.length === 0);
         }
         else
-        if (module.exports.isTypeString(obj)) {
+        if (this.isTypeString(obj)) {
             return (obj.trim().length === 0);
         }
         return false;

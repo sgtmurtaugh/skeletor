@@ -11,6 +11,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app.fn.tasks.ensureTaskDependencies( gulp, plugins, app, app.tasks, [
         'clean',
         'generate-pages',
+        'generate-less',
         'generate-sass',
         'generate-javascript',
         'copy-images',
@@ -23,6 +24,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
              'clean',
              gulp.parallel(
                  'generate-pages',
+                 'generate-less',
                  'generate-sass',
                  'generate-javascript',
                  'copy-images',

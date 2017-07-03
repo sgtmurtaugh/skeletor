@@ -1,9 +1,9 @@
 'use strict';
 
-import gulp     from 'gulp';
-import gulpPlugins  from 'gulp-load-plugins';
-import yargs    from 'yargs';
-// import promise  from 'es6-promise';
+var gulp = require('gulp');
+var gulpPlugins = require('gulp-load-plugins');
+var yargs = require('yargs');
+// var promise = require('es6-promise');
 
 // Load all Gulp plugins into one variable
 const plugins = gulpPlugins();
@@ -70,7 +70,8 @@ app.tasks = fn.tasks.loadTaskConfigs();
  * load dynamically all tasks
  */
 fn.tasks.addTasks( gulp, plugins, app, app.tasks );
-
+console.log('app.tasks');
+console.log(app.tasks);
 
 /* ==============================
  *  # Functions
@@ -95,7 +96,7 @@ function defaultTask( done ) {
  */
 function usage( done ) {
     console.log('\r\nList of all registred tasks:\r\n');
-    fn.tasks.lookupTasknames(app.tasks);
+    fn.tasks.showTasknames(app.tasks);
     console.log('');
     console.log('npm start {taskname}\r\n');
     done();
