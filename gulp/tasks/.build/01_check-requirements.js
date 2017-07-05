@@ -11,13 +11,13 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    // Sub-Tasks ermitteln
-    let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
+    // // Sub-Tasks lookup
+    // let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
 
-    // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    app.fn.tasks.ensureTaskDependencies(gulp, plugins, app, app.tasks, self_tasks);
+    // // if necessary - register depending tasks
+    // app.fn.tasks.ensureRegistrationOfDependingTasks(gulp, plugins, app, app.tasks, self_tasks);
 
-    // Task definieren
+    // define task
     gulp.task( self,
         checkRequirements
     );

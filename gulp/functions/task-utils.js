@@ -27,7 +27,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
 
-        'ensureTaskDependencies': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
+        'ensureRegistrationOfDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
             if ( app.fn.typeChecks.isTypeArray( tasknames ) ) {
                 for ( let taskname of tasknames ) {
                     if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
