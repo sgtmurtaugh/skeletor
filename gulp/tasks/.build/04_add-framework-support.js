@@ -1,7 +1,7 @@
-var gulp;
-var plugins;
-var app;
-var self;
+let gulp;
+let plugins;
+let app;
+let self;
 
 module.exports = function ( _gulp, _plugins, _app ) {
     gulp = _gulp;
