@@ -129,10 +129,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
         'lookupDependentTasknames': function (jsonTasks, taskname) {
             const TASK_FOLDER_PREFIX = '.';
             let tasknames = [];
-console.log('jsonTasks');
-console.log(jsonTasks);
-console.log('taskname');
-console.log(taskname);
+
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
             if ( app.fn.typeChecks.isTypeObject( jsonTasks ) ) {
                 if ( taskname !== null ) {

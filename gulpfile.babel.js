@@ -70,8 +70,7 @@ app.tasks = fn.tasks.loadTaskConfigs();
  * load dynamically all tasks
  */
 fn.tasks.addTasks( gulp, plugins, app, app.tasks );
-console.log('app.tasks');
-console.log(app.tasks);
+
 
 /* ==============================
  *  # Functions
