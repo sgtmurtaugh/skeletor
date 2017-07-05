@@ -1,17 +1,22 @@
 var gulp;
 var plugins;
 var app;
+var self;
 
 module.exports = function ( _gulp, _plugins, _app ) {
     gulp = _gulp;
     plugins = _plugins;
     app = _app;
+    self = app.fn.tasks.taskname(__filename);
+
+    // Sub-Tasks ermitteln
+    let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
 
     // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    app.fn.tasks.ensureTaskDependencies(gulp, plugins, app, app.tasks, []);
+    app.fn.tasks.ensureTaskDependencies(gulp, plugins, app, app.tasks, self_tasks);
 
     // Task definieren
-    gulp.task( app.fn.path.basename(__filename),
+    gulp.task( self,
         gulp.series(
             app.fn.preprocessor.copyPreprocessorTemplates,
             app.fn.preprocessor.addNPMPreprocessorSupport,
