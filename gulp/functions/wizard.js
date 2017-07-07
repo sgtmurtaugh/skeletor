@@ -70,8 +70,8 @@ module.exports = function(inq, config) {
             });
 
             for (let frameworkKey in frameworks) {
-                if (frameworkKey !== null
-                        && frameworks.hasOwnProperty(frameworkKey)) {
+                if ( frameworkKey !== null
+                        && frameworks.hasOwnProperty(frameworkKey) ) {
 
                     choices.push({
                         name: frameworkKey
@@ -110,9 +110,9 @@ module.exports = function(inq, config) {
             let choices = [];
             let framework = config.frameworks[answers.framework];
 
-            for (let versionKey in framework) {
+            for ( let versionKey in framework ) {
                 if ( versionKey !== null
-                        && framework.hasOwnProperty(versionKey)) {
+                        && framework.hasOwnProperty(versionKey) ) {
 
                     choices.push({
                         name: answers.framework + ' ' + versionKey,
@@ -185,9 +185,9 @@ module.exports = function(inq, config) {
                 value: null
             });
 
-            for (let preprocessorKey in preprocessors) {
+            for ( let preprocessorKey in preprocessors ) {
                 if ( preprocessorKey !== null
-                        && preprocessors.hasOwnProperty(preprocessorKey)) {
+                        && preprocessors.hasOwnProperty(preprocessorKey) ) {
 
                     choices.push({
                         name: preprocessorKey
@@ -247,9 +247,9 @@ module.exports = function(inq, config) {
             let choices = [];
             let spriteGenerators = config.spritegenerators;
 
-            for (let spriteGeneratorsKey in spriteGenerators) {
+            for ( let spriteGeneratorsKey in spriteGenerators ) {
                 if ( spriteGeneratorsKey !== null
-                        && spriteGenerators.hasOwnProperty(spriteGeneratorsKey)) {
+                        && spriteGenerators.hasOwnProperty(spriteGeneratorsKey) ) {
 
                     choices.push({
                         name: spriteGeneratorsKey
@@ -312,12 +312,12 @@ module.exports = function(inq, config) {
             if (jsonFrameworks !== null) {
                 for ( let frameworkKey in jsonFrameworks ) {
                     if ( frameworkKey !== null
-                            && jsonFrameworks.hasOwnProperty(frameworkKey)) {
+                            && jsonFrameworks.hasOwnProperty(frameworkKey) ) {
 
                         let jsonFramework = jsonFrameworks[frameworkKey];
                         for ( let frameworkVersionKey in jsonFramework ) {
                             if ( frameworkVersionKey !== null
-                                    && jsonFramework.hasOwnProperty(frameworkVersionKey)) {
+                                    && jsonFrameworks.hasOwnProperty(frameworkVersionKey) ) {
 
                                 if ( jsonFramework[frameworkVersionKey] !== null ) {
                                     bShowFrameworkQuestion = true;
@@ -351,12 +351,14 @@ module.exports = function(inq, config) {
 
                 for ( let preprocessorsKey in jsonPreprocessors ) {
                     if ( preprocessorsKey !== null
-                            && jsonPreprocessors.hasOwnProperty(preprocessorsKey)) {
+                            && jsonPreprocessors.hasOwnProperty(preprocessorsKey) ) {
 
                         let jsonPreprocessor = jsonPreprocessors[preprocessorsKey];
 
                         for ( let preprocessorKey in jsonPreprocessor ) {
-                            if ( preprocessorKey !== null ) {
+                            if ( preprocessorKey !== null
+                                    && jsonPreprocessor.hasOwnProperty(preprocessorKey) ) {
+
                                 bShowPreprocessorsQuestion = true;
                                 break;
                             }
@@ -385,7 +387,9 @@ module.exports = function(inq, config) {
             let jsonSpriteGenerators = config.spritegenerators;
             if (jsonSpriteGenerators !== null) {
                 for ( let spriteGeneratorKey in jsonSpriteGenerators ) {
-                    if ( spriteGeneratorKey !== null ) {
+                    if ( spriteGeneratorKey !== null
+                            && jsonSpriteGenerators.hasOwnProperty(spriteGeneratorKey) ) {
+
                         bShowSpriteGeneratorQuestion = true;
                         break;
                     }

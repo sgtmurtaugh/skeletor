@@ -1,6 +1,6 @@
 'use strict';
 
-var colors = require('colors');
+let colors = require('colors');
 
 module.exports = function(name) {
     return {

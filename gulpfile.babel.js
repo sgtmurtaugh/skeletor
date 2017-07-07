@@ -69,7 +69,7 @@ app.tasks = fn.tasks.loadTaskConfigs();
 /*
  * load dynamically all tasks
  */
-fn.tasks.addTasks( gulp, plugins, app, app.tasks );
+fn.tasks.registerTasks( gulp, plugins, app, app.tasks );
 
 
 /* ==============================
@@ -83,7 +83,7 @@ fn.tasks.addTasks( gulp, plugins, app, app.tasks );
  */
 function defaultTask( done ) {
     // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    fn.tasks.ensureTaskDependencies( gulp, plugins, app, app.tasks, [
+    fn.tasks.registerDependingTasks( gulp, plugins, app, app.tasks, [
         'build',
     ]);
     done();
