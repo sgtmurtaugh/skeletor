@@ -1,11 +1,27 @@
 {
-  "sprite_src": "src/assets/img/sprites-src",
-  "sprite_target": "src/assets/img/sprites",
-  "sprite_prefix": "nsg-generated-sprite-",
-  "sprite_suffix": "",
-  "sprite_extension": ".png",
-  "stylesheet_target": "src/assets/scss/sprites/nsg-generated-sprite",
-  "stylesheet_prefix": "_sprite-",
-  "stylesheet_suffix": "-style",
-  "stylesheet_extension": ".scss"
+  "sprite" : {
+    "src": "src/assets/img/sprites-src",
+    "target": "src/assets/img/sprites",
+    "prefix": "nsg-generated-sprite-",
+    "suffix": "",
+    "extension": ".png"
+  },
+  "stylesheet" : {
+    "target": "src/assets/scss/sprites/nsg-generated-sprite",
+    "prefix": "_sprite-",
+    "suffix": "-style",
+    "extension": ".scss",
+    "varPrefix": "nsg-",
+    "varPrefixWithFilename": true,
+    "varPrefixWithFilenameSuffix": "---"
+  },
+  "_sprite_src": "src/assets/img/sprites-src",
+  "_sprite_target": "src/assets/img/sprites",
+  "_sprite_prefix": "nsg-generated-sprite-",
+  "_sprite_suffix": "",
+  "_sprite_extension": ".png",
+  "_stylesheet_target": "src/assets/scss/sprites/nsg-generated-sprite",
+  "_stylesheet_prefix": "_sprite-",
+  "_stylesheet_suffix": "-style",
+  "_stylesheet_extension": ".scss"
 }

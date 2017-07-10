@@ -16,6 +16,7 @@
       "src/assets/js/frameworks/jquery.cookie.js",
       "src/assets/js/frameworks/jquery.actual.min.js",
       "src/assets/js/modules/**/*.js",
+      "src/assets/js/init.js",
       "src/assets/js/app.js"
     ],
     "sass": [

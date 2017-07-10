@@ -27,7 +27,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
  * runs the generateSprite function on each of them.
  */
 function generateSprites( done ) {
-    let folders = app.fn.npm.getFolders( app.config.vendor['node-sprite-generator'].sprite_src );
+    let folders = app.fn.npm.getFolders( app.config.vendor['node-sprite-generator'].sprite.src );
     folders.forEach( function ( folder ) {
         return generateSprite( folder, app );
     });
@@ -48,13 +48,13 @@ function generateSprite( folder, app ) {
         console.log( 'Start generating sprite for \'' + folder + '\' ...' );
         nsg({
             src: [
-                path.join( app.config.vendor['node-sprite-generator'].sprite_src, folder, '**/*.png' )
+                path.join( app.config.vendor['node-sprite-generator'].sprite.src, folder, '**/*.png' )
             ],
-            spritePath: path.join( app.config.vendor['node-sprite-generator'].sprite_target, app.config.vendor['node-sprite-generator'].sprite_prefix + folder + app.config.vendor['node-sprite-generator'].sprite_suffix + '.png' ),
+            spritePath: path.join( app.config.vendor['node-sprite-generator'].sprite.target, app.config.vendor['node-sprite-generator'].sprite.prefix + folder + app.config.vendor['node-sprite-generator'].sprite.suffix + '.png' ),
             stylesheet: 'scss',
-            stylesheetPath: path.join( app.config.vendor['node-sprite-generator'].stylesheet_target, app.config.vendor['node-sprite-generator'].stylesheet_prefix + folder + app.config.vendor['node-sprite-generator'].stylesheet_suffix + '.scss' ),
+            stylesheetPath: path.join( app.config.vendor['node-sprite-generator'].stylesheet.target, app.config.vendor['node-sprite-generator'].stylesheet.prefix + folder + app.config.vendor['node-sprite-generator'].stylesheet.suffix + '.scss' ),
             stylesheetOptions: {
-                prefix: '',
+                prefix: app.config.vendor['node-sprite-generator'].stylesheet.varPrefix + (app.config.vendor['node-sprite-generator'].stylesheet.varPrefixWithFilename ? ( folder + app.config.vendor['node-sprite-generator'].stylesheet.varPrefixWithFilenameSuffix ) : ''),
                 spritePath: './'
             },
             compositor: 'jimp',

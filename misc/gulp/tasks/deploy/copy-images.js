@@ -23,7 +23,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
  * In production, the images are compressed
  */
 function copyImages() {
-    return gulp.src( ['src/assets/img/{icons,sprites}/**/*', '!src/assets/img/sprites-src'] )
+    return gulp.src( ['src/assets/img/{icons,sprites,svg-sprites}/**/*', '!src/assets/img/sprites-src'] )
         .pipe( plugins.if(app.isProductive, plugins.imagemin({
             progressive: true
         })))
