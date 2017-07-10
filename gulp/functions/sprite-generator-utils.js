@@ -1,8 +1,10 @@
-var path = require('path');
+'use strict';
 
-var gulp;
-var plugins;
-var app;
+let path = require('path');
+
+let gulp;
+let plugins;
+let app;
 
 module.exports = function ( _gulp, _plugins, _app ) {
 

@@ -1,4 +1,6 @@
-var typechecks = require('./type-checks');
+'use strict';
+
+let typechecks = require('./type-checks');
 
 module.exports = {
 

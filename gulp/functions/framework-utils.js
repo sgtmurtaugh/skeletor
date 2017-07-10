@@ -1,8 +1,10 @@
-var path = require('path');
+'use strict';
 
-var gulp;
-var plugins;
-var app;
+let path = require('path');
+
+let gulp;
+let plugins;
+let app;
 
 module.exports = function ( _gulp, _plugins, _app ) {
 
@@ -52,11 +54,15 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                 if (null !== jsonDependencies) {
                     for ( let jsonDependencyKey in jsonDependencies ) {
-                        let jsonDependencyValue = app.fn.npm.getOwnPropertyValue(jsonDependencies, jsonDependencyKey);
+                        if ( jsonDependencyKey !== null
+                                && jsonDependencies.hasOwnProperty(jsonDependencyKey) ) {
 
-                        if ( jsonDependencyKey === 'preprocessor' ) {
+                            let jsonDependencyValue = app.fn.npm.getOwnPropertyValue(jsonDependencies, jsonDependencyKey);
+
+                            if ( jsonDependencyKey === 'preprocessor' ) {
         // TODO!!!
-        //                    copyPreprocessorTemplates(app.config.preprocessors[jsonDependencyValue], cb);
+        //                      copyPreprocessorTemplates(app.config.preprocessors[jsonDependencyValue], cb);
+                            }
                         }
                     }
                 }

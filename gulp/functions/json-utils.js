@@ -1,8 +1,10 @@
-var path = require('path');
+'use strict';
 
-var gulp;
-var plugins;
-var app;
+let path = require('path');
+
+let gulp;
+let plugins;
+let app;
 
 module.exports = function ( _gulp, _plugins, _app ) {
 
@@ -34,8 +36,12 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         if ( app.fn.npm.hasOwnProperty( json[key], 'npm')) {
                             // for each preprocessor npm dependency
                             for ( let npmConfigKey in json[key].npm ) {
-                                if ( app.fn.npm.hasOwnProperty( json[key].npm, npmConfigKey ) ) {
-                                    packageJson.devDependencies[npmConfigKey] = json[key].npm[npmConfigKey];
+                                if ( npmConfigKey !== null
+                                        && json.hasOwnProperty(npmConfigKey) ) {
+
+                                    if ( app.fn.npm.hasOwnProperty( json[key].npm, npmConfigKey ) ) {
+                                        packageJson.devDependencies[npmConfigKey] = json[key].npm[npmConfigKey];
+                                    }
                                 }
                             }
                         }
