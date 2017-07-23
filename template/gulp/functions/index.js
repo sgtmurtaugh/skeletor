@@ -1,16 +1,21 @@
-var fs = require('fs');
-var path = require('path');
+'use strict';
 
-var configs  = require('./config-utils');
-var tasks  = require('./task-utils');
-var typechecks  = require('./type-checks');
+let gulp;
+let plugins;
+let app;
 
+module.exports = function (_gulp, _plugins, _app) {
+    gulp =_gulp;
+    plugins = _plugins;
+    app = _app;
 
-module.exports = {
-    'fs' : fs,
-    'path' : path,
+    return {
+        'fs': require('fs'),
+        'path': require('path'),
 
-    'config' : configs,
-    'tasks' : tasks,
-    'typechecks' : typechecks
+        'config': require('./config-utils'),
+        'typechecks': require('./type-checks'),
+
+        'tasks': require('./task-utils')(gulp, plugins, app)
+    };
 };
