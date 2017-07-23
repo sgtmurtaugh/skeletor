@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins');
 var yargs = require('yargs');
 
-var fn = require('./gulp/functions');
+var fn = require('./gulp/functions')(gulp, plugins, null);
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
