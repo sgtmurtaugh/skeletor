@@ -16,18 +16,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
         /*
          * addNPMSupport
-         * <p>Delegates to separate preprocessor specific addPreprocessor-Methods
+         * <p>TODO
          */
         'addNPMSupport' : function (cb) {
-            // when preprocessor support is enabled
-            if (app.wizard.preprocessorSupport) {
-                // and preprocessor selected
-                if (!app.fn.typeChecks.isEmpty(app.wizard.preprocessor)) {
-                    return app.fn.json.addNPMEntryToPackageConfiguration(
-                        app.config.preprocessors[app.wizard.preprocessor],
-                        cb
-                    );
-                }
+            // when template enging is selected
+            if (!app.fn.typeChecks.isEmpty(app.wizard.templateEngine)) {
+                return app.fn.json.addNPMEntryToPackageConfiguration(
+                    app.config.templateEngines[app.wizard.templateEngine],
+                    app.wizard.templateEngine,
+                    cb
+                );
             }
             else {
                 console.info('skipped!');
@@ -47,18 +45,17 @@ module.exports = function ( _gulp, _plugins, _app ) {
         /*
          * copyTemplates
          * @param cb
-         * <p>Copies the preprocessor template for the user selected preprocessor type to the corresponding preprocessor folder
-         * inside the assets of the installation directory.
+         * <p>Copies the template-engine templates for the user selected type to the default installation
+         * directory.
          */
         'copyTemplates' : function (cb) {
             let src = null;
 
-            // when preprocessor support is enabled
-            if (app.wizard.preprocessorSupport) {
-                // create preprocessor src path variable with user selected preprocessor informations
+            // when templateEngine is selected
+            if (!app.fn.typeChecks.isEmpty(app.wizard.templateEngine)) {
                 src = path.join(
-                    app.config.paths.preprocessors,
-                    app.wizard.preprocessor,
+                    app.config.paths.templateEngines,
+                    app.wizard.templateEngine,
                     app.config.paths.recursive
                 );
             }

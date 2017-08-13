@@ -27,6 +27,7 @@ module.exports = function (_gulp, _plugins, _app) {
         'preprocessor' : require('./preprocessor-utils')(gulp, plugins, app),
         'spriteGenerator' : require('./sprite-generator-utils')(gulp, plugins, app),
         'tasks' : require('./task-utils')(gulp, plugins, app),
-        'template' : require('./template-utils')(gulp, plugins, app)
+        'template' : require('./template-utils')(gulp, plugins, app),
+        'templateEngine' : require('./template-engine-utils')(gulp, plugins, app)
     };
 };

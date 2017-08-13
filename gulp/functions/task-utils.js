@@ -33,7 +33,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             let tasknames = [];
 
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
-            if ( app.fn.typeChecks.isTypeObject( jsonTasks ) ) {
+            if ( app.fn.typeChecks.isObject( jsonTasks ) ) {
                 if ( taskname !== null ) {
                     let taskvalue = null;
 
@@ -45,11 +45,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         taskvalue = jsonTasks[taskname];
                     }
 
-                    if ( app.fn.typeChecks.isTypeFunction(taskvalue) ) {
+                    if ( app.fn.typeChecks.isFunction(taskvalue) ) {
                         tasknames.push(taskname);
                     }
                     else
-                    if ( app.fn.typeChecks.isTypeObject(taskvalue) ) {
+                    if ( app.fn.typeChecks.isObject(taskvalue) ) {
                         tasknames = tasknames.concat(
                             this.lookupDependentTasknames(taskvalue, null)
                         );
@@ -62,11 +62,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                             let taskvalue = jsonTasks[jsonKey];
 
-                            if ( app.fn.typeChecks.isTypeFunction(taskvalue) ) {
+                            if ( app.fn.typeChecks.isFunction(taskvalue) ) {
                                 tasknames.push(jsonKey);
                             }
                             else
-                            if ( app.fn.typeChecks.isTypeObject(taskvalue) ) {
+                            if ( app.fn.typeChecks.isObject(taskvalue) ) {
                                 tasknames = tasknames.concat(
                                     this.lookupDependentTasknames(taskvalue, null)
                                 );
@@ -93,7 +93,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             let taskvalue = null;
 
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
-            if ( app.fn.typeChecks.isTypeObject( jsonTasks ) ) {
+            if ( app.fn.typeChecks.isObject( jsonTasks ) ) {
                 // Wenn ein taskname uebergeben wurde, in dem JSON direkt nach einem Key taskname suchen
                 if ( taskname !== null ) {
                     if ( jsonTasks.hasOwnProperty(taskname) ) {
@@ -102,7 +102,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                     // Wenn der ermittelte Wert eine Task-Function ist, dann diese zurueckgeben, andernfalls den JSON
                     // Baumrekursiv durchsuchen.
-                    if ( ! app.fn.typeChecks.isTypeFunction( taskvalue ) ) {
+                    if ( ! app.fn.typeChecks.isFunction( taskvalue ) ) {
                         for ( let key in jsonTasks ) {
                             if ( key !== null
                                 && jsonTasks.hasOwnProperty(key) ) {
@@ -132,7 +132,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             let tasknames = [];
 
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
-            if ( app.fn.typeChecks.isTypeObject( jsonTasks ) ) {
+            if ( app.fn.typeChecks.isObject( jsonTasks ) ) {
 
                 for ( let taskname in jsonTasks ) {
                     if ( taskname !== null
@@ -140,7 +140,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                         let taskvalue = jsonTasks[taskname];
 
-                        if ( app.fn.typeChecks.isTypeFunction(taskvalue) ) {
+                        if ( app.fn.typeChecks.isFunction(taskvalue) ) {
                             tasknames.push(taskname);
                         }
                         else {
@@ -166,14 +166,21 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * TODO
          */
         'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
-            if ( app.fn.typeChecks.isTypeArray( tasknames ) ) {
+            if ( app.fn.typeChecks.isArray( tasknames ) ) {
                 for ( let taskname of tasknames ) {
+                    let flag = false;
+
                     if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
                         let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, done );
 
                         if ( taskfunction !== null ) {
                             this.registerTask( gulp, plugins, app, taskfunction, done )
+                            flag = true;
                         }
+                    }
+
+                    if ( !flag ) {
+                        console.log('[ERROR] Task "' + taskname + '" not defined!');
                     }
                 }
             }
@@ -190,7 +197,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * TODO
          */
         'registerTask': function ( gulp, plugins, app, taskfunction, done ) {
-            if ( app.fn.typeChecks.isTypeFunction( taskfunction ) ) {
+            if ( app.fn.typeChecks.isFunction( taskfunction ) ) {
                 taskfunction( gulp, plugins, app, done );
             }
         },
@@ -214,11 +221,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         let value = jsonTasks[key];
 
                         if ( ! gulp.tree().nodes.key ) {
-                            if ( app.fn.typeChecks.isTypeObject( value ) ) {
+                            if ( app.fn.typeChecks.isObject( value ) ) {
                                 this.registerTasks( gulp, plugins, app, value, done );
                             }
                             else
-                            if ( app.fn.typeChecks.isTypeFunction( value ) ) {
+                            if ( app.fn.typeChecks.isFunction( value ) ) {
                                 this.registerTask( gulp, plugins, app, value, done );
                             }
                             else {
@@ -253,7 +260,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             }
 
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
-            if ( app.fn.typeChecks.isTypeObject( jsonTasks ) ) {
+            if ( app.fn.typeChecks.isObject( jsonTasks ) ) {
 
                 for ( let taskname in jsonTasks ) {
                     if ( taskname !== null
@@ -261,7 +268,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                         let taskvalue = jsonTasks[taskname];
 
-                        if ( app.fn.typeChecks.isTypeFunction(taskvalue) ) {
+                        if ( app.fn.typeChecks.isFunction(taskvalue) ) {
                             tasknames.push(taskname);
                         }
                         else {

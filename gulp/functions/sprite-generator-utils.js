@@ -15,16 +15,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
     return {
 
         /*
-         * addNPMSpriteGeneratorSupport
+         * addNPMSupport
          * <p>Delegates to separate sprite generator specific addSpriteGenerator-Methods
          */
-        'addNPMSpriteGeneratorSupport' : function (cb) {
+        'addNPMSupport' : function (cb) {
             // when spritegenerator support is enabled
             if (app.wizard.spriteGeneratorSupport) {
                 // and spriteGenerators selected
                 if (!app.fn.typeChecks.isEmpty(app.wizard.spriteGenerators)) {
                     return app.fn.json.addMultipleNPMEntriesToPackageConfiguration(
-                        app.config.spritegenerators,
+                        app.config.spriteGenerators,
                         app.wizard.spriteGenerators,
                         cb
                     );
@@ -37,12 +37,21 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
         /*
-         * copySpriteGeneratorTemplates
+         * copyDependencies
+         * @param cb
+         * <p>TODO
+         */
+        'copyDependencies' : function (cb) {
+            cb();
+        },
+
+        /*
+         * copyTemplates
          * @param cb
          * <p>Copies the spriteGenerator templates for the user selected spriteGenerator types to the default installation
          * directory.
          */
-        'copySpriteGeneratorTemplates' : function (cb) {
+        'copyTemplates' : function (cb) {
             let src = null;
     
             // when spriteGenerator support is enabled
@@ -54,7 +63,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     // add src folder for the current spriteGenerator
                     src.push(
                         path.join(
-                            app.config.paths.spritegenerators,
+                            app.config.paths.spriteGenerators,
                             spriteGenerator,
                             app.config.paths.recursive
                         )

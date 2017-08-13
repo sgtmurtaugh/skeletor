@@ -4,9 +4,6 @@
  * exports
  * @param inq
  * @param config
- * @param config.frameworks
- * @param config.preprocessors
- * @param config.spritegenerators
  * @return {Array}
  */
 module.exports = function(inq, config) {
@@ -40,21 +37,83 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 3. Framework Support (frameworkSupport)
+     * 3. Quick Clone (quickClone)
+     */
+    questions.push({
+        name: 'quickClone',
+        message: 'Quick Clone (skips wizard and creates a simple clone without any framework support):',
+        type: 'confirm',
+        default: false
+    });
+
+
+    /**
+     * 4. TemplateEngine (templateEngine)
+     */
+    questions.push({
+        name: 'templateEngine',
+        message: 'Choose TemplateEngine:',
+        type: 'list',
+        choices: function (answers) {
+            let choices = [];
+            let templateEngines = config.templateEngines;
+
+            choices.push({
+                name: 'none',
+                value: null
+            });
+
+            for ( let templateEngineKey in templateEngines ) {
+                if ( templateEngineKey !== null
+                    && templateEngines.hasOwnProperty(templateEngineKey) ) {
+
+                    choices.push({
+                        name: templateEngineKey
+                    });
+                }
+            }
+
+            return choices;
+        },
+        when: function (answers) {
+            // // QuickClone check
+            // if ( ! isQuickClone(answers) ) return false;
+            //
+            // let bShowTemplateEngineQuestion = false;
+            // // if true, at least one preprocessor is configured
+            // if (bShowTemplateEngineQuestion) {
+            //     // when more than one preprocessor is configured prompt question
+            //     // otherwise autoselect the only configured one.
+            //     let keys = Object.keys(config.preprocessors);
+            //     bShowTemplateEngineQuestion = (keys.length > 1);
+            //
+            //     if (!bShowTemplateEngineQuestion) {
+            //         // autoselect only configured one
+            //         answers.templateEngine = keys[0];
+            //     }
+            // }
+            // return bShowTemplateEngineQuestion;
+return true;
+        }
+    });
+
+
+    /**
+     * 5. Framework Support (frameworkSupport)
      */
     questions.push({
         name: 'frameworkSupport',
         message: 'Install web framework:',
         type: 'confirm',
         default: true,
-        when: function (answers) {
-            return hasFrameworkSupport(answers);
+        when: function(answers) {
+            return isQuickClone(answers)
         }
     });
 
 
     /**
-     * 4. Framework (framework)
+     * 6. Framework (framework)
      */
     questions.push({
         name: 'framework',
@@ -82,6 +141,9 @@ module.exports = function(inq, config) {
             return choices;
         },
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             let bShowFrameworkQuestion = answers.frameworkSupport;
             // if true, at least one framework is configured
             if (bShowFrameworkQuestion) {
@@ -100,7 +162,7 @@ module.exports = function(inq, config) {
     });
 
     /**
-     * 5. Framework Version (frameworkVersion)
+     * 7. Framework Version (frameworkVersion)
      */
     questions.push({
         name: 'frameworkVersion',
@@ -123,6 +185,9 @@ module.exports = function(inq, config) {
             return choices;
         },
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             let bShowFrameworkVersionQuestion = answers.frameworkSupport;
             // if true, at least one framework is configured
             if (bShowFrameworkVersionQuestion) {
@@ -150,7 +215,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 6. Preprocessor Support (preprocessorSupport)
+     * 8. Preprocessor Support (preprocessorSupport)
      */
     questions.push({
         name: 'preprocessorSupport',
@@ -158,6 +223,9 @@ module.exports = function(inq, config) {
         type: 'confirm',
         default: true,
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             let bHasPreprocessorSupport = false;
 
             // prompt this question only when the frameworkSupport is true and the preprocessorSupport is configured.
@@ -170,7 +238,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 7. Preprocessor (preprocessor)
+     * 9. Preprocessor (preprocessor)
      */
     questions.push({
         name: 'preprocessor',
@@ -198,6 +266,9 @@ module.exports = function(inq, config) {
             return choices;
         },
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             let bShowPreprocessorQuestion = answers.preprocessorSupport;
             // if true, at least one preprocessor is configured
             if (bShowPreprocessorQuestion) {
@@ -217,7 +288,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 8. Sprite Generator Support (spriteGeneratorSupport)
+     * 10. Sprite Generator Support (spriteGeneratorSupport)
      */
     questions.push({
         name: 'spriteGeneratorSupport',
@@ -225,6 +296,9 @@ module.exports = function(inq, config) {
         type: 'confirm',
         default: true,
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             // When preprocessor is null (none option) update preprocessorSupport answer!
             if ( answers.preprocessor === null ) {
                 answers.preprocessorSupport = false;
@@ -236,7 +310,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 9. Sprite Generator List (spriteGenerators)
+     * 11. Sprite Generator List (spriteGenerators)
      */
     questions.push({
         name: 'spriteGenerators',
@@ -245,7 +319,7 @@ module.exports = function(inq, config) {
         default: [],
         choices: function (answers) {
             let choices = [];
-            let spriteGenerators = config.spritegenerators;
+            let spriteGenerators = config.spriteGenerators;
 
             for ( let spriteGeneratorsKey in spriteGenerators ) {
                 if ( spriteGeneratorsKey !== null
@@ -266,12 +340,15 @@ module.exports = function(inq, config) {
             return true;
         },
         when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
             let bShowSpriteGeneratorQuestion = answers.spriteGeneratorSupport;
             // if true, at least one preprocessor is configured
             if (bShowSpriteGeneratorQuestion) {
                 // when more than one preprocessor is configured prompt question
                 // otherwise autoselect the only configured one.
-                let keys = Object.keys(config.spritegenerators);
+                let keys = Object.keys(config.spriteGenerators);
                 bShowSpriteGeneratorQuestion = (keys.length > 1);
 
                 if (!bShowSpriteGeneratorQuestion) {
@@ -285,7 +362,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 10. Dependencies Installation (installDependencies)
+     * 12. Dependencies Installation (installDependencies)
      */
     questions.push({
         name: 'installDependencies',
@@ -295,6 +372,9 @@ module.exports = function(inq, config) {
     });
 
     return questions;
+
+
+    /* ### wizard util functions ######################## */
 
 
     /**
@@ -384,7 +464,7 @@ module.exports = function(inq, config) {
             // default
             bShowSpriteGeneratorQuestion = false;
 
-            let jsonSpriteGenerators = config.spritegenerators;
+            let jsonSpriteGenerators = config.spriteGenerators;
             if (jsonSpriteGenerators !== null) {
                 for ( let spriteGeneratorKey in jsonSpriteGenerators ) {
                     if ( spriteGeneratorKey !== null
@@ -397,6 +477,21 @@ module.exports = function(inq, config) {
             }
         }
         return bShowSpriteGeneratorQuestion;
+    }
+
+    /**
+     * isQuickClone
+     * @param answers
+     * @return {boolean}
+     */
+    function isQuickClone(answers) {
+        let quickClone = false;
+
+        if ( answers.quickClone === undefined
+                || answers.quickClone === false ) {
+            quickClone = true;
+        }
+        return quickClone;
     }
 
 };

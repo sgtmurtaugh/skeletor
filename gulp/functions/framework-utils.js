@@ -14,11 +14,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
     return {
         /*
-         * addNPMFrameworkSupport
+         * addNPMSupport
          * @param cb
          * <p>Delegates to separate framework specific addFramework-Methods
          */
-        'addNPMFrameworkSupport' : function (cb) {
+        'addNPMSupport' : function (cb) {
             // when framework support is enabled
             if (app.wizard.frameworkSupport) {
                 // and framework selected
@@ -37,11 +37,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
 
         /*
-         * copyFrameworkDependencies
+         * copyDependencies
          * @param cb
          * <p>Copies the framework dependencies (e.g. preprocessor template).
          */
-        'copyFrameworkDependencies' : function (cb) {
+        'copyDependencies' : function (cb) {
             let src = null;
         // TODO!!!!!
             // when framework support is enabled
@@ -88,11 +88,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
         /*
-         * copyFrameworkTemplates
+         * copyTemplates
          * @param cb
          * <p>Copies the framework template for the user selected framework type to the default installation directory.
          */
-        'copyFrameworkTemplates' : function (cb) {
+        'copyTemplates' : function (cb) {
             let src = null;
 
             // when framework support is enabled

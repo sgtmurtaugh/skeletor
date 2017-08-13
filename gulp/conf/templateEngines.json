@@ -1,0 +1,9 @@
+{
+  "panini": {
+    "npm": {
+      "panini": "^1.4.0"
+    },
+    "dependencies": {
+    }
+  }
+}

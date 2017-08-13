@@ -22,7 +22,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @return {*}
          */
         'addMultipleNPMEntriesToPackageConfiguration' : function (json, keyList, cb) {
-            // when spritegenerator support is enabled
+            // when the json param and the keyList param are not empty
             if (!app.fn.typeChecks.isEmpty(json)
                 && !app.fn.typeChecks.isEmpty(keyList)) {
     
@@ -30,11 +30,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     devDependencies: {}
                 };
     
-                // add preprocessor entries in devDependencies (multiple values possible)
+                // add each keyList entry definition to devDependencies (multiple values possible)
                 for ( let key of keyList ) {
                     if ( app.fn.npm.hasOwnProperty( json, key ) ) {
                         if ( app.fn.npm.hasOwnProperty( json[key], 'npm')) {
-                            // for each preprocessor npm dependency
+                            // for each key npm dependency
                             for ( let npmConfigKey in json[key].npm ) {
                                 if ( npmConfigKey !== null
                                         && json.hasOwnProperty(npmConfigKey) ) {
@@ -52,12 +52,12 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     }
                 }
     
-                // add sprite generator definition to package.json
+                // add definition to package.json
                 return this.writeJSONConfigToPackageConfiguration(packageJson, cb);
             }
             else
-            if (null === jsonPart) {
-                console.log('[warn] addMultipleNPMEntriesToPackageConfiguration: jsonPart is null.');
+            if (null === json) {
+                console.log('[warn] addMultipleNPMEntriesToPackageConfiguration: json is null.');
             }
             else
             if (null === keyList) {
@@ -74,17 +74,17 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @return {*}
          */
         'addNPMEntryToPackageConfiguration' : function (json, cb) {
-            // when preprocessor support is enabled
+            // when json is defined
             if (null !== json) {
                 let packageJson = {
                     devDependencies: {}
                 };
-    
+
                 if (app.fn.npm.hasOwnProperty(json, 'npm')) {
-                    // add preprocessor entry in devDependencies
+                    // add entry in devDependencies
                     packageJson.devDependencies = json.npm;
     
-                    // add framework definition to package.json
+                    // add definition to package.json
                     return this.writeJSONConfigToPackageConfiguration(packageJson, cb);
                 }
             }
