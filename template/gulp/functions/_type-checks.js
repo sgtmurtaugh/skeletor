@@ -43,52 +43,52 @@ module.exports = {
     },
 
     /*
-     * isTypeArray
+     * isArray
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
      */
-    'isTypeArray': function (obj) {
+    'isArray': function (obj) {
         return ('array' === module.exports.getType(obj));
     },
 
     /*
-     * isTypeFunction
+     * isFunction
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'function' otherwise false.
      */
-    'isTypeFunction': function (obj) {
+    'isFunction': function (obj) {
         return ('function' === module.exports.getType(obj));
     },
 
     /*
-     * isTypeObject
+     * isObject
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
      */
-    'isTypeObject': function isTypeObject(obj) {
+    'isObject': function isObject(obj) {
         return ('object' === module.exports.getType(obj));
     },
 
     /*
-     * isTypeOther
+     * isOther
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
      */
-    'isTypeOther': function isTypeOther(obj) {
+    'isOther': function isOther(obj) {
         return ('other' === module.exports.getType(obj));
     },
 
     /*
-     * isTypeString
+     * isString
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
      */
-    'isTypeString': function isTypeString(obj) {
+    'isString': function isString(obj) {
         return ('string' === module.exports.getType(obj));
     },
 
@@ -105,11 +105,11 @@ module.exports = {
             return true;
         }
         else
-        if (module.exports.isTypeArray(obj)) {
+        if (module.exports.isArray(obj)) {
             return (obj.length === 0);
         }
         else
-        if (module.exports.isTypeString(obj)) {
+        if (module.exports.isString(obj)) {
             return (obj.trim().length === 0);
         }
         return false;

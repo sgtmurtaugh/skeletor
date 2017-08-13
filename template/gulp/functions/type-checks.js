@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 
     /*
@@ -43,52 +45,52 @@ module.exports = {
     },
 
     /*
-     * isTypeArray
+     * isArray
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
      */
-    'isTypeArray': function (obj) {
+    'isArray': function (obj) {
         return ('array' === this.getType(obj));
     },
 
     /*
-     * isTypeFunction
+     * isFunction
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'function' otherwise false.
      */
-    'isTypeFunction': function (obj) {
+    'isFunction': function (obj) {
         return ('function' === this.getType(obj));
     },
 
     /*
-     * isTypeObject
+     * isObject
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
      */
-    'isTypeObject': function isTypeObject(obj) {
+    'isObject': function isObject(obj) {
         return ('object' === this.getType(obj));
     },
 
     /*
-     * isTypeOther
+     * isOther
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
      */
-    'isTypeOther': function isTypeOther(obj) {
+    'isOther': function isOther(obj) {
         return ('other' === this.getType(obj));
     },
 
     /*
-     * isTypeString
+     * isString
      * @param obj
      * @return {boolean}
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
      */
-    'isTypeString': function isTypeString(obj) {
+    'isString': function isString(obj) {
         return ('string' === this.getType(obj));
     },
 
@@ -105,11 +107,11 @@ module.exports = {
             return true;
         }
         else
-        if (this.isTypeArray(obj)) {
+        if (this.isArray(obj)) {
             return (obj.length === 0);
         }
         else
-        if (this.isTypeString(obj)) {
+        if (this.isString(obj)) {
             return (obj.trim().length === 0);
         }
         return false;

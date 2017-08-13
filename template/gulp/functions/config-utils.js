@@ -1,10 +1,31 @@
-var fs = require('fs');
-var path = require('path');
+'use strict';
 
-var requireDir = require('require-dir');
+let fs = require('fs');
+let path = require('path');
+
+let requireDir = require('require-dir');
 
 module.exports = {
 
+    /**
+     * getFolders
+     * @param dir
+     * TODO
+     */
+    'getFolders': function (dir) {
+        return fs.readdirSync(dir)
+            .filter(function (file) {
+                return fs.statSync(path.join(dir, file)).isDirectory();
+            });
+    },
+
+
+    /**
+     * loadConfig
+     * @param file
+     * @return {*}
+     * TODO
+     */
     'loadConfig': function (file) {
         let json = null;
         if (null !== file) {
@@ -18,20 +39,19 @@ module.exports = {
     },
 
 
+    /**
+     * loadConfigs
+     * @param recursive
+     * @return {map}
+     * TODO
+     */
     'loadConfigs': function (recursive) {
         if (recursive === undefined || recursive === null) {
             recursive = true;
         }
 
         return requireDir('../conf', {recurse: recursive});
-    },
-
-
-    'getFolders': function (dir) {
-        return fs.readdirSync(dir)
-            .filter(function (file) {
-                return fs.statSync(path.join(dir, file)).isDirectory();
-            });
     }
+
 
 };
