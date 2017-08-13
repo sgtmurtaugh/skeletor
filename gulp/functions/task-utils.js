@@ -174,7 +174,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, done );
 
                         if ( taskfunction !== null ) {
-                            this.registerTask( gulp, plugins, app, taskfunction, done )
+                            this.registerTask( gulp, plugins, app, taskfunction, done );
                             flag = true;
                         }
                     }
