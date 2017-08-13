@@ -20,8 +20,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
     // define task
     gulp.task( self,
         gulp.series(
-            app.fn.spriteGenerator.copySpriteGeneratorTemplates,
-            app.fn.spriteGenerator.addNPMSpriteGeneratorSupport
+            app.fn.preprocessor.copyDependencies,
+            app.fn.preprocessor.copyTemplates,
+            app.fn.preprocessor.addNPMSupport,
         )
     );
 };

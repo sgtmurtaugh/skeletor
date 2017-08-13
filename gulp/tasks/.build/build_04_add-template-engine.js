@@ -20,8 +20,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
     // define task
     gulp.task( self,
         gulp.series(
-            app.fn.preprocessor.copyPreprocessorTemplates,
-            app.fn.preprocessor.addNPMPreprocessorSupport,
+            app.fn.templateEngine.copyDependencies,
+            app.fn.templateEngine.copyTemplates,
+            app.fn.templateEngine.addNPMSupport
         )
     );
 };
