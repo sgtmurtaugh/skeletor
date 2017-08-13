@@ -1,19 +1,22 @@
+'use strict';
+
 import rimraf   from 'rimraf';
 
-var gulp;
-var plugins;
-var app;
+let gulp;
+let plugins;
+let app;
+let self;
 
 module.exports = function ( _gulp, _plugins, _app ) {
     gulp = _gulp;
     plugins = _plugins;
     app = _app;
+    self = app.fn.tasks.taskname(__filename);
 
-    // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    app.fn.tasks.ensureTaskDependencies(gulp, plugins, app, app.tasks, []);
-
-    // Task definieren
-    gulp.task( 'clean', clean );
+    // define task
+    gulp.task( self,
+        clean
+    );
 };
 
 /**
@@ -26,4 +29,3 @@ module.exports = function ( _gulp, _plugins, _app ) {
 function clean( done ) {
     rimraf( app.config.paths.dist.path, done );
 }
-
