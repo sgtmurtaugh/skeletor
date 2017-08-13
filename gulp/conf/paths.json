@@ -1,9 +1,10 @@
 {
   "packageJson": "package.json",
   "template": "template",
+  "templateEngines": "template-engines",
   "frameworks": "frameworks",
   "preprocessors": "preprocessors",
-  "spritegenerators": "sprite-generators",
+  "spriteGenerators": "sprite-generators",
   "recursive": "**/*",
   "gulp": "gulp",
   "src": "src",

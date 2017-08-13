@@ -4,6 +4,7 @@
       "gulp-less": "^3.3.0"
     }
   },
+
   "sass": {
     "npm": {
       "gulp-sass": "^2.3.2"
