@@ -1,25 +1,31 @@
 'use strict';
 
-var gulp = require('gulp');
-var plugins = require('gulp-load-plugins');
-var yargs = require('yargs');
-
-var fn = require('./gulp/functions')(gulp, plugins, null);
+let gulp = require('gulp');
+let plugins = require('gulp-load-plugins');
+let yargs = require('yargs');
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
 
 const app = {
-    'config': fn.config.loadConfigs(),
-    'tasks': fn.tasks.loadTaskConfigs(),
     'isProductive': !!(yargs.argv.production),
-    'fn' : fn
+
+    'fn' : [],
+    'config': [],
+    'tasks': []
 };
+
+let fn = require('./gulp/functions')(gulp, plugins, app);
+
+app.fn = fn;
+app.config = fn.config.loadConfigs();
+app.tasks = fn.tasks.loadTaskConfigs();
+
 
 /*
  * load dynamically all tasks
  */
-fn.tasks.addTasks( gulp, $, app, app.tasks );
+fn.tasks.registerTasks( gulp, $, app, app.tasks );
 
 
 /* ==============================
@@ -33,7 +39,7 @@ fn.tasks.addTasks( gulp, $, app, app.tasks );
  */
 function defaultTask( done ) {
     // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    fn.tasks.ensureTaskDependencies( gulp, plugins, app, app.tasks, [
+    fn.tasks.registerDependingTasks( gulp, plugins, app, app.tasks, [
         'run',
     ]);
     done();

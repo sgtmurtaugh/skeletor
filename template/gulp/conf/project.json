@@ -1,4 +1,10 @@
 {
-  "name": "click-dummy-creator",
-  "version": "0.1.0"
+  "name": "clickdummy-creator",
+  "version": "0.1.0",
+  "components": {
+    "templateEngine": "",
+    "framework": "",
+    "preprocessor": "",
+    "spriteGenerators": []
+  }
 }

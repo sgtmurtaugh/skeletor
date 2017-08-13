@@ -1,8 +1,8 @@
 'use strict';
 
-var gulp = require('gulp');
-var gulpPlugins = require('gulp-load-plugins');
-var yargs = require('yargs');
+let gulp = require('gulp');
+let gulpPlugins = require('gulp-load-plugins');
+let yargs = require('yargs');
 // var promise = require('es6-promise');
 
 // Load all Gulp plugins into one variable
@@ -13,13 +13,16 @@ const app = {
 
     'const' : {
         'REGEX_PLACEHOLDER_CLICKDUMMY_CREATOR' : /clickdummy-creator-placeholder/,
-        'PLACEHOLDER_CLICKDUMMY_CREATOR' : 'clickdummy-creator-placeholder'
+        'PLACEHOLDER_CLICKDUMMY_CREATOR' : 'clickdummy-creator-placeholder',
+        '': 'panini'
     },
 
     /*
      * wizard.directory: installation directory
      * wizard.name: new template name
      * wizard.projectFolder: concatenated path of directory and name
+     *
+     * wizard.quickClone: boolean flag
      *
      * wizard.frameworkSupport: boolean flag
      * wizard.framework: chosen framework name
@@ -38,6 +41,10 @@ const app = {
         name: null,
         projectFolder: null,
 
+        quickClone: false,
+
+        templateEngine: null,
+
         frameworkSupport: false,
         framework: null,
         frameworkVersion: null,
@@ -52,15 +59,12 @@ const app = {
     },
 
 
-    // 'fn' : fn,
-    // 'config': this.fn.config.loadConfigs(),
-    // 'tasks': this.fn.tasks.loadTaskConfigs()
     'fn' : [],
     'config': [],
     'tasks': []
 };
 
-var fn = require('./gulp/functions')(gulp, plugins, app);
+let fn = require('./gulp/functions')(gulp, plugins, app);
 
 app.fn = fn;
 app.config = fn.config.loadConfigs();
