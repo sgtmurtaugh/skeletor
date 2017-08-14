@@ -25,16 +25,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
 
-        'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
+        'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, cb ) {
             if ( typechecks.isArray( tasknames ) ) {
                 for ( let taskname of tasknames ) {
                     let flag = false;
 
                     if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
-                        let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, done );
+                        let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, cb );
 
                         if ( taskfunction !== null ) {
-                            this.addTask( gulp, plugins, app, taskfunction, done )
+                            this.addTask( gulp, plugins, app, taskfunction, cb )
                             flag = true;
                         }
                     }
@@ -157,18 +157,18 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
 
-        'addTasks': function ( gulp, plugins, app, jsonTasks, done ) {
+        'addTasks': function ( gulp, plugins, app, jsonTasks, cb ) {
             if ( jsonTasks !== null ) {
                 for (var key in jsonTasks) {
                     var value = jsonTasks[key];
 
                     if ( ! gulp.tree().nodes.key ) {
                         if ( typechecks.isObject( value ) ) {
-                            this.addTasks( gulp, plugins, app, value, done );
+                            this.addTasks( gulp, plugins, app, value, cb );
                         }
                         else
                         if ( typechecks.isFunction( value ) ) {
-                            this.addTask( gulp, plugins, app, value, done );
+                            this.addTask( gulp, plugins, app, value, cb );
                         }
                         else {
                             console.log('else: ' + value);
@@ -182,9 +182,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
         },
 
 
-        'addTask': function ( gulp, plugins, app, taskfunction, done ) {
+        'addTask': function ( gulp, plugins, app, taskfunction, cb ) {
             if ( typechecks.isFunction( taskfunction ) ) {
-                taskfunction( gulp, plugins, app, done );
+                taskfunction( gulp, plugins, app, cb );
             }
         }
     };

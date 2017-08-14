@@ -162,19 +162,19 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param app
          * @param jsonTasks
          * @param tasknames
-         * @param done
+         * @param cb
          * TODO
          */
-        'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
+        'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, cb ) {
             if ( app.fn.typeChecks.isArray( tasknames ) ) {
                 for ( let taskname of tasknames ) {
                     let flag = false;
 
                     if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
-                        let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, done );
+                        let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, cb );
 
                         if ( taskfunction !== null ) {
-                            this.registerTask( gulp, plugins, app, taskfunction, done );
+                            this.registerTask( gulp, plugins, app, taskfunction, cb );
                             flag = true;
                         }
                     }
@@ -193,12 +193,12 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param plugins
          * @param app
          * @param taskfunction
-         * @param done
+         * @param cb
          * TODO
          */
-        'registerTask': function ( gulp, plugins, app, taskfunction, done ) {
+        'registerTask': function ( gulp, plugins, app, taskfunction, cb ) {
             if ( app.fn.typeChecks.isFunction( taskfunction ) ) {
-                taskfunction( gulp, plugins, app, done );
+                taskfunction( gulp, plugins, app, cb );
             }
         },
 
@@ -209,10 +209,10 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param plugins
          * @param app
          * @param jsonTasks
-         * @param done
+         * @param cb
          * TODO
          */
-        'registerTasks': function ( gulp, plugins, app, jsonTasks, done ) {
+        'registerTasks': function ( gulp, plugins, app, jsonTasks, cb ) {
             if ( jsonTasks !== null ) {
                 for (let key in jsonTasks) {
                     if ( key !== null
@@ -222,11 +222,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                         if ( ! gulp.tree().nodes.key ) {
                             if ( app.fn.typeChecks.isObject( value ) ) {
-                                this.registerTasks( gulp, plugins, app, value, done );
+                                this.registerTasks( gulp, plugins, app, value, cb );
                             }
                             else
                             if ( app.fn.typeChecks.isFunction( value ) ) {
-                                this.registerTask( gulp, plugins, app, value, done );
+                                this.registerTask( gulp, plugins, app, value, cb );
                             }
                             else {
                                 console.log('else: ' + value);

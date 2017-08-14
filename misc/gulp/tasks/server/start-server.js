@@ -21,13 +21,13 @@ module.exports = function ( _gulp, _plugins, _app ) {
 /**
  * startServer
  * Task-Function
- * @param done
+ * @param cb
  * Start a server with BrowserSync to preview the site in
  */
-function startServer( done ) {
+function startServer(cb) {
     browser.init({
         server: app.config.paths.dist.path,
         port: app.config.vendor.server.development.port
     });
-    done();
+    cb();
 }

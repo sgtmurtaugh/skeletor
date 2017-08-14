@@ -32,10 +32,10 @@ module.exports = function ( _gulp, _plugins, _app ) {
 /**
  * reloadServer
  * Task-Function
- * @param done
+ * @param cb
  * Reload the browser with BrowserSync
  */
-function reloadServer( done ) {
+function reloadServer(cb) {
     browser.reload();
-    done();
+    cb();
 }

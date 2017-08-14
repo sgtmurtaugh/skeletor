@@ -22,16 +22,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
 /**
  * generateSprites
  * Task-Function
- * @param done
+ * @param cb
  * Determines all sprite folders inside the sprite-src folder and
  * runs the generateSprite function on each of them.
  */
-function generateSprites( done ) {
+function generateSprites(cb) {
     let folders = app.fn.npm.getFolders( app.config.vendor['node-sprite-generator'].sprite.src );
     folders.forEach( function ( folder ) {
         return generateSprite( folder, app );
     });
-    done();
+    cb();
 }
 
 /**

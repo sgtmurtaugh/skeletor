@@ -34,16 +34,16 @@
 // /**
 //  * generateStyleGuide
 //  * Task-Function
-//  * @param done
+//  * @param cb
 //  * Generate a style guide from the Markdown content and HTML template in styleguide/
 //  */
-// function generateStyleGuide(done) {
+// function generateStyleGuide(cb) {
 //     sherpa(
 //         'src/styleguide/index.md',
 //         {
 //             output: app.config.paths.dist + '/styleguide.html',
 //             template: 'src/styleguide/template.html'
 //         },
-//         done
+//         cb
 //     );
 // }

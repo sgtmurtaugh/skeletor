@@ -22,10 +22,10 @@ module.exports = function ( _gulp, _plugins, _app ) {
 /**
  * clean
  * Task-Function
- * @param done
+ * @param cb
  * Delete the "dist" folder
  * This happens every time a build starts
  */
-function clean( done ) {
-    rimraf( app.config.paths.dist.path, done );
+function clean(cb) {
+    rimraf( app.config.paths.dist.path, cb );
 }

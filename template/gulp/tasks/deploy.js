@@ -19,6 +19,6 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
     // define task
     gulp.task( self,
-        gulp.parallel( self_tasks )
+        gulp.parallel(self_tasks)
     );
 };

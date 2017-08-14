@@ -17,14 +17,14 @@ module.exports = {
     },
 
 
-    'ensureTaskDependencies': function ( gulp, plugins, app, jsonTasks, tasknames, done ) {
+    'ensureTaskDependencies': function ( gulp, plugins, app, jsonTasks, tasknames, cb ) {
         if ( typechecks.isArray( tasknames ) ) {
             for ( let taskname of tasknames ) {
                 if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
-                    let taskfunction = module.exports.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, done );
+                    let taskfunction = module.exports.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, cb );
 
                     if ( taskfunction !== null ) {
-                        module.exports.addTask( gulp, plugins, app, taskfunction, done )
+                        module.exports.addTask( gulp, plugins, app, taskfunction, cb )
                     }
                 }
             }
@@ -80,18 +80,18 @@ module.exports = {
 
 
 
-    'addTasks': function ( gulp, plugins, app, jsonTasks, done ) {
+    'addTasks': function ( gulp, plugins, app, jsonTasks, cb ) {
         if ( jsonTasks !== null ) {
             for (var key in jsonTasks) {
                 var value = jsonTasks[key];
 
                 if ( ! gulp.tree().nodes.key ) {
                     if ( typechecks.isObject( value ) ) {
-                        module.exports.addTasks( gulp, plugins, app, value, done );
+                        module.exports.addTasks( gulp, plugins, app, value, cb );
                     }
                     else
                     if ( typechecks.isFunction( value ) ) {
-                        module.exports.addTask( gulp, plugins, app, value, done );
+                        module.exports.addTask( gulp, plugins, app, value, cb );
                     }
                     else {
 console.log('else: ' + value);
@@ -105,9 +105,9 @@ console.log('task already registred: ' + key);
     },
 
 
-    'addTask': function ( gulp, plugins, app, taskfunction, done ) {
+    'addTask': function ( gulp, plugins, app, taskfunction, cb ) {
         if ( typechecks.isFunction( taskfunction ) ) {
-            taskfunction( gulp, plugins, app, done );
+            taskfunction( gulp, plugins, app, cb );
         }
     }
 };

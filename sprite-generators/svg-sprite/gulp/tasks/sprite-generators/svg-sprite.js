@@ -25,9 +25,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
  * Task-Function
  * Determines all sprite folders inside the sprite-src folder and
  * runs the generateSprite function on each of them.
- * @param done
+ * @param cb
  */
-function generateSVGSprites( done ) {
+function generateSVGSprites( cb ) {
     let spriter = svgsg(
         app.config.vendor["svg-sprite"]
     );
@@ -56,12 +56,12 @@ function generateSVGSprites( done ) {
                     spriter,
                     folder,
                     app,
-                    done
+                    cb
                 );
             }
         });
     }
-    done();
+    cb();
 }
 
 /**

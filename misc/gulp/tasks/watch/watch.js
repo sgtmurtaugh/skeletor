@@ -21,10 +21,10 @@ module.exports = function ( _gulp, _plugins, _app ) {
 /**
  * watch
  * Task-Function
- * @param done
+ * @param cb
  * Watch for changes to static assets, pages, Sass, and JavaScript
  */
-function watch( done ) {
+function watch(cb) {
     gulp.watch(app.config.paths.assets, gulp.series('copy-assets'));
     gulp.watch('src/pages/**/*.html').on('change', gulp.series('generate-pages', browser.reload));
     gulp.watch('src/{layouts,partials}/**/*.html').on('change', gulp.series('update-pages', 'generate-pages', browser.reload));
@@ -32,5 +32,5 @@ function watch( done ) {
     gulp.watch('src/assets/js/**/*.js').on('change', gulp.series('generate-javascript', browser.reload));
     gulp.watch('src/assets/img/**/*').on('change', gulp.series('copy-images', browser.reload));
     // gulp.watch('src/styleguide/**').on('change', gulp.series('generate-styleguide', browser.reload));
-    done();
+    cb();
 }

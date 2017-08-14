@@ -30,26 +30,26 @@ fn.tasks.addTasks( gulp, plugins, app, app.tasks );
 
 /**
  * defaultTask
- * @param done
+ * @param cb
  */
-function defaultTask( done ) {
+function defaultTask(cb) {
     // Pruefen, ob alle Tasks bereits definiert und registriert wurden
     fn.tasks.ensureTaskDependencies( gulp, plugins, app, app.tasks, [
         'run',
     ]);
-    done();
+    cb();
 }
 
 /**
  * usage
- * @param done
+ * @param cb
  */
-function usage( done ) {
+function usage(cb) {
     console.log('\r\nList of all registred tasks:\r\n');
     fn.tasks.lookupTasknames(app.tasks);
     console.log('');
     console.log('npm start {taskname}\r\n');
-    done();
+    cb();
 }
 
 

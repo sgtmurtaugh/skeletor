@@ -33,9 +33,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
  * updatePages
  * Task-Function
  * Load updated HTML templates and partials into Panini
- * @param done
+ * @param cb
  */
-function updatePages( done ) {
+function updatePages(cb) {
     panini.refresh();
-    done();
+    cb();
 }
