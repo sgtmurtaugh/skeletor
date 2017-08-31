@@ -13,7 +13,22 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    if ( app.fn.typeChecks.isFunction(templateEngine) ) {
-        templateEngine( gulp, plugins, app );
-    }
+    // define task
+    gulp.task( self,
+        deployTemplateEngine
+    );
 };
+
+/**
+ * deployTemplateEngine
+ * Task-Function
+ * @param cb
+ * @return {*}
+ * TODO
+ */
+function deployTemplateEngine(cb) {
+    if ( app.fn.typeChecks.isFunction(templateEngine) ) {
+        return templateEngine( gulp, plugins, app );
+    }
+    cb();
+}
