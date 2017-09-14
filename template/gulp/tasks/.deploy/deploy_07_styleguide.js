@@ -19,11 +19,11 @@
 //     // // Task definieren
 //     // gulp.task( 'generate-styleguide', generateStyleGuide );
 //
-//     // Sub-Tasks lookup
-//     let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
-//
 //     // if necessary - register depending tasks
-//     app.fn.tasks.registerDependingTasks(gulp, plugins, app, app.tasks, self_tasks);
+//     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
+//
+//     // define Task
+//     app.fn.tasks.defineTask(self, self_tasks, generateStyleGuide);
 //
 //     // define task
 //     gulp.task( self,

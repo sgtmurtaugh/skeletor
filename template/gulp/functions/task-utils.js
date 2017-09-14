@@ -9,6 +9,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
     plugins = _plugins;
     app = _app;
 
+    // Recursion breakOff object.
+    let _requestedTasknames = [];
+
     return {
 
         /**
@@ -25,10 +28,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * lookupDependentTasknames
          * @param jsonTasks
          * @param taskname
+         * @param currentTask
          * @return {Array}
          * TODO
          */
-        'lookupDependentTasknames': function (jsonTasks, taskname) {
+        'lookupDependentTasknames': function (jsonTasks, taskname, currentTask) {
             const TASK_FOLDER_PREFIX = '.';
             let tasknames = [];
 
@@ -45,13 +49,20 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         taskvalue = jsonTasks[taskname];
                     }
 
+
                     if ( app.fn.typeChecks.isFunction(taskvalue) ) {
-                        tasknames.push(taskname);
+
+                        // Only add Task, when it's not the current task! (-> recursion)
+                        if (app.fn.typeChecks.isEmpty(currentTask)
+                                || currentTask !== taskname) {
+
+                            tasknames.push(taskname);
+                        }
                     }
                     else
                     if ( app.fn.typeChecks.isObject(taskvalue) ) {
                         tasknames = tasknames.concat(
-                            this.lookupDependentTasknames(taskvalue, null)
+                            this.lookupDependentTasknames(taskvalue, null, currentTask)
                         );
                     }
                 }
@@ -68,7 +79,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                             else
                             if ( app.fn.typeChecks.isObject(taskvalue) ) {
                                 tasknames = tasknames.concat(
-                                    this.lookupDependentTasknames(taskvalue, null)
+                                    this.lookupDependentTasknames(taskvalue, null, currentTask)
                                 );
                             }
                         }
@@ -81,15 +92,12 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
         /**
          * lookupTaskFunction
-         * @param gulp
-         * @param plugins
-         * @param app
          * @param jsonTasks
          * @param taskname
          * @return {*}
          * TODO
          */
-        'lookupTaskFunction': function (gulp, plugins, app, jsonTasks, taskname) {
+        'lookupTaskFunction': function (jsonTasks, taskname) {
             let taskvalue = null;
 
             // Wenn das uebergebene jsonTasks Objekt nicht null ist
@@ -105,9 +113,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     if ( ! app.fn.typeChecks.isFunction( taskvalue ) ) {
                         for ( let key in jsonTasks ) {
                             if ( key !== null
-                                && jsonTasks.hasOwnProperty(key) ) {
+                                    && jsonTasks.hasOwnProperty(key) ) {
 
-                                taskvalue = this.lookupTaskFunction(gulp, plugins, app, jsonTasks[key], taskname);
+                                taskvalue = this.lookupTaskFunction(jsonTasks[key], taskname);
 
                                 if ( taskvalue !== null ) {
                                     break;
@@ -157,24 +165,21 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
         /**
          * registerDependingTasks
-         * @param gulp
-         * @param plugins
-         * @param app
          * @param jsonTasks
          * @param tasknames
          * @param cb
          * TODO
          */
-        'registerDependingTasks': function ( gulp, plugins, app, jsonTasks, tasknames, cb ) {
+        'registerDependingTasks': function (jsonTasks, tasknames, cb) {
             if ( app.fn.typeChecks.isArray( tasknames ) ) {
                 for ( let taskname of tasknames ) {
                     let flag = false;
 
-                    if ( ! gulp.tree().nodes.hasOwnProperty(taskname) ) {
-                        let taskfunction = this.lookupTaskFunction( gulp, plugins, app, jsonTasks, taskname, cb );
+                    if (!this.isTaskDefined(taskname)) {
+                        let taskfunction = this.lookupTaskFunction( jsonTasks, taskname, cb );
 
                         if ( taskfunction !== null ) {
-                            this.registerTask( gulp, plugins, app, taskfunction, cb );
+                            this.registerTask( taskfunction, cb );
                             flag = true;
                         }
                     }
@@ -188,15 +193,56 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
 
         /**
+         * registerDependingTasksNeu
+         * @param jsonTasks
+         * @param currentTask
+         * @param additionalTasknames
+         * TODO
+         */
+        'registerDependingTasksNeu': function ( jsonTasks, currentTask, additionalTasknames) {
+            let tasknames = app.fn.helper.getMergedArray(
+                this.lookupDependentTasknames(app.tasks, currentTask, currentTask),
+                additionalTasknames
+            );
+
+            if ( app.fn.typeChecks.isNotEmpty( tasknames ) ) {
+                for ( let taskname of tasknames ) {
+                    let flag = false;
+
+                    if ( app.fn.typeChecks.isNotEmptyString( taskname ) ) {
+                        if (!this.isTaskDefined(taskname)) {
+                            this._endlessRecursionBreakOff(taskname);
+
+                            let taskfunction = this.lookupTaskFunction( jsonTasks, taskname );
+
+                            if ( taskfunction !== null ) {
+                                this.registerTask( taskfunction );
+                                flag = true;
+                            }
+                        }
+
+                        if ( !flag ) {
+                            console.log('[ERROR] Task "' + taskname + '" not defined!');
+                        }
+                    }
+                    else
+                    if ( app.fn.typeChecks.isNotEmpty( taskname ) ) {
+                        console.log('[WARN] Detected a Non-String Object in the task definitions! type : ' + (typeof taskname));
+                        console.log(taskname);
+                    }
+                }
+            }
+            return tasknames;
+        },
+
+
+        /**
          * registerTask
-         * @param gulp
-         * @param plugins
-         * @param app
          * @param taskfunction
          * @param cb
          * TODO
          */
-        'registerTask': function ( gulp, plugins, app, taskfunction, cb ) {
+        'registerTask': function ( taskfunction, cb ) {
             if ( app.fn.typeChecks.isFunction( taskfunction ) ) {
                 taskfunction( gulp, plugins, app, cb );
             }
@@ -205,14 +251,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
         /**
          * registerTasks
-         * @param gulp
-         * @param plugins
-         * @param app
          * @param jsonTasks
          * @param cb
          * TODO
          */
-        'registerTasks': function ( gulp, plugins, app, jsonTasks, cb ) {
+        'registerTasks': function ( jsonTasks, cb ) {
             if ( jsonTasks !== null ) {
                 for (let key in jsonTasks) {
                     if ( key !== null
@@ -220,16 +263,19 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                         let value = jsonTasks[key];
 
-                        if ( ! gulp.tree().nodes.key ) {
+                        if (!this.isTaskDefined(key)) {
+                            // value is an Object. It might contain JSON SubTask definitions
                             if ( app.fn.typeChecks.isObject( value ) ) {
-                                this.registerTasks( gulp, plugins, app, value, cb );
+                                this.registerTasks( value, cb );
                             }
+                            // The value is a Task Function and can be registered
                             else
                             if ( app.fn.typeChecks.isFunction( value ) ) {
-                                this.registerTask( gulp, plugins, app, value, cb );
+                                this.registerTask( value, cb );
                             }
+                            // The value might be null or undefined
                             else {
-                                console.log('else: ' + value);
+                                console.log('The determined value Object will not be further processed! value : ' + value);
                             }
                         }
                         else {
@@ -304,8 +350,125 @@ module.exports = function ( _gulp, _plugins, _app ) {
             return app.fn.path.basename(filename,
                 app.fn.path.extname(filename)
             );
+        },
+
+
+        /**
+         * defineTask
+         * @param taskname
+         * @param dependingTasks
+         * @param taskFunction
+         * @returns {*}
+         */
+        'defineTask': function (taskname, dependingTasks, taskFunction) {
+            if (app.fn.typeChecks.isNotEmptyString(taskname)) {
+
+                if (app.fn.typeChecks.isNotEmpty(dependingTasks)) {
+                    if (app.fn.tasks.isEachTaskDefined(dependingTasks)) {
+                        if (app.fn.typeChecks.isNotEmpty(taskFunction)
+                                && app.fn.typeChecks.isFunction(taskFunction)) {
+
+                            gulp.task(taskname,
+                                dependingTasks,
+                                taskFunction
+                            );
+                        }
+                        else {
+                            gulp.task(taskname,
+                                dependingTasks
+                            );
+                        }
+                    }
+                }
+                else {
+                    if (app.fn.typeChecks.isNotEmpty(taskFunction)
+                            && app.fn.typeChecks.isFunction(taskFunction)) {
+
+                        gulp.task(taskname,
+                            taskFunction
+                        );
+                    }
+                    else {
+// nothing to do!
+                    }
+                }
+            }
+        },
+
+        /**
+         * isTaskDefined
+         * @param taskname {String}
+         * @returns {boolean}
+         * checks gulp tree for the given taskname. undefined or null will result in true.
+         */
+        'isTaskDefined' : function (taskname) {
+            let bIsTaskDefined = true;
+
+            if (app.fn.typeChecks.isNotEmptyString(taskname)) {
+                bIsTaskDefined = gulp.tree().nodes.hasOwnProperty(taskname);
+            }
+            else {
+                // TODO logging
+                // undefined/null/empty Object
+            }
+            return bIsTaskDefined;
+        },
+
+        /**
+         * isEachTaskDefined
+         * @param tasknames {String} / String-{Array}
+         * @returns {boolean}
+         * each value is checked by isTaskDefined method. undefined or null will result in true.
+         */
+        'isEachTaskDefined' : function (tasknames) {
+            let bIsEachTaskDefined = true;
+
+            if (app.fn.typeChecks.isNotEmpty(tasknames)) {
+                if (app.fn.typeChecks.isArray(tasknames)) {
+                    for (let taskname of tasknames) {
+                        bIsEachTaskDefined = this.isTaskDefined(taskname);
+
+                        if (!bIsEachTaskDefined)
+                            break;
+                    }
+                }
+                else
+                if (app.fn.typeChecks.isString(tasknames)) {
+                    bIsEachTaskDefined = this.isTaskDefined(tasknames);
+                }
+                else {
+                    // TODO logging
+                    // no String or String Array -> no definition check possible!
+                }
+            }
+            else {
+                // TODO logging
+                // undefined/null/empty Object
+            }
+
+            return bIsEachTaskDefined;
+        },
+
+
+        /**
+         * _endlessRecursionBreakOff
+         * @param taskname
+         * @private
+         */
+        '_endlessRecursionBreakOff' : function (taskname) {
+            // remove already registered tasknames
+            for (let requestedTaskname of _requestedTasknames) {
+                if (this.isTaskDefined(requestedTaskname)) {
+                    _requestedTasknames.splice(_requestedTasknames.indexOf(requestedTaskname), 1);
+                }
+            }
+
+            if (!_requestedTasknames.includes(taskname)) {
+                _requestedTasknames.push(taskname);
+            }
+            else {
+                throw Error('Recursion detected! taskname "' + taskname + '" already requested.');
+            }
         }
-
-
     };
 };

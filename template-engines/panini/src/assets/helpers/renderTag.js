@@ -1,4 +1,4 @@
-var typechecks = require('../../gulp/functions/type-checks');
+let typeChecks = require('../../gulp/functions/type-checks');
 
 /**
  * renderTag
@@ -34,7 +34,7 @@ module.exports = function(tagname, tagattrs, context, options) {
             if ( options['data'].hasOwnProperty('partial-block') ) {
                 tagBody = options['data']['partial-block'];
 
-                if ( typechecks.isTypeFunction( tagBody ) ) {
+                if ( typeChecks.isTypeFunction( tagBody ) ) {
                     tagBody = tagBody();
                 }
                 else {

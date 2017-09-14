@@ -11,18 +11,20 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    // // Sub-Tasks lookup
-    // let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
+    // if necessary - register depending tasks
+    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
-    // // if necessary - register depending tasks
-    // app.fn.tasks.registerDependingTasks(gulp, plugins, app, app.tasks, self_tasks);
-
-    // define task
-    gulp.task( self,
-        gulp.series(
-            app.fn.templateEngine.copyDependencies,
-            app.fn.templateEngine.copyTemplates,
-            app.fn.templateEngine.addNPMSupport
-        )
-    );
+    // define Task
+    app.fn.tasks.defineTask(self, self_tasks, addTemplateEngine);
 };
+
+/**
+ * addTemplateEngine
+ * @param cb
+ */
+function addTemplateEngine(cb) {
+    app.fn.templateEngine.copyDependencies(cb);
+    app.fn.templateEngine.copyTemplates(cb);
+    app.fn.templateEngine.addNPMSupport(cb);
+    cb();
+}

@@ -1,5 +1,7 @@
 'use strict';
 
+import browser  from 'browser-sync';
+
 let gulp;
 let plugins;
 let app;
@@ -15,16 +17,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks, addFrameworkSupport);
+    app.fn.tasks.defineTask(self, self_tasks, reloadServer());
 };
 
 /**
- * addFrameworkSupport
+ * reloadServer
+ * Task-Function
  * @param cb
+ * Reload the browser with BrowserSync
  */
-function addFrameworkSupport(cb) {
-    app.fn.framework.copyDependencies(cb);
-    app.fn.framework.copyTemplates(cb);
-    app.fn.framework.addNPMSupport(cb);
+function reloadServer( cb ) {
+    browser.reload();
     cb();
 }

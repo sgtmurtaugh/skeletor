@@ -14,6 +14,7 @@ module.exports = function (_gulp, _plugins, _app) {
         'path': require('path'),
 
         'config': require('./config-utils'),
+        'helper': require('./helper-utils'),
         'typeChecks' : require('./type-checks'),
 
         'tasks': require('./task-utils')(gulp, plugins, app)

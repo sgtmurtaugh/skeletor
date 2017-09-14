@@ -70,40 +70,17 @@ app.fn = fn;
 app.config = fn.config.loadConfigs();
 app.tasks = fn.tasks.loadTaskConfigs();
 
+
 /*
  * load dynamically all tasks
  */
-fn.tasks.registerTasks( gulp, plugins, app, app.tasks );
+fn.tasks.registerTasks( app.tasks );
 
 
 /* ==============================
  *  # Functions
  * ============================== */
 
-
-/**
- * defaultTask
- * @param cb
- */
-function defaultTask(cb) {
-    // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    fn.tasks.registerDependingTasks( gulp, plugins, app, app.tasks, [
-        'build',
-    ]);
-    cb();
-}
-
-/**
- * usage
- * @param cb
- */
-function usage(cb) {
-    console.log('\r\nList of all registred tasks:\r\n');
-    fn.tasks.showTasknames(app.tasks);
-    console.log('');
-    console.log('npm start {taskname}\r\n');
-    cb();
-}
 
 
 
@@ -112,21 +89,3 @@ function usage(cb) {
  * ============================== */
 
 
-/**
- * Task: default
- * runs: run task
- */
-gulp.task('default',
-    gulp.series(
-        defaultTask,
-        'build'
-    )
-);
-
-/**
- * Task: usage
- * runs: usage function
- */
-gulp.task('usage',
-    usage
-);

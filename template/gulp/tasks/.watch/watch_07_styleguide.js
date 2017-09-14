@@ -13,16 +13,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    // Sub-Tasks lookup
-    let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
-
     // if necessary - register depending tasks
-    app.fn.tasks.registerDependingTasks(gulp, plugins, app, app.tasks, self_tasks);
+    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
-    // define task
-    gulp.task( self,
-        watchStyleguide
-    );
+    // define Task
+    app.fn.tasks.defineTask(self, self_tasks, watchStyleguide);
 };
 
 /**
@@ -31,7 +26,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
  * @param cb
  * Watch for changes to static assets, pages, Sass, and JavaScript
  */
-function watch(cb) {
+function watchStyleguide(cb) {
     // gulp.watch('src/styleguide/**').on('change', gulp.series('generate-styleguide', browser.reload));
     cb();
 }

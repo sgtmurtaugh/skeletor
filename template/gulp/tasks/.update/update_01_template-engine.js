@@ -13,22 +13,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    // // Pruefen, ob alle Tasks bereits definiert und registriert wurden
-    // app.fn.tasks.ensureTaskDependencies(gulp, plugins, app, app.tasks, []);
-    //
-    // // Task definieren
-    // gulp.task( 'update-pages', updatePages );
-
-    // Sub-Tasks lookup
-    let self_tasks = app.fn.tasks.lookupDependentTasknames(app.tasks, self);
-
     // if necessary - register depending tasks
-    app.fn.tasks.registerDependingTasks(gulp, plugins, app, app.tasks, self_tasks);
+    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
-    // define task
-    gulp.task( self,
-        updateTemplateEngine
-    );
+    // define Task
+    app.fn.tasks.defineTask(self, self_tasks, updateTemplateEngine);
 };
 
 /**

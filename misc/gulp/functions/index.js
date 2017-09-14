@@ -7,5 +7,5 @@ module.exports = {
 
     'tasks' : require('./task-utils'),
 
-    'typechecks' : require('./type-checks')
+    'typeChecks' : require('./type-checks')
 };

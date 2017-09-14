@@ -13,10 +13,11 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
     self = app.fn.tasks.taskname(__filename);
 
-    // define task
-    gulp.task( self,
-        clean
-    );
+    // if necessary - register depending tasks
+    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
+
+    // define Task
+    app.fn.tasks.defineTask(self, self_tasks, clean);
 };
 
 /**

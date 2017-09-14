@@ -18,6 +18,7 @@ module.exports = function (_gulp, _plugins, _app) {
 
         'config' : require('./config-utils'),
         'messages' : require('./messages'),
+        'helper' : require('./helper-utils'),
         'npm' : require('./npm-utils'),
         'typeChecks' : require('./type-checks'),
         'wizard' : require('./wizard'),

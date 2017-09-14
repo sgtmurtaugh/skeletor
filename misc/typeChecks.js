@@ -16,7 +16,7 @@
 
 'use strict';
 
-formular.utils.typechecks = {};
+formular.utils.typeChecks = {};
 
 
 /**
@@ -51,7 +51,7 @@ formular.utils.typechecks = {};
  * </dl>
  * <p>The private method doesn't make use of the log mechanism!
  */
-formular.utils.typechecks.getType = function (obj) {
+formular.utils.typeChecks.getType = function (obj) {
     var type = 'object';
 
     if ('undefined' === typeof obj) {
@@ -88,10 +88,10 @@ formular.utils.typechecks.getType = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
  */
-formular.utils.typechecks.isArray = function (obj) {
-    // log.enter('formular.utils.typechecks.isArray', obj);
-    var bIs = ('array' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isArray', bIs);
+formular.utils.typeChecks.isArray = function (obj) {
+    // log.enter('formular.utils.typeChecks.isArray', obj);
+    var bIs = ('array' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isArray', bIs);
     return bIs;
 };
 
@@ -101,10 +101,10 @@ formular.utils.typechecks.isArray = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'boolean' otherwise false.
  */
-formular.utils.typechecks.isBoolean = function (obj) {
-    // log.enter('formular.utils.typechecks.isBoolean', obj);
-    var bIs = ('boolean' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isBoolean', bIs);
+formular.utils.typeChecks.isBoolean = function (obj) {
+    // log.enter('formular.utils.typeChecks.isBoolean', obj);
+    var bIs = ('boolean' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isBoolean', bIs);
     return bIs;
 };
 
@@ -115,25 +115,25 @@ formular.utils.typechecks.isBoolean = function (obj) {
  * <p>Checks the value depending on the type of the parameter object. Returns true, if the obj is null/undefined, an
  * empty Array or an empty String, otherwise true will be returned.
  */
-formular.utils.typechecks.isEmpty = function (obj) {
-    // log.enter('formular.utils.typechecks.isEmpty', obj);
+formular.utils.typeChecks.isEmpty = function (obj) {
+    // log.enter('formular.utils.typeChecks.isEmpty', obj);
     var bIsEmpty = false;
 
-    if (formular.utils.typechecks.isNull(obj)
-            || formular.utils.typechecks.isUndefined(obj)) {
+    if (formular.utils.typeChecks.isNull(obj)
+            || formular.utils.typeChecks.isUndefined(obj)) {
 
         bIsEmpty = true;
     }
     else
-    if (formular.utils.typechecks.isArray(obj)) {
+    if (formular.utils.typeChecks.isArray(obj)) {
         bIsEmpty = (obj.length === 0);
     }
     else
-    if (formular.utils.typechecks.isString(obj)) {
+    if (formular.utils.typeChecks.isString(obj)) {
         bIsEmpty = (obj.trim().length === 0);
     }
 
-    // log.return('formular.utils.typechecks.isEmpty', bIsEmpty);
+    // log.return('formular.utils.typeChecks.isEmpty', bIsEmpty);
     return bIsEmpty;
 };
 
@@ -143,10 +143,10 @@ formular.utils.typechecks.isEmpty = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'function' otherwise false.
  */
-formular.utils.typechecks.isFunction = function (obj) {
-    // log.enter('formular.utils.typechecks.isFunction', obj);
-    var bIs = ('function' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isFunction', bIs);
+formular.utils.typeChecks.isFunction = function (obj) {
+    // log.enter('formular.utils.typeChecks.isFunction', obj);
+    var bIs = ('function' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isFunction', bIs);
     return bIs;
 };
 
@@ -157,11 +157,11 @@ formular.utils.typechecks.isFunction = function (obj) {
  * <p>Delegates to <code>getType(obj)</code> and checks for type 'string'. If true a JSON parse tests the object. When no exeption is thrown true will be returned otherwise false.
  * Attention: Numbers, booleans and null will also return true - these are valid JSON values!
  */
-formular.utils.typechecks.isJSONString = function (obj) {
-    // log.enter('formular.utils.typechecks.isJSONString', obj);
+formular.utils.typeChecks.isJSONString = function (obj) {
+    // log.enter('formular.utils.typeChecks.isJSONString', obj);
     var bIs = false;
 
-    if ('string' === formular.utils.typechecks.getType(obj)) {
+    if ('string' === formular.utils.typeChecks.getType(obj)) {
         try {
             JSON.parse(obj);
             bIs = true;
@@ -171,7 +171,7 @@ formular.utils.typechecks.isJSONString = function (obj) {
         }
     }
 
-    // log.return('formular.utils.typechecks.isJSONString', bIs);
+    // log.return('formular.utils.typeChecks.isJSONString', bIs);
     return bIs;
 };
 
@@ -181,10 +181,10 @@ formular.utils.typechecks.isJSONString = function (obj) {
  * @return {boolean}
  * <p>Delegates to isEmpty and returns the inverted value.
  */
-formular.utils.typechecks.isNotEmpty = function (obj) {
-    // log.enter('formular.utils.typechecks.isNotEmpty', obj);
-    var bNotEmpty = (! formular.utils.typechecks.isEmpty(obj));
-    // log.return('formular.utils.typechecks.isNotEmpty', bNotEmpty);
+formular.utils.typeChecks.isNotEmpty = function (obj) {
+    // log.enter('formular.utils.typeChecks.isNotEmpty', obj);
+    var bNotEmpty = (! formular.utils.typeChecks.isEmpty(obj));
+    // log.return('formular.utils.typeChecks.isNotEmpty', bNotEmpty);
     return bNotEmpty;
 };
 
@@ -195,17 +195,17 @@ formular.utils.typechecks.isNotEmpty = function (obj) {
  * <p>Checks the value depending on the type of the parameter object. Returns true, if the obj is null/undefined, an
  * empty Array or an empty String, otherwise true will be returned.
  */
-formular.utils.typechecks.isNotEmptyString = function (obj) {
-    // log.enter('formular.utils.typechecks.isNotEmptyString', obj);
+formular.utils.typeChecks.isNotEmptyString = function (obj) {
+    // log.enter('formular.utils.typeChecks.isNotEmptyString', obj);
     var bIsNotEmptyString = false;
 
-    if (formular.utils.typechecks.isString(obj)
-            && !formular.utils.typechecks.isEmpty(obj)) {
+    if (formular.utils.typeChecks.isString(obj)
+            && !formular.utils.typeChecks.isEmpty(obj)) {
 
         bIsNotEmptyString = true;
     }
 
-    // log.return('formular.utils.typechecks.isNotEmptyString', bIsNotEmptyString);
+    // log.return('formular.utils.typeChecks.isNotEmptyString', bIsNotEmptyString);
     return bIsNotEmptyString;
 };
 
@@ -215,11 +215,11 @@ formular.utils.typechecks.isNotEmptyString = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'null' otherwise false.
  */
-formular.utils.typechecks.isNull = function (obj) {
-    // log.enter('formular.utils.typechecks.isNull', obj);
-    var bIs = ('null' === formular.utils.typechecks.getType(obj));
+formular.utils.typeChecks.isNull = function (obj) {
+    // log.enter('formular.utils.typeChecks.isNull', obj);
+    var bIs = ('null' === formular.utils.typeChecks.getType(obj));
 
-    // log.return('formular.utils.typechecks.isNull', bIs);
+    // log.return('formular.utils.typeChecks.isNull', bIs);
     return bIs;
 };
 
@@ -229,12 +229,12 @@ formular.utils.typechecks.isNull = function (obj) {
  * @returns {boolean}
  * <p>Checks the value for numeric type.
  */
-formular.utils.typechecks.isNumeric = function (obj) {
-    // log.enter('formular.utils.typechecks.isNumeric', obj);
+formular.utils.typeChecks.isNumeric = function (obj) {
+    // log.enter('formular.utils.typeChecks.isNumeric', obj);
     var bIs = ((!isNaN(parseFloat(obj)))
                     && isFinite(obj));
 
-    // log.return('formular.utils.typechecks.isNumeric', bIs);
+    // log.return('formular.utils.typeChecks.isNumeric', bIs);
     return bIs;
 };
 
@@ -244,10 +244,10 @@ formular.utils.typechecks.isNumeric = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
  */
-formular.utils.typechecks.isObject = function (obj) {
-    // log.enter('formular.utils.typechecks.isObject', obj);
-    var bIs = ('object' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isObject', bIs);
+formular.utils.typeChecks.isObject = function (obj) {
+    // log.enter('formular.utils.typeChecks.isObject', obj);
+    var bIs = ('object' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isObject', bIs);
     return bIs;
 };
 
@@ -257,10 +257,10 @@ formular.utils.typechecks.isObject = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
  */
-formular.utils.typechecks.isOther = function (obj) {
-    // log.enter('formular.utils.typechecks.isOther', obj);
-    var bIs = ('other' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isOther', bIs);
+formular.utils.typeChecks.isOther = function (obj) {
+    // log.enter('formular.utils.typeChecks.isOther', obj);
+    var bIs = ('other' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isOther', bIs);
     return bIs;
 };
 
@@ -270,10 +270,10 @@ formular.utils.typechecks.isOther = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
  */
-formular.utils.typechecks.isString = function (obj) {
-    // log.enter('formular.utils.typechecks.isString', obj);
-    var bIs = ('string' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isString', bIs);
+formular.utils.typeChecks.isString = function (obj) {
+    // log.enter('formular.utils.typeChecks.isString', obj);
+    var bIs = ('string' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isString', bIs);
     return bIs;
 };
 
@@ -284,10 +284,10 @@ formular.utils.typechecks.isString = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'symbol' otherwise false.
  */
-formular.utils.typechecks.isSymbol = function (obj) {
-    // log.enter('formular.utils.typechecks.isSymbol', obj);
-    var bIs = ('symbol' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isSymbol', bIs);
+formular.utils.typeChecks.isSymbol = function (obj) {
+    // log.enter('formular.utils.typeChecks.isSymbol', obj);
+    var bIs = ('symbol' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isSymbol', bIs);
     return bIs;
 };
 /**
@@ -296,9 +296,9 @@ formular.utils.typechecks.isSymbol = function (obj) {
  * @return {boolean}
  * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'undefined' otherwise false.
  */
-formular.utils.typechecks.isUndefined = function (obj) {
-    // log.enter('formular.utils.typechecks.isUndefined', obj);
-    var bIs = ('undefined' === formular.utils.typechecks.getType(obj));
-    // log.return('formular.utils.typechecks.isUndefined', bIs);
+formular.utils.typeChecks.isUndefined = function (obj) {
+    // log.enter('formular.utils.typeChecks.isUndefined', obj);
+    var bIs = ('undefined' === formular.utils.typeChecks.getType(obj));
+    // log.return('formular.utils.typeChecks.isUndefined', bIs);
     return bIs;
 };

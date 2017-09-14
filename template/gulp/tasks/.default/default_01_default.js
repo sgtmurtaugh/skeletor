@@ -15,16 +15,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks, addFrameworkSupport);
+    app.fn.tasks.defineTask(self, self_tasks, defaultTask);
 };
 
 /**
- * addFrameworkSupport
+ * defaultTask
  * @param cb
  */
-function addFrameworkSupport(cb) {
-    app.fn.framework.copyDependencies(cb);
-    app.fn.framework.copyTemplates(cb);
-    app.fn.framework.addNPMSupport(cb);
+function defaultTask(cb) {
+    // Pruefen, ob alle Tasks bereits definiert und registriert wurden
+    app.fn.tasks.registerDependingTasksNeu(app.tasks, ['run']);
     cb();
 }
+

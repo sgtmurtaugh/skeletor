@@ -3,7 +3,7 @@
 import fs       from 'fs';
 import path     from 'path';
 
-var typechecks = require('./type-checks');
+let typeChecks = require('./type-checks');
 
 module.exports = {
 
@@ -11,12 +11,12 @@ module.exports = {
         let concatPath = null;
 
         // String
-        if ( typechecks.isTypeString(pathSnippets) ) {
+        if ( typeChecks.isTypeString(pathSnippets) ) {
             concatPath = pathSnippets;
         }
         else
         // Array mit String
-        if ( typechecks.isTypeArray(pathSnippets) ) {
+        if ( typeChecks.isTypeArray(pathSnippets) ) {
             // String konkatenieren
             for (let snippet of pathSnippets) {
                 if (snippet !== null) {

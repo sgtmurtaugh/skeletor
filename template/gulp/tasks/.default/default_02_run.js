@@ -1,3 +1,5 @@
+'use strict';
+
 let gulp;
 let plugins;
 let app;
@@ -10,8 +12,8 @@ module.exports = function ( _gulp, _plugins, _app ) {
     self = app.fn.tasks.taskname(__filename);
 
     // if necessary - register depending tasks
-    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
-console.log(gulp.tree().nodes)
+    let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self, ['run']);
+
     // define Task
     app.fn.tasks.defineTask(self, self_tasks);
 };

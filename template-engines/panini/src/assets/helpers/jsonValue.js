@@ -1,6 +1,6 @@
 // TODO: Das Plugin JSONPath funktioniert nicht ohne npm install aufgerufen zu haben....
 // var JSONPath = require('jsonpath-plus');
-var typechecks = require('../../gulp/functions/type-checks');
+let typeChecks = require('../../gulp/functions/type-checks');
 
 /**
  * jsonValue
@@ -16,7 +16,7 @@ module.exports = function(jsonObject, jsonKey, options) {
         throw METHOD + " [ERROR] Es muessen ein JSON Objekt und der JSON Key uebergeben werden.";
     }
     else {
-        if ( !typechecks.isTypeObject(jsonObject) ) {
+        if ( !typeChecks.isTypeObject(jsonObject) ) {
             throw METHOD + " [ERROR] Der JSON Objekt Parameter ist kein Object.";
         }
         else {
@@ -27,7 +27,7 @@ module.exports = function(jsonObject, jsonKey, options) {
 
                 let jsonPath;
 
-                if ( ! typechecks.isTypeArray(jsonKey) ) {
+                if ( ! typeChecks.isTypeArray(jsonKey) ) {
                     jsonPath = jsonKey.split(".");
                 }
                 else {
@@ -44,8 +44,8 @@ function getNestedJSON(jsonObject, jsonPath) {
     let jsonValue = null;
 
 
-    if (typechecks.isTypeObject(jsonObject)) {
-        if (typechecks.isTypeArray(jsonPath)) {
+    if (typeChecks.isTypeObject(jsonObject)) {
+        if (typeChecks.isTypeArray(jsonPath)) {
             jsonValue = jsonObject;
             if ( jsonValue !== null ) {
                 jsonPath.forEach(function(jsonKey) {
