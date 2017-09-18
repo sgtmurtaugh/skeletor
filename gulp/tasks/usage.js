@@ -24,7 +24,14 @@ module.exports = function ( _gulp, _plugins, _app ) {
  */
 function usage(cb) {
     console.log('\r\nList of all registred tasks:\r\n');
-    fn.tasks.lookupTasknames(app.tasks);
+
+    let tasks = app.fn.tasks.lookupTasknames(app.tasks);
+
+    if (null !== tasks) {
+        for (let task of tasks) {
+            console.log(' - ' + task);
+        }
+    }
     console.log('');
     console.log('npm start {taskname}\r\n');
     cb();

@@ -19,7 +19,8 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * <p>TODO
          */
         'addNPMSupport' : function (cb) {
-            // when template enging is selected
+            // when template engine is selected
+
             if (!app.fn.typeChecks.isEmpty(app.wizard.templateEngine)) {
                 return app.fn.json.addNPMEntryToPackageConfiguration(
                     app.config.templateEngines[app.wizard.templateEngine],

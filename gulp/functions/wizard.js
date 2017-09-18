@@ -54,6 +54,15 @@ module.exports = function(inq, config) {
         name: 'templateEngine',
         message: 'Choose TemplateEngine:',
         type: 'list',
+        default: function(answers) {
+            let def = null;
+            let entryKeys = Object.keys(config.templateEngines);
+
+            if (entryKeys.length === 1) {
+                def = entryKeys[0];
+            }
+            return def;
+        },
         choices: function (answers) {
             let choices = [];
             let templateEngines = config.templateEngines;
@@ -65,7 +74,7 @@ module.exports = function(inq, config) {
 
             for ( let templateEngineKey in templateEngines ) {
                 if ( templateEngineKey !== null
-                    && templateEngines.hasOwnProperty(templateEngineKey) ) {
+                        && templateEngines.hasOwnProperty(templateEngineKey) ) {
 
                     choices.push({
                         name: templateEngineKey
@@ -76,24 +85,14 @@ module.exports = function(inq, config) {
             return choices;
         },
         when: function (answers) {
-            // // QuickClone check
-            // if ( ! isQuickClone(answers) ) return false;
-            //
-            // let bShowTemplateEngineQuestion = false;
-            // // if true, at least one preprocessor is configured
-            // if (bShowTemplateEngineQuestion) {
-            //     // when more than one preprocessor is configured prompt question
-            //     // otherwise autoselect the only configured one.
-            //     let keys = Object.keys(config.preprocessors);
-            //     bShowTemplateEngineQuestion = (keys.length > 1);
-            //
-            //     if (!bShowTemplateEngineQuestion) {
-            //         // autoselect only configured one
-            //         answers.templateEngine = keys[0];
-            //     }
-            // }
-            // return bShowTemplateEngineQuestion;
-return true;
+            let bShow = false;
+
+            if ('undefined' !== typeof config.templateEngines
+                    && null !== config.templateEngines) {
+
+                bShow = (Object.keys(config.templateEngines).length > 0);
+            }
+            return bShow;
         }
     });
 
