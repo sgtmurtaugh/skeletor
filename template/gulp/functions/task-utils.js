@@ -54,7 +54,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
                         // Only add Task, when it's not the current task! (-> recursion)
                         if (app.fn.typeChecks.isEmpty(currentTask)
-                                || currentTask !== taskname) {
+                            || currentTask !== taskname) {
 
                             tasknames.push(taskname);
                         }
@@ -69,7 +69,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                 else {
                     for (let jsonKey in jsonTasks) {
                         if ( jsonKey !== null
-                                && jsonTasks.hasOwnProperty(jsonKey) ) {
+                            && jsonTasks.hasOwnProperty(jsonKey) ) {
 
                             let taskvalue = jsonTasks[jsonKey];
 
@@ -113,7 +113,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     if ( ! app.fn.typeChecks.isFunction( taskvalue ) ) {
                         for ( let key in jsonTasks ) {
                             if ( key !== null
-                                    && jsonTasks.hasOwnProperty(key) ) {
+                                && jsonTasks.hasOwnProperty(key) ) {
 
                                 taskvalue = this.lookupTaskFunction(jsonTasks[key], taskname);
 
@@ -220,6 +220,9 @@ module.exports = function ( _gulp, _plugins, _app ) {
                                 flag = true;
                             }
                         }
+                        else {
+                            flag = true;
+                        }
 
                         if ( !flag ) {
                             console.log('[ERROR] Task "' + taskname + '" not defined!');
@@ -259,7 +262,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             if ( jsonTasks !== null ) {
                 for (let key in jsonTasks) {
                     if ( key !== null
-                            && jsonTasks.hasOwnProperty(key) ) {
+                        && jsonTasks.hasOwnProperty(key) ) {
 
                         let value = jsonTasks[key];
 
@@ -358,38 +361,54 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param taskname
          * @param dependingTasks
          * @param taskFunction
+         * @param bParallelTasks
          * @returns {*}
          */
-        'defineTask': function (taskname, dependingTasks, taskFunction) {
+        'defineTask': function (taskname, dependingTasks, taskFunction, bParallelTasks = false) {
             if (app.fn.typeChecks.isNotEmptyString(taskname)) {
 
                 if (app.fn.typeChecks.isNotEmpty(dependingTasks)) {
                     if (app.fn.tasks.isEachTaskDefined(dependingTasks)) {
                         if (app.fn.typeChecks.isNotEmpty(taskFunction)
-                                && app.fn.typeChecks.isFunction(taskFunction)) {
+                            && app.fn.typeChecks.isFunction(taskFunction)) {
 
-                            gulp.task(taskname,
-                                dependingTasks,
-                                taskFunction
-                            );
+                            if (!bParallelTasks) {
+                                gulp.task(taskname,
+                                    gulp.series(dependingTasks),
+                                    taskFunction
+                                );
+                            }
+                            else {
+                                gulp.task(taskname,
+                                    gulp.parallel(dependingTasks),
+                                    taskFunction
+                                );
+                            }
                         }
                         else {
-                            gulp.task(taskname,
-                                dependingTasks
-                            );
+                            if (!bParallelTasks) {
+                                gulp.task(taskname,
+                                    gulp.series(dependingTasks)
+                                );
+                            }
+                            else {
+                                gulp.task(taskname,
+                                    gulp.parallel(dependingTasks)
+                                );
+                            }
                         }
                     }
                 }
                 else {
                     if (app.fn.typeChecks.isNotEmpty(taskFunction)
-                            && app.fn.typeChecks.isFunction(taskFunction)) {
+                        && app.fn.typeChecks.isFunction(taskFunction)) {
 
                         gulp.task(taskname,
                             taskFunction
                         );
                     }
                     else {
-// nothing to do!
+                        console.log('[warn] neither there is a task function nor subtasks defined for task "' + taskname + '"');
                     }
                 }
             }
@@ -405,7 +424,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             let bIsTaskDefined = true;
 
             if (app.fn.typeChecks.isNotEmptyString(taskname)) {
-                bIsTaskDefined = gulp.tree().nodes.hasOwnProperty(taskname);
+                bIsTaskDefined = gulp.tree().nodes.includes(taskname);
             }
             else {
                 // TODO logging

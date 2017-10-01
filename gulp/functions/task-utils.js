@@ -361,9 +361,10 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param taskname
          * @param dependingTasks
          * @param taskFunction
+         * @param bParallelTasks
          * @returns {*}
          */
-        'defineTask': function (taskname, dependingTasks, taskFunction) {
+        'defineTask': function (taskname, dependingTasks, taskFunction, bParallelTasks = false) {
             if (app.fn.typeChecks.isNotEmptyString(taskname)) {
 
                 if (app.fn.typeChecks.isNotEmpty(dependingTasks)) {
@@ -371,15 +372,30 @@ module.exports = function ( _gulp, _plugins, _app ) {
                         if (app.fn.typeChecks.isNotEmpty(taskFunction)
                                 && app.fn.typeChecks.isFunction(taskFunction)) {
 
-                            gulp.task(taskname,
-                                gulp.series(dependingTasks),
-                                taskFunction
-                            );
+                            if (!bParallelTasks) {
+                                gulp.task(taskname,
+                                    gulp.series(dependingTasks),
+                                    taskFunction
+                                );
+                            }
+                            else {
+                                gulp.task(taskname,
+                                    gulp.parallel(dependingTasks),
+                                    taskFunction
+                                );
+                            }
                         }
                         else {
-                            gulp.task(taskname,
-                                gulp.series(dependingTasks)
-                            );
+                            if (!bParallelTasks) {
+                                gulp.task(taskname,
+                                    gulp.series(dependingTasks)
+                                );
+                            }
+                            else {
+                                gulp.task(taskname,
+                                    gulp.parallel(dependingTasks)
+                                );
+                            }
                         }
                     }
                 }
