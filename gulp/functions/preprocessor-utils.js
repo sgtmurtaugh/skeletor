@@ -30,7 +30,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                 }
             }
             else {
-                console.info('skipped!');
+                console.info('addNPMSupport skipped!');
             }
             cb();
         },
@@ -63,7 +63,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                 );
             }
             else {
-                console.info('skipped!');
+                console.info('copyTemplates skipped!');
             }
 
             return app.fn.template.copyTemplatesSourcesToProjectFolder(src, null, cb);

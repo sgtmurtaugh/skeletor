@@ -99,15 +99,22 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @return {*}
          * <p>Adds the json snippet parameter to the package.json file in the installation directory.
          */
-        'writeJSONConfigToPackageConfiguration' : function (packageJson, cb) {
+         'writeJSONConfigToPackageConfiguration' : function (packageJson, cb) {
             if (null !== packageJson) {
+// console.dir(packageJson);
+// console.log(path.join(app.wizard.projectFolder, app.config.paths.packageJson));
                 return gulp.src(
                         path.join(
                             app.wizard.projectFolder,
                             app.config.paths.packageJson
                         )
                     )
+// .pipe(plugins.debug())
                     .pipe( plugins.jsonEditor( packageJson ) )
+                    // .pipe( plugins.jsonEditor( function (json) {
+// console.dir(json);
+//                         return json;
+//                     }))
                     .pipe( gulp.dest( app.wizard.projectFolder ) );
             }
             cb();

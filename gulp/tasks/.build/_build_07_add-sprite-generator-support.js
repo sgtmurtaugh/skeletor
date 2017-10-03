@@ -15,16 +15,5 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks, addSpriteGeneratorSupport);
+    app.fn.tasks.defineTask(self, self_tasks);
 };
-
-/**
- * addSpriteGeneratorSupport
- * @param cb
- */
-function addSpriteGeneratorSupport(cb) {
-    app.fn.spriteGenerator.copyDependencies(cb);
-    app.fn.spriteGenerator.copyTemplates(cb);
-    app.fn.spriteGenerator.addNPMSupport(cb);
-    cb();
-}

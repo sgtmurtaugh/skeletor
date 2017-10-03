@@ -15,5 +15,5 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks);
+    app.fn.tasks.defineTask(self, self_tasks, app.fn.preprocessor.copyTemplates);
 };

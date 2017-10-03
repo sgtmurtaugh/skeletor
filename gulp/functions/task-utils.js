@@ -204,7 +204,8 @@ module.exports = function ( _gulp, _plugins, _app ) {
                 this.lookupDependentTasknames(app.tasks, currentTask, currentTask),
                 additionalTasknames
             );
-
+console.log('currentTask:' + currentTask);
+console.log(tasknames);
             if ( app.fn.typeChecks.isNotEmpty( tasknames ) ) {
                 for ( let taskname of tasknames ) {
                     let flag = false;
@@ -400,6 +401,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     }
                 }
                 else {
+console.log(taskname + ': ' + taskFunction);
                     if (app.fn.typeChecks.isNotEmpty(taskFunction)
                             && app.fn.typeChecks.isFunction(taskFunction)) {
 

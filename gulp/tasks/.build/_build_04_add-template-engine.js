@@ -1,5 +1,7 @@
 'use strict';
 
+let path = require('path');
+
 let gulp;
 let plugins;
 let app;
@@ -15,16 +17,5 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks, addTemplateEngine);
+    app.fn.tasks.defineTask(self, self_tasks);
 };
-
-/**
- * addTemplateEngine
- * @param cb
- */
-function addTemplateEngine(cb) {
-    app.fn.templateEngine.copyDependencies(cb);
-    app.fn.templateEngine.copyTemplates(cb);
-    app.fn.templateEngine.addNPMSupport(cb);
-    cb();
-}

@@ -15,16 +15,5 @@ module.exports = function ( _gulp, _plugins, _app ) {
     let self_tasks = app.fn.tasks.registerDependingTasksNeu(app.tasks, self);
 
     // define Task
-    app.fn.tasks.defineTask(self, self_tasks, addProcessorSupport);
+    app.fn.tasks.defineTask(self, self_tasks);
 };
-
-/**
- * addProcessorSupport
- * @param cb
- */
-function addProcessorSupport(cb) {
-    app.fn.preprocessor.copyDependencies(cb);
-    app.fn.preprocessor.copyTemplates(cb);
-    app.fn.preprocessor.addNPMSupport(cb);
-    cb();
-}

@@ -25,6 +25,7 @@ module.exports = function (_gulp, _plugins, _app) {
 
         'framework' : require('./framework-utils')(gulp, plugins, app),
         'json' : require('./json-utils')(gulp, plugins, app),
+        'log' : require('./log-utils')(gulp, plugins, app),
         'preprocessor' : require('./preprocessor-utils')(gulp, plugins, app),
         'spriteGenerator' : require('./sprite-generator-utils')(gulp, plugins, app),
         'tasks' : require('./task-utils')(gulp, plugins, app),
