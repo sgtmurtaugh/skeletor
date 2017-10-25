@@ -1,7 +1,21 @@
 'use strict';
+
+const mappingsTrueFalse = {
+    'false': {
+        'boolean': false,
+        'character': ['n', 'N', '0'],
+        'numeric': 0,
+        'string': ['err', 'error', 'false', 'failure', 'falsch', 'fault', 'nein', 'no']
+    },
+    'true': {
+        'boolean': true,
+        'character': ['j', 'J', 'y', 'Y', '1'],
+        'numeric': 1,
+        'string': ['erfolg', 'ja', 'ok', 'richtig', 'success', 'true', 'wahr', 'yes']
+    }
+};
     
 module.exports = {
-
 
     /**
      * getType
@@ -71,9 +85,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'array' otherwise false.
      */
     'isArray': function (obj) {
-        // log.enter('module.exports.isArray', obj);
+		const METHOD = 'isArray(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('array' === module.exports.getType(obj));
-        // log.return('module.exports.isArray', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -84,9 +99,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'boolean' otherwise false.
      */
     'isBoolean': function (obj) {
-        // log.enter('module.exports.isBoolean', obj);
+		const METHOD = 'isBoolean(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('boolean' === module.exports.getType(obj));
-        // log.return('module.exports.isBoolean', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -98,7 +114,8 @@ module.exports = {
      * empty Array or an empty String, otherwise true will be returned.
      */
     'isEmpty': function (obj) {
-        // log.enter('module.exports.isEmpty', obj);
+		const METHOD = 'isEmpty(obj)';
+        // log.enter(METHOD, obj);
         let bIsEmpty = false;
 
         if (module.exports.isNull(obj)
@@ -113,9 +130,105 @@ module.exports = {
             bIsEmpty = (obj.trim().length === 0);
         }
 
-        // log.return('module.exports.isEmpty', bIsEmpty);
+        // log.return(METHOD, bIsEmpty);
         return bIsEmpty;
     },
+
+	/**
+	 * isEmptyString
+	 * @param obj
+	 * @return {boolean}
+	 * <p>Checks the object for type String and its value on not empty.
+	 */
+	'isEmptyString': function (obj) {
+		const METHOD = 'isEmptyString(obj)';
+		// log.enter(METHOD, obj);
+		var bIsEmptyString = false;
+
+		if (this.isString(obj)
+				&& this.isEmpty(obj)) {
+
+			bIsEmptyString = true;
+		}
+
+		// log.return(METHOD, bIsNotEmptyString);
+		return bIsEmptyString;
+	},
+
+	/**
+	 * isFalse
+	 * @param obj
+	 * @return {boolean}
+	 * <p>
+	 */
+	'isFalse': function (obj) {
+		const METHOD = 'isFalse(obj)';
+		// log.enter(METHOD, obj);
+		var bIs = false;
+
+		if (this.isBoolean(obj)) {
+			bIs = ( false === obj );
+			// log.logDebug(METHOD, obj  + ' === ' + false + ' ? ' + bIs );
+		}
+		else
+		if (this.isNumeric(obj)) {
+			if (this.isArray(mappingsTrueFalse.false.numeric)) {
+				for each (var numericBool in mappingsTrueFalse.false.numeric) {
+					bIs = (numericBool == obj);
+					// log.logDebug(METHOD, obj  + ' == ' + numericBool + ' ? ' + bIs );
+
+					if (true === bIs) break;
+				}
+			}
+			else {
+				bIs = (mappingsTrueFalse.false.numeric == obj);
+				// log.logDebug(METHOD, obj  + ' == ' + mappingsTrueFalse.false.numeric + ' ? ' + bIs );
+			}
+		}
+		else
+		if (this.isString(obj)) {
+			if (obj.trim().length > 1) {
+				if (this.isArray(mappingsTrueFalse.false.string)) {
+					for each (var stringBool in mappingsTrueFalse.false.string) {
+						bIs = (stringBool === obj.trim());
+						// log.logDebug(METHOD, obj  + ' === ' + stringBool + ' ? ' + bIs );
+
+						if (true === bIs) break;
+					}
+				}
+				else {
+					bIs = (mappingsTrueFalse.false.string === obj.trim());
+					// log.logDebug(METHOD, obj  + ' === ' + mappingsTrueFalse.false.string + ' ? ' + bIs );
+				}
+			}
+			else {
+				if (this.isArray(mappingsTrueFalse.false.character)) {
+					for each (var characterBool in mappingsTrueFalse.false.character) {
+						bIs = (characterBool === obj.trim());
+						// log.logDebug(METHOD, obj  + ' === ' + characterBool + ' ? ' + bIs );
+
+						if (true === bIs) break;
+					}
+				}
+				else {
+					bIs = (mappingsTrueFalse.false.character === obj.trim());
+					// log.logDebug(METHOD, obj  + ' === ' + mappingsTrueFalse.false.character + ' ? ' + bIs );
+				}
+			}
+		}
+		else
+		if (this.isObject(obj)) {
+			bIs = this.isFalse(""+obj);
+		}
+		else {
+			log.warn(METHOD, 'Das uebergebene Objekt ist weder vom Typ Boolean, Numeric oder String. Somit kann der' +
+				' Wert nicht auf false geprueft werden. obj : ');
+			log.warn(METHOD, obj);
+		}
+
+		// log.return(METHOD, bIs);
+		return bIs;
+	},
 
     /**
      * isFunction
@@ -124,9 +237,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'function' otherwise false.
      */
     'isFunction': function (obj) {
-        // log.enter('module.exports.isFunction', obj);
+		const METHOD = 'isFunction(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('function' === module.exports.getType(obj));
-        // log.return('module.exports.isFunction', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -138,7 +252,8 @@ module.exports = {
      * Attention: Numbers, booleans and null will also return true - these are valid JSON values!
      */
     'isJSONString': function (obj) {
-        // log.enter('module.exports.isJSONString', obj);
+		const METHOD = 'isJSONString(obj)';
+        // log.enter(METHOD, obj);
         let bIs = false;
 
         if ('string' === module.exports.getType(obj)) {
@@ -151,7 +266,7 @@ module.exports = {
             }
         }
 
-        // log.return('module.exports.isJSONString', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -162,9 +277,10 @@ module.exports = {
      * <p>Delegates to isEmpty and returns the inverted value.
      */
     'isNotEmpty': function (obj) {
-        // log.enter('module.exports.isNotEmpty', obj);
+		const METHOD = 'isNotEmpty(obj)';
+        // log.enter(METHOD, obj);
         let bNotEmpty = (!module.exports.isEmpty(obj));
-        // log.return('module.exports.isNotEmpty', bNotEmpty);
+        // log.return(METHOD, bNotEmpty);
         return bNotEmpty;
     },
 
@@ -176,7 +292,8 @@ module.exports = {
      * empty Array or an empty String, otherwise true will be returned.
      */
     'isNotEmptyString': function (obj) {
-        // log.enter(''isNotEmptyString', obj);
+		const METHOD = 'isNotEmptyString(obj)';
+        // log.enter(METHOD, obj);
         let bIsNotEmptyString = false;
 
         if (module.exports.isString(obj)
@@ -185,7 +302,7 @@ module.exports = {
             bIsNotEmptyString = true;
         }
 
-        // log.return('module.exports.isNotEmptyString', bIsNotEmptyString);
+        // log.return(METHOD, bIsNotEmptyString);
         return bIsNotEmptyString;
     },
 
@@ -196,10 +313,11 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'null' otherwise false.
      */
     'isNull': function (obj) {
-        // log.enter('module.exports.isNull', obj);
+		const METHOD = 'isNull(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('null' === module.exports.getType(obj));
 
-        // log.return('module.exports.isNull', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -210,11 +328,12 @@ module.exports = {
      * <p>Checks the value for numeric type.
      */
     'isNumeric': function (obj) {
-        // log.enter('module.exports.isNumeric', obj);
+		const METHOD = 'isNumeric(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ((!isNaN(parseFloat(obj)))
             && isFinite(obj));
 
-        // log.return('module.exports.isNumeric', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -225,9 +344,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'object' otherwise false.
      */
     'isObject': function (obj) {
-        // log.enter('module.exports.isObject', obj);
+		const METHOD = 'isObject(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('object' === module.exports.getType(obj));
-        // log.return('module.exports.isObject', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -238,9 +358,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'other' otherwise false.
      */
     'isOther': function (obj) {
-        // log.enter('module.exports.isOther', obj);
+		const METHOD = 'isOther(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('other' === module.exports.getType(obj));
-        // log.return('module.exports.isOther', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -251,9 +372,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'string' otherwise false.
      */
     'isString': function (obj) {
-        // log.enter('module.exports.isString', obj);
+		const METHOD = 'isString(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('string' === module.exports.getType(obj));
-        // log.return('module.exports.isString', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
 
@@ -265,11 +387,87 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'symbol' otherwise false.
      */
     'isSymbol': function (obj) {
-        // log.enter('module.exports.isSymbol', obj);
+		const METHOD = 'isSymbol(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('symbol' === module.exports.getType(obj));
-        // log.return('module.exports.isSymbol', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     },
+
+	/**
+	 * isTrue
+	 * @param obj
+	 * @return {boolean}
+	 * <p>
+	 */
+	'isTrue': function (obj) {
+		const METHOD = 'isTrue(obj)';
+		// log.enter(METHOD, obj);
+		var bIs = false;
+
+		if (this.isBoolean(obj)) {
+			bIs = ( true === obj );
+			// log.logDebug(METHOD, obj  + ' === ' + true + ' ? ' + bIs );
+		}
+		else
+		if (this.isNumeric(obj)) {
+			if (this.isArray(mappingsTrueFalse.true.numeric)) {
+				for each (var numericBool in mappingsTrueFalse.true.numeric) {
+					bIs = (numericBool == obj);
+					// log.logDebug(METHOD, obj  + ' == ' + numericBool + ' ? ' + bIs );
+
+					if (true === bIs) break;
+				}
+			}
+			else {
+				bIs = (mappingsTrueFalse.true.numeric == obj);
+				// log.logDebug(METHOD, obj  + ' == ' + mappingsTrueFalse.true.numeric + ' ? ' + bIs );
+			}
+		}
+		else
+		if (this.isString(obj)) {
+			if (obj.trim().length > 1) {
+				if (this.isArray(mappingsTrueFalse.true.string)) {
+					for each (var stringBool in mappingsTrueFalse.true.string) {
+						bIs = (stringBool === obj.trim());
+						// log.logDebug(METHOD, obj  + ' === ' + stringBool + ' ? ' + bIs );
+
+						if (true === bIs) break;
+					}
+				}
+				else {
+					bIs = (mappingsTrueFalse.true.string === obj.trim());
+					// log.logDebug(METHOD, obj  + ' === ' + mappingsTrueFalse.true.string + ' ? ' + bIs );
+				}
+			}
+			else {
+				if (this.isArray(mappingsTrueFalse.true.character)) {
+					for each (var characterBool in mappingsTrueFalse.true.character) {
+						bIs = (characterBool === obj.trim());
+						// log.logDebug(METHOD, obj  + ' === ' + characterBool + ' ? ' + bIs );
+
+						if (true === bIs) break;
+					}
+				}
+				else {
+					bIs = (mappingsTrueFalse.true.character === obj.trim());
+					// log.logDebug(METHOD, obj  + ' === ' + mappingsTrueFalse.true.character + ' ? ' + bIs );
+				}
+			}
+		}
+		else
+		if (this.isObject(obj)) {
+			bIs = this.isTrue(""+obj);
+		}
+		else {
+			log.warn(METHOD, 'Das uebergebene Objekt ist weder vom Typ Boolean, Numeric oder String. Somit kann der' +
+				' Wert nicht auf true geprueft werden. obj : ');
+			log.warn(METHOD, obj);
+		}
+
+		// log.return(METHOD, bIs);
+		return bIs;
+	},
 
     /**
      * isUndefined
@@ -278,9 +476,10 @@ module.exports = {
      * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'undefined' otherwise false.
      */
     'isUndefined': function (obj) {
-        // log.enter('module.exports.isUndefined', obj);
+		const METHOD = 'isUndefined(obj)';
+        // log.enter(METHOD, obj);
         let bIs = ('undefined' === module.exports.getType(obj));
-        // log.return('module.exports.isUndefined', bIs);
+        // log.return(METHOD, bIs);
         return bIs;
     }
 
