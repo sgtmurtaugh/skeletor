@@ -62,18 +62,27 @@ module.exports = {
             if (Array.isArray(obj)) {
                 type = 'array';
             }
-            else if ('boolean' === typeof obj
-                || 'function' === typeof obj
-                || 'number' === typeof obj
-                || 'object' === typeof obj
-                || 'string' === typeof obj
-                || 'symbol' === typeof obj) {
+			else
+			if ('boolean' === typeof obj
+					|| 'function' === typeof obj
+					|| 'number' === typeof obj
+					|| 'string' === typeof obj
+					|| 'symbol' === typeof obj) {
 
-                type = (typeof obj);
-            }
-            else {
-                type = 'other';
-            }
+				type = (typeof obj);
+			}
+			else
+			if ('object' === typeof obj) {
+				if (obj instanceof Date) {
+					type = 'date';
+				}
+				else {
+					type = (typeof obj);
+				}
+			}
+			else {
+				type = 'other';
+			}
         }
         return type;
     },
@@ -105,6 +114,20 @@ module.exports = {
         // log.return(METHOD, bIs);
         return bIs;
     },
+
+	/**
+	 * isDate
+	 * @param obj
+	 * @return {boolean}
+	 * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'date' otherwise false.
+	 */
+	'isDate' = function (obj) {
+		const METHOD = 'isDate(obj)';
+		// log.enter(METHOD, obj);
+		var bIs = ('date' === this.getType(obj));
+		// log.return(METHOD, bIs);
+		return bIs;
+	};
 
     /**
      * isEmpty
