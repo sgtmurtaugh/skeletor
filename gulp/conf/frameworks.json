@@ -53,5 +53,14 @@
         "preprocessor": "sass"
       }
     }
+  },
+
+  "app-framework": {
+    "v1.x": {
+      "npm": {
+        "foundation-sites": "^1.20.0"
+      }
+    }
   }
+
 }
