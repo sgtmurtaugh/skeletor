@@ -121,13 +121,13 @@ module.exports = {
 	 * @return {boolean}
 	 * <p>Delegates to <code>getType(obj)</code> and returns true if the returned type is 'date' otherwise false.
 	 */
-	'isDate' = function (obj) {
+	'isDate': function (obj) {
 		const METHOD = 'isDate(obj)';
 		// log.enter(METHOD, obj);
 		var bIs = ('date' === this.getType(obj));
 		// log.return(METHOD, bIs);
 		return bIs;
-	};
+	},
 
     /**
      * isEmpty
@@ -196,7 +196,7 @@ module.exports = {
 		else
 		if (this.isNumeric(obj)) {
 			if (this.isArray(mappingsTrueFalse.false.numeric)) {
-				for each (var numericBool in mappingsTrueFalse.false.numeric) {
+				for (var numericBool in mappingsTrueFalse.false.numeric) {
 					bIs = (numericBool == obj);
 					// log.logDebug(METHOD, obj  + ' == ' + numericBool + ' ? ' + bIs );
 
@@ -212,7 +212,7 @@ module.exports = {
 		if (this.isString(obj)) {
 			if (obj.trim().length > 1) {
 				if (this.isArray(mappingsTrueFalse.false.string)) {
-					for each (var stringBool in mappingsTrueFalse.false.string) {
+					for (var stringBool in mappingsTrueFalse.false.string) {
 						bIs = (stringBool === obj.trim());
 						// log.logDebug(METHOD, obj  + ' === ' + stringBool + ' ? ' + bIs );
 
@@ -226,7 +226,7 @@ module.exports = {
 			}
 			else {
 				if (this.isArray(mappingsTrueFalse.false.character)) {
-					for each (var characterBool in mappingsTrueFalse.false.character) {
+					for (var characterBool in mappingsTrueFalse.false.character) {
 						bIs = (characterBool === obj.trim());
 						// log.logDebug(METHOD, obj  + ' === ' + characterBool + ' ? ' + bIs );
 
@@ -435,7 +435,7 @@ module.exports = {
 		else
 		if (this.isNumeric(obj)) {
 			if (this.isArray(mappingsTrueFalse.true.numeric)) {
-				for each (var numericBool in mappingsTrueFalse.true.numeric) {
+				for (var numericBool in mappingsTrueFalse.true.numeric) {
 					bIs = (numericBool == obj);
 					// log.logDebug(METHOD, obj  + ' == ' + numericBool + ' ? ' + bIs );
 
@@ -451,7 +451,7 @@ module.exports = {
 		if (this.isString(obj)) {
 			if (obj.trim().length > 1) {
 				if (this.isArray(mappingsTrueFalse.true.string)) {
-					for each (var stringBool in mappingsTrueFalse.true.string) {
+					for (var stringBool in mappingsTrueFalse.true.string) {
 						bIs = (stringBool === obj.trim());
 						// log.logDebug(METHOD, obj  + ' === ' + stringBool + ' ? ' + bIs );
 
@@ -465,7 +465,7 @@ module.exports = {
 			}
 			else {
 				if (this.isArray(mappingsTrueFalse.true.character)) {
-					for each (var characterBool in mappingsTrueFalse.true.character) {
+					for (var characterBool in mappingsTrueFalse.true.character) {
 						bIs = (characterBool === obj.trim());
 						// log.logDebug(METHOD, obj  + ' === ' + characterBool + ' ? ' + bIs );
 
