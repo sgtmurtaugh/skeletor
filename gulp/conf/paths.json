@@ -1,5 +1,6 @@
 {
   "packageJson": "package.json",
+  "scaffolding": "scaffolding",
   "template": "template",
   "templateEngines": "template-engines",
   "frameworks": "frameworks",

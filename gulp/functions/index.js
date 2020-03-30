@@ -21,7 +21,7 @@ module.exports = function (_gulp, _plugins, _app) {
         'helper' : require('./helper-utils'),
         'npm' : require('./npm-utils'),
         'typeChecks' : require('./type-checks'),
-        'wizard' : require('./wizard'),
+        'wizard' : require('./install-wizard'),
 
         'framework' : require('./framework-utils')(gulp, plugins, app),
         'json' : require('./json-utils')(gulp, plugins, app),
