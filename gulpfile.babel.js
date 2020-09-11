@@ -32,7 +32,9 @@ const app = {
      * wizard.preprocessor: chosen preprocessor
      *
      * wizard.spriteGeneratorSupport: boolean flag, true if spritegenerators are configured and chosen
-     * wizard.spriteGenerators: array for with chosen spritegenerators
+     * wizard.spriteGenerators: array with chosen spritegenerators
+     *
+     * wizard.features: array with chosen features
      *
      * wizard.installDependencies: boolean flag
      */
@@ -54,6 +56,8 @@ const app = {
 
         spriteGeneratorSupport: false,
         spriteGenerators: null,
+
+        features: null,
 
         installDependencies: false
     },

@@ -28,7 +28,7 @@ module.exports = function(inq, config) {
      */
     questions.push({
         name: 'name',
-        message: 'Enter new clone name:',
+        message: 'Enter Prjoect name:',
         type: 'input',
         validate: function (name) {
             return ( name !== null && name.trim() !== '' );
@@ -37,7 +37,20 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 3. Quick Clone (quickClone)
+     * 3. Project Description
+     */
+    questions.push({
+        name: 'description',
+        message: 'Enter Project Description:',
+        type: 'input',
+        validate: function (description) {
+            return ( description !== null && description.trim() !== '' );
+        }
+    });
+
+
+    /**
+     * 4. Quick Clone (quickClone)
      */
     questions.push({
         name: 'quickClone',
@@ -48,7 +61,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 4. TemplateEngine (templateEngine)
+     * 5. TemplateEngine (templateEngine)
      */
     questions.push({
         name: 'templateEngine',
@@ -98,7 +111,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 5. Framework Support (frameworkSupport)
+     * 6.1. Framework Support (frameworkSupport)
      */
     questions.push({
         name: 'frameworkSupport',
@@ -112,7 +125,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 6. Framework (framework)
+     * 6.2. Framework (framework)
      */
     questions.push({
         name: 'framework',
@@ -161,7 +174,7 @@ module.exports = function(inq, config) {
     });
 
     /**
-     * 7. Framework Version (frameworkVersion)
+     * 7.1. Framework Version (frameworkVersion)
      */
     questions.push({
         name: 'frameworkVersion',
@@ -214,7 +227,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 8. Preprocessor Support (preprocessorSupport)
+     * 8.1. Preprocessor Support (preprocessorSupport)
      */
     questions.push({
         name: 'preprocessorSupport',
@@ -237,7 +250,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 9. Preprocessor (preprocessor)
+     * 8.2. Preprocessor (preprocessor)
      */
     questions.push({
         name: 'preprocessor',
@@ -287,7 +300,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 10. Sprite Generator Support (spriteGeneratorSupport)
+     * 9.1. Sprite Generator Support (spriteGeneratorSupport)
      */
     questions.push({
         name: 'spriteGeneratorSupport',
@@ -309,7 +322,7 @@ module.exports = function(inq, config) {
 
 
     /**
-     * 11. Sprite Generator List (spriteGenerators)
+     * 9.2. Sprite Generator List (spriteGenerators)
      */
     questions.push({
         name: 'spriteGenerators',
@@ -359,6 +372,56 @@ module.exports = function(inq, config) {
         }
     });
 
+
+    /**
+     * 10. Features (features)
+     */
+    questions.push({
+        name: 'features',
+        message: 'Choose additional Features:',
+        type: 'list',
+        choices: function (answers) {
+            let choices = [];
+            let features = config.features;
+
+            choices.push({
+                name: 'none',
+                value: null
+            });
+
+            for ( let featureKey in features ) {
+                if ( featureKey !== null
+                    && features.hasOwnProperty(featureKey) ) {
+
+                    choices.push({
+                        name: featureKey
+                    });
+                }
+            }
+
+            return choices;
+        },
+        when: function (answers) {
+            // QuickClone check
+            if ( ! isQuickClone(answers) ) return false;
+
+            // when more than one feature is configured prompt question
+            let keys = Object.keys(config.features);
+
+            return (keys.length > 0);
+        }
+    });
+
+
+    /**
+     * 11. Dependencies Installation (installDependencies)
+     */
+    questions.push({
+        name: 'installDependencies',
+        message: 'Install Project Dependencies after cloning:',
+        type: 'confirm',
+        default: false
+    });
 
     /**
      * 12. Dependencies Installation (installDependencies)
