@@ -1,9 +1,37 @@
 {
-  "panini": {
+  "Express Handlebars": {
+    "description": "A Handlebars view engine for Express which doesn't suck.",
     "npm": {
-      "panini": "^1.4.0"
+      "express-handlebars": "^5.1.0"
     },
-    "dependencies": {
-    }
+    "repository": "https://github.com/express-handlebars/express-handlebars",
+    "url": "https://github.com/express-handlebars/express-handlebars"
+  },
+
+  "Handlebars.js": {
+    "description": "Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.",
+    "npm": {
+      "handlebarsjs": "^4.7.6"
+    },
+    "repository": "http://www.handlebarsjs.com/",
+    "url": "https://github.com/wycats/handlebars.js"
+  },
+
+  "Nunjucks": {
+    "description": "A powerful templating engine with inheritance, asynchronous control, and more (jinja2 inspired)",
+    "npm": {
+      "nunjucks": "^3.2.2"
+    },
+    "repository": "https://github.com/mozilla/nunjucks",
+    "url": "https://github.com/mozilla/nunjucks#readme"
+  },
+
+  "Panini": {
+    "description": "A super tiny flat file compiler.",
+    "npm": {
+      "panini": "^1.7.1"
+    },
+    "repository": "https://github.com/foundation/panini",
+    "url": "https://github.com/foundation/panini#readme"
   }
 }

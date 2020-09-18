@@ -1,0 +1,34 @@
+{
+  "ava": {
+    "npm": {
+      "ava": "^3.12.1"
+    },
+    "dependencies": {
+    }
+  },
+
+  "jest": {
+    "npm": {
+      "jest": "^26.4.2"
+    },
+    "dependencies": {
+    }
+  },
+
+  "mocha": {
+    "npm": {
+      "mocha": "^3.12.1"
+    },
+    "dependencies": {
+    }
+  },
+
+  "selenium-webdriver": {
+    "npm": {
+      "selenium-webdriver": "^4.0.0-alpha.7"
+    },
+    "dependencies": {
+    }
+  }
+
+}
