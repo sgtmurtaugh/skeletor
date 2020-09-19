@@ -1,0 +1,91 @@
+@import 'headline/headline';
+@import 'legend/legend';
+@import 'withIcon/withIcon';
+
+@include breakpoint($breakpoint-fms-desktop-only) {
+
+}
+
+@include breakpoint($breakpoint-fms-mobile-only) {
+
+  .ffw_segmentInstance {
+    .lbl__text,
+    .lbl__label,
+    .lbl__subtext {
+
+    }
+
+    .lbl__text {
+
+    }
+
+    .lbl__label {
+
+    }
+
+    .lbl__subtext {
+
+    }
+
+    .lbl__label__100,
+    .lbl__label__90,
+    .lbl__label__80,
+    .lbl__label__70,
+    .lbl__label__60,
+    .lbl__label__50,
+    .lbl__label__40,
+    .lbl__label__30,
+    .lbl__label__20,
+    .lbl__label__10 {
+      text-align: left !important;
+      height: $element-height!important;
+      margin-left: $margin-left-element-offset !important;
+      margin-right: $margin-left-element-offset !important;
+      float: left !important;
+
+      * {
+        padding-left: 0!important;
+      }
+    }
+
+    .lbl__label__100 {
+      width: calc(100% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__90 {
+      width: calc(90% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__80 {
+      width: calc(80% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__70 {
+      width: calc(70% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__60 {
+      width: calc(60% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__50 {
+      width: calc(50% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__40 {
+      width: calc(40% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__30 {
+      width: calc(30% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__20 {
+      width: calc(20% - #{$margin-percentage-offset}) !important;
+    }
+
+    .lbl__label__10 {
+      width: calc(10% - #{$margin-percentage-offset}) !important;
+    }
+  }
+}

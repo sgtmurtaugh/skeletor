@@ -1,0 +1,17 @@
+{
+  "basetheme": "core",
+  "activated": [
+    "core",
+    "theme_A",
+    "theme_B"
+  ],
+  "dependencies": {
+    "core": [
+    ],
+    "theme_A": [
+      "core"
+    ],
+    "theme_B": [
+    ]
+  }
+}

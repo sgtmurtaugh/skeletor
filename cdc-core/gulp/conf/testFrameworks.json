@@ -1,0 +1,38 @@
+{
+  "ava": {
+    "description": "Node.js test runner that lets you develop with confidence.",
+    "npm": {
+      "ava": "^3.12.1"
+    },
+    "repository": "https://github.com/avajs/ava",
+    "url": "https://avajs.dev/"
+  },
+
+  "jest": {
+    "description": "Delightful JavaScript Testing.",
+    "npm": {
+      "jest": "^26.4.2"
+    },
+    "repository": "https://github.com/facebook/jest",
+    "url": "https://jestjs.io/"
+  },
+
+  "mocha": {
+    "description": "Simple, flexible, fun test framework",
+    "npm": {
+      "mocha": "^8.1.3"
+    },
+    "repository": "https://github.com/mochajs/mocha",
+    "url": "https://mochajs.org/"
+  },
+
+  "selenium-webdriver": {
+    "description": "The official WebDriver JavaScript bindings from the Selenium project",
+    "npm": {
+      "selenium-webdriver": "^4.0.0-alpha.7"
+    },
+    "repository": "https://github.com/SeleniumHQ/selenium",
+    "url": "https://github.com/SeleniumHQ/selenium"
+  }
+
+}

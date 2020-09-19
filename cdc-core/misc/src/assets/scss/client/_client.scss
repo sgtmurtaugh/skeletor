@@ -1,0 +1,12 @@
+@import 'mixins/mixins';
+@import 'components/components';
+
+@include breakpoint($breakpoint-fms-desktop-only) {
+
+}
+
+@include breakpoint($breakpoint-fms-mobile-only) {
+  body {
+    background-color: white !important;
+  }
+}

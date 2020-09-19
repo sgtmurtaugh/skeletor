@@ -1,0 +1,2920 @@
+<!--
+    <link rel="stylesheet" type="text/css" href="http://localhost:8000/assets/css/client.css">
+    <script type="text/javascript" src="http://localhost:8000/assets/js/app.js"></script>
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de" id="ext-gen2" class=" ext-strict"><head>
+
+
+
+
+
+<base href="http://localhost:8081/lip/">
+
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="author" content="Lucom GmbH">
+<meta name="generator" content="Lucom Interaction Platform\u00ae">
+<meta name="keywords" lang="de" content="Formularserver, Formulare, Interaktionsplattform">
+<meta name="keywords" lang="en" content="form server, forms, interaction platform">
+
+
+
+
+
+
+
+		<title>
+				Lucom Interaction Platform
+			(FMS Entwurfsmuster)
+		</title>
+
+		<link rel="shortcut icon" href="/lip/favicon.ico">
+
+
+
+
+
+		<!-- lip:startOf:scripts -->
+
+
+
+
+
+
+
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/extcore/ext-core.js?3.4-3983" src="http://localhost:8081/lip/script/extcore/ext-core.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/browser.js?3.4-3983" src="http://localhost:8081/lip/script/browser.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/handler.js?3.4-3983" src="http://localhost:8081/lip/script/handler.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/ffw.js?3.4-3983" src="http://localhost:8081/lip/script/ffw.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/ajax.js?3.4-3983" src="http://localhost:8081/lip/script/ajax.js?3.4-3983"></script>
+
+
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/modalOverlay.js?3.4-3983" src="http://localhost:8081/lip/script/modalOverlay.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/jscalendar/calendar.js?3.4-3983" src="http://localhost:8081/lip/script/jscalendar/calendar.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/jscalendar/lang/calendar-de.js?3.4-3983" src="http://localhost:8081/lip/script/jscalendar/lang/calendar-de.js?3.4-3983"></script>
+
+
+
+		<script type="text/javascript" data-rid="http://localhost:8081/lip/script/jscalendar/calendar-setup.js?3.4-3983" src="http://localhost:8081/lip/script/jscalendar/calendar-setup.js?3.4-3983"></script>
+
+
+
+
+		<!-- lip:insertLocation:scripts -->
+
+		<!-- lip:startOf:stylesheets -->
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/theme/css/app.css?3.4-3983" href="http://localhost:8081/lip/theme/css/app.css?3.4-3983">
+
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/theme/css/form.css?3.4-3983" href="http://localhost:8081/lip/theme/css/form.css?3.4-3983">
+
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/theme/css/formControls.css?3.4-3983" href="http://localhost:8081/lip/theme/css/formControls.css?3.4-3983">
+
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/theme/css/select.css?3.4-3983" href="http://localhost:8081/lip/theme/css/select.css?3.4-3983">
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/theme/css/modalOverlay.css?3.4-3983" href="http://localhost:8081/lip/theme/css/modalOverlay.css?3.4-3983">
+
+
+
+		<link rel="stylesheet" type="text/css" href="http://localhost:8000/assets/css/client.css">
+    <script type="text/javascript" src="http://localhost:8000/assets/js/app.js"></script>
+
+
+
+
+
+
+
+		<link rel="stylesheet" type="text/css" data-rid="http://localhost:8081/lip/script/jscalendar/skins/lucom/theme.css?3.4-3983" href="http://localhost:8081/lip/script/jscalendar/skins/lucom/theme.css?3.4-3983">
+
+
+		<!-- lip:insertLocation:stylesheets -->
+
+		<!-- lip:startOf:invocations -->
+		<!-- lip:insertLocation:invocations -->
+
+
+		<script type="text/javascript">
+		<!--
+			var browser = new Browser();
+			var configuration = {"resizeDelay":"250","ajax":true,"ajaxTimeout":"30000","loadingNotificationDelay":"250","locale":"de","contextPath":"/lip","urlPattern":"/lip/@","monthNames":["Januar","Jan","Februar","Feb","März","Mrz","April","Apr","Mai","Mai","Juni","Jun","Juli","Jul","August","Aug","September","Sep","Oktober","Okt","November","Nov","Dezember","Dez"],"useStandardSelectBox":false,"toolbarFixed":true,"fixViewEmbeddings":true,"fixHeaderSegments":true,"highlightFocussed":true,"highlightMandatory":"auto","highlightNotEditable":true,"workaround.surroundTooltipByIFrame":false,"messages":{"StringHandler.tooLong":"Zu lang! Das Feld darf nicht mehr als <strong>{1}<\/strong> Zeichen enthalten.","NumberHandler.precision":"Zu viele Stellen! Es sind höchstens {1} Stellen zulässig.","DateHandler.between":"Der eingegebene Wert liegt außerhalb des zulässigen Bereiches von {1} bis {2}.","DateHandler.invalidDate":"Kein gültiges Datum! Bitte verwenden Sie das Format {1}.","BooleanHandler.invalidData":"Das Feld darf nur die Werte <strong>{1}<\/strong> oder <strong>{2}<\/strong> enthalten.","causes.SCALE_EXCEED":"Zu viele Nachkommastellen!","StringHandler.exactly":"Das Feld muss genau <strong>{1}<\/strong> Zeichen enthalten.","DateHandler.invalidMonth":"Kein gültiger Monat: {1}","DateHandler.tooLittle":"Zu früh! Der Zeitpunkt darf nicht vor {1} liegen.","NumberHandler.tooLittle":"Zu klein! Der Wert muss mindestens {1} betragen.","NumberHandler.tooBig":"Zu groß! Der Wert darf {1} nicht überschreiten.","DateHandler.invalidHour":"Keine gültige Stunde: {1}","editor.uncheckHtmlView":"Bitte die HTML Quellcode Ansicht abschalten, um die Symbolleiste zu nutzen.","StringHandler.tooShort":"Zu kurz! Das Feld muss mindestens <strong>{1}<\/strong> Zeichen enthalten.","StringHandler.between":"Das Feld muss zwischen <strong>{1}<\/strong> und <strong>{2}<\/strong> Zeichen enthalten.","error.MANDATORY":"Pflichtfeld","error.SERVER_ERROR":"Verarbeitungsfehler","NumberHandler.between":"Der eingegebene Wert liegt außerhalb des zulässigen Bereiches von {1} bis {2}.","error.CLIENT_ERROR":"Fehler","DateHandler.invalidSecond":"Keine gültige Sekunde: {1}","DateHandler.invalidTime":"Keine gültige Uhrzeit. Bitte verwenden Sie das Format {1}.","DateHandler.invalidDay":"Kein gültiger Tag: {1}","DateHandler.maxDays":"Der Monat {1} hat nur {2} Tage.","causes.NOT_NULLABLE":"Ein Wert ist erforderlich!","DateHandler.tooBig":"Zu spät! Der Zeitpunkt darf nicht nach {1} liegen.","causes.MAX_LENGTH_EXCEED":"Der Eintrag ist zu lang!","causes.MIN_VALUE_EXCEED":"Der Wert ist zu klein!","NumberHandler.invalidData":"Keine gültige Zahl! Bitte verwenden Sie das Format {1}.","DateHandler.invalidMinute":"Keine gültige Minute: {1}","causes.PRECISION_EXCEED":"Zu viele Stellen!","StringHandler.maxLines":"Das Feld darf höchstens <strong>{1}<\/strong> Zeilen enthalten.","causes.MAX_VALUE_EXCEED":"Der Wert ist zu groß!","error.SELECTION_REQUIRED":"Eine Auswahl ist erforderlich!","causes.MIN_LENGTH_EXCEED":"Der Eintrag ist zu kurz!","causes.INVALID_DATA":"Ungültige Daten!"},"accessibleMode":false,"focusViewEmbedding":true};
+			ffw.init (configuration);
+			ffw.tipFixed = browser.nav;	// 'cause it's still too slow (even in nav7)
+
+			modalOverlay.setToolbarFixed (ffw.toolbarFixed);
+
+			function openChildWindow (url, name, width, height) {
+				var childWindow = window.open (url, name, "width=" + width + ",height=" + height +
+					",resizable=yes,dependent=yes,hotkeys=no,locationbar=no,toolbar=no" +
+					",status=no,scrollbars=yes,menubar=no,directories=no");
+				if (childWindow)	// may be undefined if popup was blocked!
+					childWindow.opener = self;
+			}
+
+			function getForm() {
+				return document.forms["lip_formBean"];
+			}
+
+			function checkSubmit (evt) {
+
+				var target = evt.getTarget ();
+
+				if (ffw.debug.ajaxProcessing)
+					console.log ("HTML submit; target: " + target.id);
+
+				if (ffw.ajaxRequestBuffer.hasPendingTasks ()) {
+					if (ffw.debug.ajaxProcessing)
+						console.log ("pending ajax requests found; html request will be queued and executed later");
+
+					var actionCode = null;
+					var actionParam = "$action";
+
+					var submitter = ffw.formSubmitter;
+					ffw.formSubmitter = null;
+					var action = Ext.isEmpty (submitter) ? null : submitter.name;
+
+					if (!Ext.isEmpty (action)) {
+						if (action.indexOf (actionParam + ':') == 0)
+							actionCode = action.substring (actionParam.length + 1);
+					}
+
+					ffw.registerFormSubmit (target.id, actionCode);
+
+					evt.stopEvent ();
+					return false;
+				}
+
+				ffw.updateViewSettings ();
+				Ext.fly ("$viewSettings").set ({value: Ext.encode(ffw.getViewSettings())});
+
+				// TinyMCE 4 Inline Div Element Change
+				if (typeof tinyMCE !== 'undefined') {
+					for (var i = (tinyMCE.editors.length - 1); i >= 0; i--) {
+					    if (typeof tinyMCE.editors[i] == 'object') {
+					    	var editor = tinyMCE.editors[i];
+					    	if (!editor)
+					    		continue;
+					    	var editorDomId = editor.id;
+					    	editor.save ();
+					    	if (Ext.get(editorDomId) && Ext.get(editorDomId).dom)
+					    		Ext.get(editorDomId).dom.innerHTML = editor.getContent();
+					    }
+					}
+				}
+
+				// show loading notification
+				var defapp = '{"onOutOfSynch":"modalDialog","ajax.timeout":"30000","content.centered":"true","forceAdministrativeRelogin":"false","popup.lookup":"force","handler.acquireLockTimeout":"15","ajax.loadingNotificationDelay":"10","checkAccessibleCondition":"true","popup.ieTimeout":"250","uuidCacheSize":"500","useCSRFToken":"true","autoSaveChanges":"ask","createAccessibleSession":"true","previewMaxWidth":"160","instanceLockingMode":"auto","xmlBackendDateIncludeTime":"true","attachments.modalWindow":"true","list.unselectAfterFilterChange":"true","scriptingEngine.startupJSDebugger":"false","popup.downloadFormPackage":"false","showErrorNotification":"true","renderSelectOpenerInside":"true","webServiceCacheSize":"50","popup.print":"false","scaledAttachmentsCacheSize":"0","fixNavigationBar":"true","useFormPreviews":"true","forceRelogin":"true","previewMaxHeight":"230","search.fulltext":"false","locales":"de,en,nl,fr","popup.downloadXML":"false","popup.modalWindow":"force","xmlDateIncludeTime":"true","instanceLockingMode.allowCopy":"true","scriptingEngine.precompiled.cacheSize":"1000","xmlImport.useExistingRows":"false","popup.mailTo":"false"}';
+				defapp = Ext.decode (defapp, true) || {};
+				var delay = isNaN (defapp['ajax.loadingNotificationDelay']) ? 10 : defapp['ajax.loadingNotificationDelay'];
+				ffw.showLoadingNotification.defer (delay, ffw, [ffw.getLoadingNotificationTemplate ()]);
+
+				return true;
+			}
+
+			function action (actionCode) {
+				ffw.forward (getForm (), actionCode);
+			}
+
+			function forward (actionCode) {
+				action (actionCode);
+			}
+
+			function redisplay (ajax) {
+				if (ajax && ffw.ajax) {
+					var options = {
+						url: ffw.getURLPattern ().replace ("@", "form/display.do"),
+						params: {
+							"$context" : Ext.fly("$context").getValue (),
+							lip_redisplay: true,
+							"$requestType" :
+								"ajax"
+						},
+						method: "GET",
+						headers: {"Content-Type" : "application/x-www-form-urlencoded"},
+						success: handleAjaxUpdateSuccess,
+						failure: handleAjaxFailure,
+						timeout: ffw.ajaxTimeout,
+						showLoadingNotification: true,
+						avoidRedisplay: true	// avoid redisplay!
+					};
+
+					ffw.removeRichTextEditors ();
+					ffw.execAjaxRequest (options);
+				} else
+					window.location.reload();
+			}
+
+			function notify (control, reason, ajax, dataControlsOnly) {
+
+				if (ffw.debug[(ajax ? 'ajax' : 'html') + 'Processing'])
+					console.log ("notifing model ...");
+
+				dataControlsOnly = dataControlsOnly != false;
+				var actionCode = 'pre:notify:' + ffw.getControlId (control) +
+					"$dataControlsOnly=" + dataControlsOnly +
+					(reason ? '$reason=' + reason : '');
+
+				if (ajax)
+					ajaxUpdate (actionCode);
+				else
+					action (actionCode);
+			}
+
+			function recalc () {
+			}
+
+			function handleAjaxRedirectResponse (response) {
+
+				var result = undefined;
+				if (ffw.mightBeJSON (response)) {
+					try {
+						result = Ext.decode (response);
+					} catch (e) {
+						if (ffw.debug.ajaxProcessing) {
+							console.log ("failed to decode response: ");
+							if (typeof console.dir == "function")
+								console.dir (response.responseText);
+							else
+								console.log (response.responseText);
+						}
+						result = response;
+					}
+				} else
+					result = response;
+
+				if (typeof result == "object" && def (result["redirectTo"])) {
+					ffw.redirectTo (result["redirectTo"], true);
+					return true;
+				}
+
+				return false;
+			}
+
+			function handleAjaxUpdateSuccess (response, opts) {
+
+				getForm().elements["$action"].value = "";
+
+				if (ffw.mightBeJSON (response.responseText)) {
+					try {
+						var result = Ext.decode (response.responseText);
+
+						if (handleAjaxRedirectResponse (result))
+							return;
+
+						if (result["info"]["invalidStage"] == true) {
+							ffw.removeLoadingNotification ();
+							updateViewEmbeddings (result);
+							return;
+						}
+
+						result['formMenuHeight'] = '67';
+						result['isFormSet'] = 'false';
+						result['hasPageTree'] = 'false';
+						result['treeWidth'] = '0';
+						result['treeOffset'] = '0';
+
+						requestUpdateViewEmbeddings (result);
+
+						requestUpdateView (result, opts);
+
+						if (true)
+
+							requestUpdateMenuBar ();
+
+						if (!requestUpdateModalFormOverlay (result)) {
+
+							ffw.removeLoadingNotification ();
+						}
+
+						if (false)
+
+							updateRefreshButton ();
+					} finally {
+						updateStage (result);
+					}
+				} else {
+					redisplay (false);
+				}
+			}
+
+			function handleAjaxFailure (response, opts) {
+
+				if (ffw.debug.ajaxProcessing) {
+					console.log ("handleAjaxFailure(): ");
+					if (console.dir)
+						console.dir (response);
+				}
+
+				getForm().elements["$action"].value = "";
+				ffw.removeLoadingNotification ();
+
+				if (ffw.debug.ajaxProcessing)
+					console.log ('server-side failure with status code ' +
+							response.status + ': ' + response.statusText);
+				if (response.isTimeout) {
+					// handle client timeout
+					if (ffw.debug.ajaxProcessing)
+						console.log ('ajax request timed out!');
+				} else if (response.status <= 0) {
+					// communication aborted by client/server not available
+					if (ffw.debug.ajaxProcessing)
+						console.log ('ajax request aborted: ' + response.statusText);
+				} else {
+					var redirectToError = false;
+					if (typeof response.getResponseHeader == 'function') {
+						redirectToError = response.getResponseHeader ('x-lip-redirect_to_error');
+						if (ffw.debug.ajaxProcessing)
+							console.log ('found redirect header');
+					} else {
+						if (ffw.debug.ajaxProcessing)
+							console.log ('no redirect header');
+						redirectToError = true;
+					}
+
+					if (redirectToError) {
+						var param = '';
+						var context = Ext.get ('$context');
+						if (def (context))
+							param = '?' + encodeURIComponent ('$context') + '=' + context.getValue ();
+						ffw.redirectTo ('error/display.do' + param);
+						return true;
+					}
+				}
+
+				if (typeof opts.avoidRedisplay === 'undefined' ||
+					opts.avoidRedisplay == false) {
+					redisplay (true);	// redisplay to update the stage!
+					return true;
+				}
+
+				return false;
+			}
+
+			function handleRunOnServerResponse (options, success, response) {
+
+				if (def (options.handler)) {
+					if (success) {
+						if (def (options.handler.success))
+							options.handler.success (response.responseText);
+					} else {
+						if (def (options.handler.error))
+							options.handler.error (response.status, response.statusText);
+					}
+				}
+			}
+
+			var loadingNotificationTask = new Ext.util.DelayedTask (function () {
+				ffw.showLoadingNotification ();
+			});
+
+			function handleResize (lastWidth, lastHeight) {
+				if (typeof FormMenu == "object")
+					FormMenu.setToolbarWidth ();
+			}
+
+			function handleResized (lastWidth, lastHeight) {
+				if (typeof modal_handleResized == "function")
+					modal_handleResized (lastWidth, lastHeight);
+			}
+
+			function handleOrientationChange (lastOrientation) {
+
+				var orientation = window.orientation;
+				// rotation from landscape to portrait or vice versa
+				if (Math.abs (lastOrientation - orientation) == 90) {
+					if (ffw.ajax)
+						ajaxUpdate ("/form/orientationChanged.do", { lastOrientation: lastOrientation, newOrientation: orientation });
+					else
+						ffw.forward (getForm (), "/form/orientationChanged.do?lastOrientation=" + lastOrientation + "&newOrientation=" + orientation);
+				}
+			}
+
+		//-->
+		</script>
+
+		<style id="lip_formStyles" type="text/css">
+
+						.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__text {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__next {
+				vertical-align: middle;
+				color: #ffffff;
+				text-align: center;
+				font-size: 20px;
+				background-color: #e40521;
+				border-width: 0px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h1 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-size: 40px;
+				font-family: Arial;
+				font-weight: normal;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h2 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 37px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h3 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 34px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h4 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 30px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h5 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 27px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__h6 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 24px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__label {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__subtext {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__info {
+				vertical-align: bottom;
+				color: black;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+				text-align: center;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__document {
+				vertical-align: bottom;
+				color: black;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+				text-align: center;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__legend__pageNr {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__legend__text {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__legend__pageNr__disabled {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__legend__text__disabled {
+				vertical-align: bottom;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+				color: RGB(103,103,103);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__back {
+				vertical-align: middle;
+				text-align: center;
+				font-size: 20px;
+				color: #000000;
+				background-color: #ffffff;
+				border-style: solid;
+				border-color: #000000;
+				border-width: 2px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__default {
+				vertical-align: middle;
+				text-align: center;
+				font-size: 20px;
+				color: #000000;
+				border-style: solid;
+				border-color: #000000;
+				border-width: 2px;
+				background-color: transparent;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__save {
+				vertical-align: middle;
+				text-align: center;
+				font-size: 20px;
+				color: #000000;
+				background-color: #6cccf2;
+				border-style: solid;
+				border-color: #6cccf2;
+				border-width: 2px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__close {
+				vertical-align: middle;
+				color: #ffffff;
+				text-align: center;
+				font-size: 20px;
+				background-color: #e40521;
+				border-width: 0px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__label__100 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .txt__100 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__label__50 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .txt__50 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__label__30 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__label__70 {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .txt__30 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .txt__70 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .date__100 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .date__50 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ckb {
+				color: #000000;
+				font-size: 30px;
+				background-color: #ffffff;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .lbl__ckb__rbtn {
+				vertical-align: bottom;
+				color: black;
+				text-align: left;
+				font-family: Arial;
+				font-weight: normal;
+				font-size: 20px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .rbtn {
+				color: #000000;
+				font-size: 30px;
+				background-color: #ffffff;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .sig__50 {
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				color: #000000;
+				font-size: 20px;
+				background-color: #ffffff;
+				padding-bottom: 5px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .rbtn__verzweigung {
+				vertical-align: middle;
+				text-align: center;
+				font-size: 20px;
+				border-width: 0px;
+				color: #000000;
+				background-color: #ffffff;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .btn__next__rbtnOption {
+				vertical-align: middle;
+				color: #ffffff;
+				text-align: center;
+				font-size: 20px;
+				background-color: #e40521;
+				border-width: 0px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_invisible {
+				position: absolute;
+				height: 1px;
+				overflow: hidden;
+				width: 1px;
+				left: -2000px;
+				top: 0px;
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_mandatory {
+				background-color: rgb(255, 250, 204);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_notEditable {
+				cursor: not-allowed;
+				color: rgb(128, 128, 128);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_comparisonAdded {
+				background-color: rgb(206, 228, 255);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_comparisonRemoved {
+				background-color: rgb(206, 228, 255);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_comparisonModified {
+				background-color: rgb(255, 250, 204);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_serverError {
+				color: white;
+				background-color: rgb(238, 17, 17);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_clientError {
+				color: white;
+				background-color: rgb(238, 17, 17);
+			}
+			.pageContent__Elementsammlung__ResponsiveViaSegement .ffw_focussed {
+				border: 2px solid rgb(84,163,33);
+			}
+
+
+		</style>
+
+		<style type="text/css">
+
+			#lip_header {
+				z-index: 1001;
+			}
+
+			form.centered #lip_headerSegments.fixed {
+				left: auto;
+				right: auto;
+			}
+
+			#lip_headerSegments.fixed {
+				z-index: 999;
+				position: fixed;
+				left: 0px;
+				right: 0;
+				top: 67px;
+				padding-bottom: 0px;
+			}
+
+			#lip_ScrollArea {
+				position:relative;
+				top: 105px;
+				left: 0px;
+			}
+
+			form.centered .padding {
+				padding: 0 20px;
+			}
+
+
+			form.centered .padding .centeredContent {
+				width: 1000px;
+			}
+
+			form.centered .goToTop {
+				right: auto;
+				margin-left: 1020px;
+			}
+
+		</style>
+
+
+
+
+
+		<style type="text/css">
+			#lip_header {
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+			}
+		</style>
+		<!--[if gte IE 5.5]>
+		<![if lt IE 7]>
+		<style type="text/css">
+			@media screen {
+				html, body {
+					overflow-y: hidden;
+				}
+				#lip_ScrollArea {
+					height: 100%; width: 100%; overflow: auto; top: 0;
+				}
+				#lip_formBottomPadding {
+					height: 67px;
+				}
+			}
+		</style>
+		<![endif]>
+		<![endif]-->
+
+
+		<!--[if gte IE 5.5]>
+		<![if lt IE 7]>
+		<style type="text/css">
+			br {
+				clear: left;
+				letter-spacing:normal;
+			}
+		</style>
+		<![endif]>
+		<![endif]-->
+
+
+		<!--[if lte IE 7]>
+		<style type="text/css">
+			.formToolbar .logo {
+				display: inline;
+				left: 10px;
+			}
+
+			.formToolbar .logo .content {
+				display: inline;
+				top: 13px;
+				position: absolute;
+			}
+
+			.formToolbar .buttonPanel .toolbar {
+				display: inline;
+			}
+
+			.formToolbar .buttonPanel .toolbar .tContent {
+				top: 15px;
+				position: relative;
+			}
+
+			div.centeredContainer > div {
+				display: inline;
+				zoom: 1;
+			}
+		</style>
+		<![endif]-->
+
+
+	</head>
+
+
+	<body class="formBody  ext-webkit ext-chrome" style="
+		background-color: #EEEEEE;" id="ext-gen3">
+
+		<div id="ffw._tooltip" class="tooltip" style="visibility: hidden; left: 10px; top: 5px;"></div>
+
+		<p class="invisible">
+			<a href="/lip/form/display.do?%24context=203B064CBB5FE3CBAE2B#lip_content">
+				Direkt zum Inhalt</a>
+		</p>
+
+
+		<div>
+			<a name="lip_topAnchor" id="lip_topAnchor"></a>
+		</div>
+
+		<form action="/lip/form/update.do" id="lip_formBean" method="post" class="centered">
+
+			<div>
+
+
+
+				<input type="submit" name="lip_refresh" value="Submit" onclick="return ajaxUpdate();" id="lip_refresh" class="invisible">
+
+
+
+			</div>
+
+			<div>
+				<input id="$context" name="$context" type="hidden" value="203B064CBB5FE3CBAE2B" class="">
+
+				<input id="$action" name="$action" type="hidden" value="" class="">
+
+					<input id="$csrf" name="$csrf" type="hidden" value="7NS5L1V2YIQZMQY1W6MNBYV58" class="">
+
+				<input id="$viewSettings" name="$viewSettings" type="hidden" value="" class="">
+				<input id="$instanceIndex" name="$instanceIndex" type="hidden" value="-1" class="">
+				<input id="$hasNextInstance" type="hidden" value="false" class="">
+			</div>
+
+
+
+				<div id="lip_modalTmpWindow">
+				</div>
+				<div id="lip_modalWindow" style="display: none;">
+					<div id="lip_modalWindowContent"></div>
+				</div>
+				<div id="lip_modalBackground" style="display: none;"></div>
+
+				<script type="text/javascript">
+				<!--
+					// use delayed task to give the theme service a chance to
+					// resolve the image!
+					var defapp = '{"onOutOfSynch":"modalDialog","ajax.timeout":"30000","content.centered":"true","forceAdministrativeRelogin":"false","popup.lookup":"force","handler.acquireLockTimeout":"15","ajax.loadingNotificationDelay":"10","checkAccessibleCondition":"true","popup.ieTimeout":"250","uuidCacheSize":"500","useCSRFToken":"true","autoSaveChanges":"ask","createAccessibleSession":"true","previewMaxWidth":"160","instanceLockingMode":"auto","xmlBackendDateIncludeTime":"true","attachments.modalWindow":"true","list.unselectAfterFilterChange":"true","scriptingEngine.startupJSDebugger":"false","popup.downloadFormPackage":"false","showErrorNotification":"true","renderSelectOpenerInside":"true","webServiceCacheSize":"50","popup.print":"false","scaledAttachmentsCacheSize":"0","fixNavigationBar":"true","useFormPreviews":"true","forceRelogin":"true","previewMaxHeight":"230","search.fulltext":"false","locales":"de,en,nl,fr","popup.downloadXML":"false","popup.modalWindow":"force","xmlDateIncludeTime":"true","instanceLockingMode.allowCopy":"true","scriptingEngine.precompiled.cacheSize":"1000","xmlImport.useExistingRows":"false","popup.mailTo":"false"}';
+					defapp = Ext.decode (defapp, true) || {};
+					loadingNotificationTask.delay ((defapp['ajax.loadingNotificationDelay'] || 10));
+				//-->
+				</script>
+
+
+
+
+				<div id="lip_header">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+	var attributes = {};
+	var dataIncludes = {};
+
+	function addControlAttributes (controlId, attribs, data) {
+		attributes[controlId] = attribs;
+		dataIncludes[controlId] = data;
+	}
+
+	function updateChooser (encodedId, actionCode, paramName, paramValue) {
+			var input = document.getElementById (encodedId);
+			var seperator = actionCode.indexOf ('?') >= 0 ? '&' : '?';
+			actionCode = actionCode + seperator + paramName + '=' + paramValue;
+			input.name = '$action:' + actionCode;
+
+			if (true) {
+				var chooser = Ext.get ('lip_chooser_' + encodedId);
+				var params = {};
+				params[paramName] = chooser.getValue ();
+				return ajaxUpdate (actionCode, params);
+			} else if (typeof action == 'function'){
+				return action (actionCode);
+			}
+	}
+//-->
+</script>
+
+
+
+	<div class="formToolbar  centered" id="lip_formToolbar">
+
+
+		<div class="content">
+
+
+			<div class="logo">
+
+					<div class="content">
+
+
+
+
+
+
+	<a href="http://www.lucom.com" target="_blank" title="Externer Verweis zur Lucom GmbH Website" class="lip_companyLogoLink">
+		<img src="images/LIP.png" alt="Externer Verweis zur Lucom GmbH Website">
+	</a>
+
+					</div>
+
+			</div>
+
+			<div id="lip_buttonPanel" class="buttonPanel">
+
+
+	<div class="toolbar">
+	<div class="tContent centeredContainer">
+	<div class="inner" id="ext-gen6" style="min-width: 739px;">
+
+				<div class="button" id="ext-gen7"><input id="lip_toolbar_form:2fclose" type="image" name="$action:/form/close.do" src="images/action/home.png" title="Schließen (ALT + 0)" alt="Schließen (ALT + 0)" class="button flag_ajaxOnclick" accesskey="0" data-alt-src="images/action/home_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="separator" id="ext-gen8">&nbsp;</div>
+				<div class="button" id="ext-gen9"><img src="images/action/first_disabled.png" title="Erster Datensatz (ALT + 1)" alt="Erster Datensatz (ALT + 1)" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen10"></div>
+				<div class="button" id="ext-gen11"><img src="images/action/previous_disabled.png" title="Vorheriger Datensatz (ALT + 2)" alt="Vorheriger Datensatz (ALT + 2)" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen12"></div>
+				<div class="button" id="ext-gen13"><img src="images/action/next_disabled.png" title="Nächster Datensatz (ALT + 3)" alt="Nächster Datensatz (ALT + 3)" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen14"></div>
+				<div class="button" id="ext-gen15"><img src="images/action/last_disabled.png" title="Letzter Datensatz (ALT + 4)" alt="Letzter Datensatz (ALT + 4)" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen16"></div>
+				<div class="separator" id="ext-gen17">&nbsp;</div>
+				<div class="button" id="ext-gen18"><input id="lip_toolbar_form:2fprint" type="image" name="$action:/form/print.do" src="images/action/preparePrint.png" title="Drucken (ALT + 5)" alt="Drucken (ALT + 5)" class="button flag_ajaxOnclick" accesskey="5" data-alt-src="images/action/preparePrint_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="separator" id="ext-gen19">&nbsp;</div>
+				<div class="button" id="ext-gen20"><input id="lip_toolbar_favorites:2fbookmark" type="image" name="$action:/favorites/bookmarkFromForm.do" src="images/action/bookmarkData.png" title="Formular zu Favoriten hinzufügen." alt="Formular zu Favoriten hinzufügen." class="button flag_ajaxOnclick" data-alt-src="images/action/bookmarkData_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="button" id="ext-gen21"><input id="lip_toolbar_form:2fdownloadXMLData" type="image" name="$action:/form/downloadXMLData.do" src="images/action/downloadXMLData.png" title="Aktuellen Datensatz als XML-Datei herunterladen" alt="Aktuellen Datensatz als XML-Datei herunterladen" class="button flag_ajaxOnclick" data-alt-src="images/action/downloadXMLData_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="button" id="ext-gen22"><input id="lip_toolbar_form:2fimportXMLData" type="image" name="$action:/importXMLData/open.do" src="images/action/importXMLData.png" title="Daten aus einer XML-Datei importieren" alt="Daten aus einer XML-Datei importieren" class="button flag_ajaxOnclick" data-alt-src="images/action/importXMLData_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="separator" id="ext-gen23">&nbsp;</div>
+				<div class="button" id="ext-gen24"><input id="lip_toolbar_form:2fnewRow" type="image" name="$action:/form/newRow.do" src="images/action/new.png" title="Neuer Datensatz (ALT + 7)" alt="Neuer Datensatz (ALT + 7)" class="button flag_ajaxOnclick" accesskey="7" data-alt-src="images/action/new_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="button" id="ext-gen25"><input id="lip_toolbar_form:2fcopyRow" type="image" name="$action:/form/copyRow.do" src="images/action/copy.png" title="Datensatz kopieren" alt="Datensatz kopieren" class="button flag_ajaxOnclick" data-alt-src="images/action/copy_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="button" id="ext-gen26"><input id="lip_toolbar_form:2fupdateChanges" type="image" name="$action:/form/updateChanges.do" src="images/action/update.png" title="Änderungen speichern (ALT + 8)" alt="Änderungen speichern (ALT + 8)" class="button flag_ajaxOnclick" accesskey="8" data-alt-src="images/action/update_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="button" id="ext-gen27"><input id="lip_toolbar_form:2fdiscardChanges" type="image" name="$action:/form/discardChanges.do" src="images/action/cancel.png" title="Änderungen verwerfen" alt="Änderungen verwerfen" class="button flag_ajaxOnclick" data-alt-src="images/action/cancel_over.png" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true"></div>
+				<div class="separator" id="ext-gen28">&nbsp;</div>
+				<div class="button" id="ext-gen29"><img src="images/action/remove_disabled.png" title="Datensatz löschen" alt="Datensatz löschen" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen30"></div>
+
+
+				<div class="text" id="ext-gen31">
+
+					(<strong>0</strong> Sätze)
+
+					<br>
+					<span class="newInstance">
+						<strong>neu</strong>
+					</span>
+					</div>
+
+<div class="button" id="ext-gen32"><img src="images/action/page1_disabled.png" title="Elementsammlung" alt="Elementsammlung" class="button" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" data-img-loaded="true" id="ext-gen33"></div><div class="button" id="ext-gen34"><input type="image" name="$action:/form/showPage.do?id=siteAuswahlVersicherungsnehmer&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58" src="images/action/page2.png" title="Versicherungsnehmer" alt="Versicherungsnehmer" class="button" data-alt-src="images/action/page2_over.png" onclick="return ajaxUpdate ('/form/showPage.do?id=siteAuswahlVersicherungsnehmer&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58');" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true" id="ext-gen35"></div><div class="button" id="ext-gen36"><input type="image" name="$action:/form/showPage.do?id=siteFamilienangehoerige&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58" src="images/action/page3.png" title="Seite 2" alt="Seite 2" class="button" data-alt-src="images/action/page3_over.png" onclick="return ajaxUpdate ('/form/showPage.do?id=siteFamilienangehoerige&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58');" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true" id="ext-gen37"></div><div class="button" id="ext-gen38"><input type="image" name="$action:/form/showPage.do?id=sitePersoenlicheAngaben&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58" src="images/action/page4.png" title="Persönliche Angaben" alt="Persönliche Angaben" class="button" data-alt-src="images/action/page4_over.png" onclick="return ajaxUpdate ('/form/showPage.do?id=sitePersoenlicheAngaben&amp;%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58');" onerror="ffw.setImageLoaded (this);" onload="ffw.setImageLoaded (this);" onmouseout="ffw.swapImageSource (this);" onmouseover="ffw.swapImageSource (this);" data-img-loaded="true" id="ext-gen39"></div>
+
+
+			</div>
+			</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<!-- The bar separating the buttons from the form -->
+	<div class="lowerBarBorder">
+
+		&nbsp;
+	</div>
+
+	</div>
+
+
+
+
+<script type="text/javascript">
+<!--
+
+	FormMenu = function () {
+
+		// private
+
+		var delegates = {};
+
+		var setButtonPanelWidthDelayed = 0;
+
+		function getAction (button) {
+			var name = button.getAttribute ('name');
+
+			if (Ext.isEmpty (name))
+				return null;
+
+			if (name.indexOf ('$action:') != 0)
+				return null;
+
+			return name.substring (8);
+		};
+
+		// public
+
+		return {
+			initPageSelector: function () {
+
+				if (true)
+					return;
+
+				var control = $('#lip_goToPage');
+				if (control.length == 0)
+					return;
+
+				var configuration = {
+					maxItems: 1,
+					closeAfterSelect: true,
+					plugins: [ 'lip_pageSelect' ]
+				};
+				control.selectize (configuration);
+			},
+
+			setToolbarWidth: function () {
+
+				if (ffw.toolbarFixed)
+					return;
+
+				var header = Ext.get ("lip_header");
+				if (Ext.isEmpty (header))
+					return;
+
+				header.setWidth ();
+				header.setWidth (Ext.getBody ().dom.scrollWidth);
+			},
+
+			setButtonPanelWidth: function () {
+
+				var inner = Ext.get (Ext.DomQuery.selectNode ("#lip_buttonPanel .inner"));
+				if (!Ext.isEmpty (inner)) {
+					var child = inner.first ('div');
+					var width = 0;
+					while (child) {
+						if (child.hasClass ("button")) {
+							var img = child.first ("input[type='image']") || child.first ("img");
+							if (img && Ext.isEmpty (img.getAttribute ("data-img-loaded"))) {
+								setButtonPanelWidthDelayed++;
+								if (setButtonPanelWidthDelayed <= 10) {
+									// call this function again in 100ms
+									new Ext.util.DelayedTask (this.setButtonPanelWidth, this).delay (100);
+									return;
+								}
+							}
+							width += child.getWidth ();
+						} else
+							width += child.getWidth ();
+						child = child.next ('div');
+					}
+
+					if (width > 0)
+						//Fix for Mac: Prevent overflow by adding an extra pixel
+						inner.setStyle ((false ? "width" : "min-width"), (width + 1) + "px");
+
+					setButtonPanelWidthDelayed = 0;
+				}
+			},
+
+			registerButtonEvents: function () {
+
+				if (!true)
+					return;
+
+				// get all buttons with class ajaxOnclick
+				var buttonPanel = Ext.get ("lip_buttonPanel");
+				var buttons = Ext.DomQuery.select ("div.button > input.flag_ajaxOnclick", buttonPanel.dom);
+
+				for (var i = 0; i < buttons.length; i++) {
+					var button = Ext.get (buttons[i]);
+					var action = getAction (button);
+					if (action != null)
+						this.registerOnClick (button.id, action);
+				}
+			},
+
+			removeListener: function (id) {
+
+				if (!true)
+					return;
+
+				var delegate = delegates[id];
+				if (delegate) {
+					Ext.fly (id).removeListener ('click', delegate);
+					delete delegates[id];
+				}
+			},
+
+			registerOnClick: function (id, action, params) {
+
+				if (!true)
+					return;
+
+
+				delegates[id] = ajaxUpdate.createDelegate (this, [ action, params ], 0);
+				Ext.fly (id).on ('click', delegates[id]);
+			}
+		};
+	} ();
+//-->
+</script>
+
+
+				</div>
+
+
+
+			<div class="padding">
+				<div class="centeredContent">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div id="ffw.viewEmbeddings" class="viewEmbeddings fixed" style=" width: 1002px; top: 67px; background-color: #EEEEEE; ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+		// this function is called upon evaluating the response of invoking
+		// a QuestionEmbedding's "answer" command via AJAX. Note that the
+		// QuestionEmbedding itself has already been removed when this function
+		// is called.
+		function handleQuestionEmbeddingResult (embeddingId, forwardURL, confirm, redirect) {
+			if (def (forwardURL)) {
+				if (redirect)
+					return ffw.redirectTo (forwardURL, true);
+
+				var params = {};
+				if (confirm)
+					params['$confirmAction'] = true;
+				ajaxUpdate (forwardURL, params);
+			} else
+				redisplay (ffw.ajax);
+		}
+
+		function clearViewEmbeddingsCallback (embedding, options) {
+			ffw.removeBackgroundImages (embedding);
+			embedding.remove ();
+			return true;
+		}
+
+		function clearViewEmbeddings (container) {
+			processViewEmbeddings (container, clearViewEmbeddingsCallback);
+		}
+
+		function clearModalViewEmbeddings () {
+			var modalViewEmbeddings = Ext.get ('lip_modalViewEmbeddings');
+			if (def (modalViewEmbeddings)) {
+				ffw.removeBackgroundImages (modalViewEmbeddings);
+				modalViewEmbeddings.remove ();
+			}
+		}
+
+		function processViewEmbeddings (container, callback, options) {
+
+			var embeddings = [];
+
+			if (Ext.isEmpty (container))
+				return embeddings;
+
+			var child = container.first ('div');
+			while (def (child)) {
+
+				var nextChild = child.next ('div');
+
+				var id = child.id;
+				// make sure this element is really a view embedding!
+				if (def (id) && id.indexOf ('ffw.viewEmbedding.') == 0) {
+					embeddings.push (child);
+					if (typeof callback === 'function')
+						if (!callback (child, options))
+							break;
+				}
+
+				child = nextChild;
+			}
+
+			return embeddings;
+		}
+
+		function moveFollowingContent (container) {
+
+			if (!ffw.fixViewEmbeddings)
+				return;
+
+			moveContent (container.getHeight ());
+		}
+
+		function moveContent (embeddingsHeight, oldHeight) {
+
+			var scrollArea = Ext.get ('lip_ScrollArea');
+			var headerSegments = Ext.get ('lip_headerSegments');
+
+			if (Ext.isEmpty (scrollArea) && Ext.isEmpty (headerSegments))
+				return;
+
+			// move header segments
+			if (!Ext.isEmpty (headerSegments)) {
+				var originalTop = headerSegments.getY ();
+
+				if (ffw.fixHeaderSegments) {
+					var scrollTop = 0;
+					if (document.documentElement.scrollTop)
+						scrollTop = document.documentElement.scrollTop;
+					else if (document.body.scrollTop)
+						scrollTop = document.body.scrollTop;
+					else if (window.scrollTop)
+						scrollTop = window.scrollTop;
+
+					originalTop -= scrollTop;
+				}
+
+				var top = originalTop;
+				if (oldHeight)
+					top = top - oldHeight + embeddingsHeight;
+				else
+					top += embeddingsHeight;
+
+				if (top != originalTop)
+					headerSegments.setTop (top);
+			}
+			// move form
+			if (!Ext.isEmpty (scrollArea)) {
+				var top = scrollArea.getY ();
+				if (oldHeight)
+					top = top - oldHeight + embeddingsHeight;
+				else
+					top += embeddingsHeight;
+
+				scrollArea.setY (top);
+			}
+		}
+
+		function moveEmbeddings (updateResult, container) {
+
+			if (ffw.fixViewEmbeddings || !ffw.fixHeaderSegments)
+				return;
+
+			var top = 0;
+			var headerSegments = Ext.get ('lip_headerSegments');
+			if (Ext.isEmpty (headerSegments))
+				top = parseInt (updateResult['formMenuHeight'], 10);
+			else
+				top = headerSegments.getBottom ();
+
+			container.setTop (top);
+		}
+
+		function requestUpdateViewEmbeddings (updateResult) {
+
+			if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+				if (ffw.debug.ajaxProcessing)
+					console.log ("(found pending update-task; skipping refreshing of view embeddings)");
+				return;
+			}
+
+			if (ffw.mouseDown) {
+				// delay execution until mouse button is released again, this prevents
+				// from exchanging the toolbar button before the user releases the
+				// mouse button again (that would cause the onclick event to be lost)
+				// (see also event handler "handleMouseUp()" in ffw.js)
+				if (ffw.debug.ajaxProcessing)
+					console.log ("enqueue request for updateViewEmbeddings()");
+				ffw.registerMouseUpEvent (updateViewEmbeddings, updateResult);
+			} else
+				updateViewEmbeddings (updateResult);
+		}
+
+		function updateViewEmbeddings (updateResult) {
+
+			if (ffw.debug.ajaxProcessing)
+				console.log ("updateViewEmbeddings()");
+
+			if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+				if (ffw.debug.ajaxProcessing)
+					console.log ("(found pending update-task; skipping refreshing of view embeddings)");
+				return;
+			}
+
+			if (ffw.debug.ajaxProcessing)
+				console.log ("(refreshing view embeddings)");
+
+			var requestParams = {
+				"$requestType" :
+					"ajax",
+				"$context": Ext.fly ("$context").getValue ()
+			};
+
+			var csrf = ffw.getCSRFToken ();
+			if (csrf)
+				requestParams["$csrf"] = csrf;
+
+			var headers = {};
+			var ajaxOptions = updateResult['ajaxOptions'];
+			var reuseParam = 'reuseErrorMessageEmbedding';
+			if (!Ext.isEmpty (ajaxOptions) && ajaxOptions[reuseParam] == 'true')
+				headers['x-lip-reuse_error_message_embedding'] = true;
+
+			ffw.execAjaxRequest ({
+				url: ffw.getURLPattern ().replace ("@", "form/getViewEmbeddings.do"),
+				method: "POST",
+				params: requestParams,
+				headers: headers,
+				timeout: ffw.ajaxTimeout,
+				success: function (response, opts) {
+					var result = Ext.decode (response.responseText);
+					if (handleAjaxRedirectResponse (result))
+						return;
+
+					var container = Ext.get ("ffw.viewEmbeddings");
+					var modalContainer = Ext.get ("lip_modalWindow");
+					var modalWindowContent = modalContainer.child ('#lip_modalWindowContent');
+					clearViewEmbeddings (container);
+					clearModalViewEmbeddings ();
+
+					var hasModal = false;
+					if (def (container) && def (modalContainer)) {
+						var modalViewEmbeddings = Ext.get ('lip_modalViewEmbeddings');
+						var hasVisibleEmbeddings = false;
+						for (var id in result) {
+							if (id == 'ffw.questionEmbeddingDefaultAnswer')
+								continue;
+
+							var embedding = result[id];
+
+							if (!hasVisibleEmbeddings && embedding.html && embedding.html.length > 0)
+								hasVisibleEmbeddings = true;
+
+							if (embedding.modal) {
+								if (!def (modalViewEmbeddings)) {
+									var config = {
+										tag: 'div',
+										id: 'lip_modalViewEmbeddings',
+										cls: 'viewEmbeddings'
+									};
+									modalViewEmbeddings =
+										Ext.DomHelper.insertFirst (
+												modalWindowContent, config, true);
+								}
+								modalViewEmbeddings.insertHtml ('beforeEnd', embedding.html);
+								hasModal = true;
+							} else
+								container.insertHtml ('beforeEnd', embedding.html);
+						}
+						if (def (modalViewEmbeddings)) {
+							modalOverlay.addOverlay ('lip_modalViewEmbeddings');
+							ffw.removeLoadingNotification ();
+						}
+
+						if (hasVisibleEmbeddings) {
+							var back = Ext.get ('lip_viewEmbeddingsBackground');
+							if (!Ext.isEmpty (back)) {
+								ffw.removeBackgroundImages (back);
+								back.remove ();
+							}
+							enlargeEmbeddings (updateResult);
+
+							ffw.initErrorNotifications ();
+
+							if (ffw.fixViewEmbeddings)
+								moveFollowingContent (container);
+							else if (ffw.fixHeaderSegments)
+								moveEmbeddings (updateResult, container);
+
+							var doFocus = true;
+							if (def (result['ffw.questionEmbeddingDefaultAnswer'])) {
+								var defAnswer = result['ffw.questionEmbeddingDefaultAnswer'];
+								if (defAnswer.modal || !hasModal)
+									doFocus = !ffw.focusDefaultQuestionAnswer (defAnswer.id);
+							}
+							if (doFocus)
+								focusControl (hasModal);
+						}
+					}
+				},
+				failure: handleAjaxFailure
+			});
+		}
+
+		function enlargeEmbeddings (updateResult) {
+
+			if (!ffw.fixViewEmbeddings)
+				return;
+
+			var container = Ext.get ("ffw.viewEmbeddings");
+			if (Ext.isEmpty (container))
+				return;
+
+			if (!updateResult['options'])
+				return;
+
+			if (updateResult['options']['view.embeddings.useFormWidth'] == 'true')
+				return;
+
+			var embeddings = processViewEmbeddings (container, function () {
+				return false;	// stop processing
+			});
+			if (embeddings.length == 0)
+				return;
+
+			var width = updateResult['formSize']['width'];
+			if (updateResult['pageBorderWidths'].length > 0)
+				width += updateResult['pageBorderWidths'][0];
+			if (updateResult['pageBorderWidths'].length > 1)
+				width += updateResult['pageBorderWidths'][1];
+
+			var height = container.getHeight (true);
+			var marginLeft = (updateResult['options']['page-offset-x'] ?
+					updateResult['options']['page-offset-x'] + '' :	'0');
+			var div = {
+				tag: 'div',
+				id: 'lip_viewEmbeddingsBackground',
+				style: 'width: ' + width + 'px; '
+					+ 'background-color: ' + updateResult['formBodyBackgroundColor'] + '; '
+					+ 'top: ' + updateResult['formMenuHeight'] + 'px; '
+					+ 'z-index: 999; '
+					+ 'margin-left: ' + marginLeft + '; '
+					+ 'height: ' + height + 'px; position: fixed;'
+					+ 'left: ' + (updateResult['isFormSet'] || updateResult['hasPageTree'] ? (updateResult['treeWidth'] + updateResult['treeOffset']) : (updateResult['formSize']['left'])) + 'px;'
+			};
+			Ext.DomHelper.insertBefore (container, div);
+		}
+
+		function focusControl (hasModal) {
+
+			if (!hasModal && !ffw.focusViewEmbedding)
+				return;
+
+			if (!hasModal && ffw.isFocusForced ())
+				return;
+
+			ffw.focusViewEmbeddingControl (hasModal);
+		}
+	//-->
+	</script>
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+		var options = {
+			"view.embeddings.useFormWidth": true,
+			"page-offset-x" : '20px'
+		};
+		var results = {
+			formSize: [1000, 2849],
+			options: options,
+			pageBorderWidths: [1, 1],
+			formBodyBackgroundColor: '#EEEEEE',
+			formMenuHeight: 67,
+			isFormSet: false,
+			hasPageTree: false,
+			treeWidth: 0,
+			treeOffset: 0
+		};
+		enlargeEmbeddings (results);
+		ffw.initErrorNotifications ();
+
+		// focus embedding
+		if (!ffw.focusDefaultQuestionAnswer ('null'))
+			focusControl (false);
+	//-->
+	</script>
+
+
+
+
+			</div>
+
+
+			<div id="lip_headerSegmentsContainer">
+
+						<div id="lip_headerSegments" class="form page pageContent__Elementsammlung__ResponsiveViaSegement fixed">
+		<div style="border-left-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-width:1px; border-right-width:1px; border-bottom-width:1px; border-left-color:#D3D3D3; border-right-color:#D3D3D3; border-bottom-color:#D3D3D3; position:relative; left:0; height:38px; width:1000px;">
+					<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:a09231D1D50D0F162" class="ffw_segmentInstance" style="position:absolute; left:0px; top:0px; width:1000px; height:38px; background-color:#D9534F;">
+				<div id="DD83A7AB9BC1FEAE" class=" formControl formControlLabel" style="font-size:15px; font-weight:bold; font-family:Arial; color:white; background-color:transparent; overflow:hidden; padding-left:6px; padding-top:1px; position:absolute; left:29px; top:5px; width:756px; height:29px; -webkit-border-radius:0;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:7px; left:0px;"><p style="text-align:left; overflow:hidden; margin:0; width:100%;">Your server is not licensed. Please contact the vendor.</p></div></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+			</div>
+
+
+
+			<div id="ffw.confirmations" style="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+		function showModalConfirmation () {
+
+			removeModalConfirmation ();
+			var confirmationBox = Ext.get ("ffw.confirmation");
+			if (confirmationBox) {
+				var content = Ext.get ("lip_modalWindowContent");
+				content.appendChild (confirmationBox);
+				modalOverlay.addOverlay ("ffw.confirmation");
+			}
+		}
+
+		function removeModalConfirmation () {
+			modalOverlay.removeOverlay ("ffw.confirmation");
+		}
+	//-->
+	</script>
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+			<div class="formPanel">
+				<div id="lip_ScrollArea" style="left: 0px; top: 105px;">
+					<a id="lip_content"><!--local anchor--></a>
+
+
+					<div id="ffw.modalFormOverlay">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+
+		function handleModalFormOverlayUpdate (options, success, response) {
+
+			if (handleAjaxRedirectResponse (response.responseText))
+				return;
+
+			ffw.removeLoadingNotification ();
+			if (success) {
+				var container = Ext.get ('lip_modalWindowContent');
+				var dims = getMaxDimensions ();
+
+				var tpl = new Ext.Template (
+					'<div id="lip_modalFormOverlayDiv" style="max-width:' + dims[0] + 'px;max-height:' + dims[1] + 'px;">',
+						'{content}',
+					'</div>'
+				);
+				tpl.compile ();
+				// replace the scripts
+				var content = ajax.replaceScripts (response.responseText);
+				// append the modal overlay to the modal window content
+				tpl.append (container, {content: content.html}, true);
+				// show the overlay
+				modalOverlay.addOverlay ("lip_modalFormOverlayDiv");
+				// insert the previously replaced scripts again (replacing
+				// the placeholders). The inserted scripts will be evaluated
+				// immediately.
+				ajax.insertReplacedScripts (content.ids, content.scripts);
+			} else {
+				handleAjaxFailure (response, options);
+			}
+		}
+
+		function getMaxDimensions () {
+			var maxWidth = (window.innerWidth || document.body.clientWidth) - 40;
+			var maxHeight = (window.innerHeight || document.body.clientHeight) - 40;
+			return [ maxWidth, maxHeight ];
+		}
+
+		function modal_handleResized () {
+			var container = Ext.get ('lip_modalFormOverlayDiv');
+			if (Ext.isEmpty (container))
+				return;
+
+			var dims = getMaxDimensions ();
+			container.setStyle ({ maxWidth: dims[0] + "px", maxHeight: dims[1] + "px" });
+
+			// adjust position
+			modalOverlay.onWindowResize ();
+		}
+
+		function hasModalFormOverlay () {
+
+			var modalWindowContent = Ext.get ('lip_modalWindowContent');
+			var modalFormOverlayDiv = modalWindowContent.child ('#lip_modalFormOverlayDiv');
+
+			return !Ext.isEmpty (modalFormOverlayDiv);
+		}
+
+		function showModalFormOverlay (result) {
+			return !Ext.isEmpty (result['modalFormOverlay']);
+		}
+
+		function requestUpdateModalFormOverlay (updateResult) {
+
+			if (!showModalFormOverlay (updateResult))
+				return false;
+
+			if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+				if (ffw.debug.ajaxProcessing)
+					console.log ("(found pending update-task; skipping refreshing of modal form overlay)");
+				return false;
+			}
+
+			if (ffw.mouseDown) {
+				// delay execution until mouse button is released again, this prevents
+				// from exchanging the toolbar button before the user releases the
+				// mouse button again (that would cause the onclick event to be lost)
+				// (see also event handler "handleMouseUp()" in ffw.js)
+				if (ffw.debug.ajaxProcessing)
+					console.log ("enqueue request for updateModalFormOverlay()");
+				ffw.registerMouseUpEvent (updateModalFormOverlay, updateResult);
+				return false;
+			} else
+				return updateModalFormOverlay (updateResult);
+		}
+
+		function updateModalFormOverlay (result) {
+
+			if (hasModalFormOverlay ())
+				return false;
+
+			if (ffw.debug.ajaxProcessing)
+				console.log ("updateModalFormOverlay()");
+
+			if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+				if (ffw.debug.ajaxProcessing)
+					console.log ("(found pending update-task; skipping refreshing of modal form overlay)");
+				return false;
+			}
+
+			if (ffw.debug.ajaxProcessing)
+				console.log ("(refreshing modal form overlay)");
+
+			var url;
+			var requestParams = {
+				"$requestType" :
+					"ajax",
+				'$context' : Ext.fly ('$context').getValue ()
+			};
+
+			var csrf = ffw.getCSRFToken ();
+			if (csrf)
+				requestParams["$csrf"] = csrf;
+
+			var options = {};
+			var overlay = result['modalFormOverlay'];
+			if (def (overlay)) {
+				if (def (result['modalFormOverlayForward']) && result['modalFormOverlayForward']) {
+					url = overlay;
+					if (url.indexOf ('/') == 0)
+						url = url.substring (1);
+					Ext.apply (requestParams, {
+						modalWindow : true,
+						initDisplay : true
+					});
+				} else {
+					Ext.apply (requestParams, { page : overlay });
+					url = 'form/getModalFormOverlay.do';
+				}
+			}
+
+			if (def (url)) {
+
+				options['url'] = ffw.fixJSessionId (ffw.getURLPattern ().replace ("@", url));
+				options['method'] = 'POST';
+				options['params'] = requestParams;
+				options['timeout'] = ffw.ajaxTimeout;
+				options['callback'] = handleModalFormOverlayUpdate;
+				options['showLoadingNotification'] = true;
+
+				ffw.execAjaxRequest (options);
+
+				return true;
+			} else {
+				closeModalFormOverlay (undefined, false);
+			}
+
+			return false;
+		}
+	//-->
+	</script>
+
+
+	<script type="text/javascript">
+	<!--
+		function closeModalFormOverlay (actionCode, doRedisplay) {
+
+			var modalWindowContent = Ext.get ('lip_modalWindowContent');
+			var modalFormOverlayDiv = modalWindowContent.child ('#lip_modalFormOverlayDiv');
+
+			if (def (modalFormOverlayDiv))
+				modalOverlay.removeOverlay (modalFormOverlayDiv.id);
+
+			if (def (actionCode)) {
+				if (ffw.ajax)
+					ajaxUpdate (actionCode);
+				else
+					action (actionCode);
+			} else if (doRedisplay)
+				redisplay (ffw.ajax);
+		}
+	//-->
+	</script>
+
+
+
+
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="/lip/script/toolbox.js?3.4-3983"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="ffw._selectbox" class="selectbox" style="cursor: default;">
+		<div id="ffw._selectbox.scrollUp" class="scrollButton" style="top:0px; z-index:9999;">
+			<a href="#" onmousedown="return ffw.getSelectBox().handleScrollUp();" onmouseup="return ffw.getSelectBox().handleScrollStop();" onmouseout="return ffw.getSelectBox().handleScrollStop();" onclick="return false;">
+				<img src="theme/images/action/selectbox.scrollUp.png" alt="scroll up" onmouseover="ffw.animate (this, 1);" onmouseout="ffw.animate (this, 0);" style="border:none;"></a></div>
+		<div id="ffw._selectbox.scrollDown" class="scrollButton" style="bottom:0px; z-index:9999;">
+			<a href="#" onmousedown="return ffw.getSelectBox().handleScrollDown();" onmouseup="return ffw.getSelectBox().handleScrollStop();" onmouseout="return ffw.getSelectBox().handleScrollStop();" onclick="return false;">
+				<img src="theme/images/action/selectbox.scrollDown.png" alt="scroll down" onmouseover="ffw.animate (this, 1);" onmouseout="ffw.animate (this, 0);" style="border:none;"></a></div>
+		<div onmousedown="return ffw.getSelectBox().dragstart(this)" id="ffw._selectbox.scrollBar" class="scrollBar"></div>
+		<div id="ffw._selectbox.canvas" class="canvas">
+			<div id="ffw._selectbox.content" class="content">
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script type="text/javascript" src="/lip/script/select.js?3.4-3983"></script>
+
+
+	<script type="text/javascript">
+	<!--
+		ffw.setSelectBox (new SelectBox ('ffw._selectbox'));
+		ffw.getSelectBox().draginit();
+		disableSelection(document.getElementById('ffw._selectbox'));
+	//-->
+	</script>
+
+
+
+
+
+<div id="form:FMS_Entwurfsmuster" class="form FMS_Entwurfsmuster" style="position:relative; width:1000px; height:2849px; top:20px;">
+	<div id="page:Elementsammlung_ResponsiveViaSegement" class="page" style="position:relative; width:1000px; height:2849px; background-color:white; border-style:solid; border-width:1px; border-color:#D3D3D3;">
+		<div class="pageContent__Elementsammlung__ResponsiveViaSegement">
+			<div id="lip_segment-instances" class="ffw_segmentInstances" style="position:absolute; left:0px; top:0px; width:1000px; height:2849px;">
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default" class="ffw_segmentInstance" style="position:absolute; left:0px; top:0px; width:576px; height:71px; background-color:white;">
+					<div id="lblText59" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:38px; width:538px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Überschriften</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default23" class="ffw_segmentInstance" style="position:absolute; left:576px; top:0px; width:424px; height:71px; background-color:white;">
+					<input id="btnWeiter5" type="submit" name="$action:/form/showPage.do?id=siteAuswahlVersicherungsnehmer" value="Beispielformular: Mitgliedschaftsantrag" title="Beispielformular: Mitgliedschaftsantrag" class="btn__next formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:19px; top:10px; width:395px; height:48px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default2" class="ffw_segmentInstance" style="position:absolute; left:0px; top:71px; width:1000px; height:400px; background-color:white;">
+					<div id="lblText46" class="lbl__h1 formControl formControlLabel" style="position:absolute; left:33px; top:10px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H1 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText47" class="lbl__h2 formControl formControlLabel" style="position:absolute; left:33px; top:76px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H2 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText48" class="lbl__h3 formControl formControlLabel" style="position:absolute; left:33px; top:143px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H3 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText49" class="lbl__h4 formControl formControlLabel" style="position:absolute; left:33px; top:205px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H4 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText50" class="lbl__h5 formControl formControlLabel" style="position:absolute; left:33px; top:267px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H5 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText51" class="lbl__h6 formControl formControlLabel" style="position:absolute; left:33px; top:329px; width:929px; height:52px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">H6 - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default3" class="ffw_segmentInstance" style="position:absolute; left:0px; top:471px; width:1000px; height:262px; background-color:white;">
+					<div id="lblText57" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:24px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Texte &amp; Labels</p></div></div>
+					</div>
+					<div id="lblText52" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:62px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Text - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText53" class="lbl__label formControl formControlLabel" style="position:absolute; left:33px; top:100px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Label - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText54" class="lbl__subtext formControl formControlLabel" style="position:absolute; left:33px; top:138px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Subtext - Knappschaft - für meine Gesundheit!</p></div></div>
+					</div>
+					<div id="lblText55" class="lbl__info formControl formControlLabel" style="position:absolute; left:33px; top:176px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Infotext (mit Info-Icon)</p></div></div>
+					</div>
+					<div id="lblText56" class="lbl__document formControl formControlLabel" style="position:absolute; left:33px; top:214px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Infotext (mit Dokument-Icon)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default4" class="ffw_segmentInstance" style="position:absolute; left:0px; top:733px; width:1000px; height:48px; background-color:white;">
+					<div id="lblText58" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:14px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Legende</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default24" class="ffw_segmentInstance" style="position:absolute; left:0px; top:781px; width:262px; height:52px; background-color:white;">
+					<div id="lblText61" class="lbl__legend__pageNr formControl formControlLabel" style="position:absolute; left:33px; top:5px; width:19px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">1</p></div></div>
+					</div>
+					<div id="lblText60" class="lbl__legend__text formControl formControlLabel" style="position:absolute; left:62px; top:5px; width:195px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Schritt (aktiv)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default25" class="ffw_segmentInstance" style="position:absolute; left:262px; top:781px; width:238px; height:52px; background-color:white;">
+					<div id="lblText63" class="lbl__legend__pageNr__disabled formControl formControlLabel" style="position:absolute; left:5px; top:5px; width:19px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">2</p></div></div>
+					</div>
+					<div id="lblText62" class="lbl__legend__text__disabled formControl formControlLabel" style="position:absolute; left:33px; top:5px; width:195px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Schritt (inaktiv)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default26" class="ffw_segmentInstance" style="position:absolute; left:500px; top:781px; width:233px; height:52px; background-color:white;">
+					<div id="lblText65" class="lbl__legend__pageNr__disabled formControl formControlLabel" style="position:absolute; left:0px; top:5px; width:19px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">3</p></div></div>
+					</div>
+					<div id="lblText64" class="lbl__legend__text__disabled formControl formControlLabel" style="position:absolute; left:29px; top:5px; width:195px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Schritt (inaktiv)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default27" class="ffw_segmentInstance" style="position:absolute; left:733px; top:781px; width:267px; height:52px; background-color:white;">
+					<div id="lblText67" class="lbl__legend__pageNr__disabled formControl formControlLabel" style="position:absolute; left:5px; top:5px; width:19px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">4</p></div></div>
+					</div>
+					<div id="lblText66" class="lbl__legend__text__disabled formControl formControlLabel" style="position:absolute; left:33px; top:5px; width:195px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Schritt (inaktiv)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default5" class="ffw_segmentInstance" style="position:absolute; left:0px; top:833px; width:1000px; height:43px; background-color:white;">
+					<div id="lblText68" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:14px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Schaltflächen</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default28" class="ffw_segmentInstance" style="position:absolute; left:0px; top:876px; width:1000px; height:62px; background-color:white;">
+					<input id="btnTest7" type="submit" name="$action:/form/runScript.do?script=meinTest" value="Weiter" title="Weiter" class="btn__next formControl formControlButton" style="-webkit-border-radius:0; border-width:2px; border-color:#e40521; border-style:solid; position:absolute; left:32px; top:4px; width:233px; height:50px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<input id="btnTest8" type="submit" name="$action:/form/redirectToURL.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;url=%2Fresources%2F203B064CBB5FE3CBAE2B%2Fform%2Fleer" value="Zurück" title="Zurück" class="btn__back formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:280px; top:4px; width:233px; height:50px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default6" class="ffw_segmentInstance" style="position:absolute; left:0px; top:938px; width:519px; height:67px; background-color:white;">
+					<input id="btnTest11" type="submit" name="$action:/form/redirectToURL.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;url=%2Fresources%2F203B064CBB5FE3CBAE2B%2Fform%2Fleer" value="Standard" title="Standard" class="btn__default formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:32px; top:4px; width:233px; height:50px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<input id="btnTest9" type="submit" name="$action:/form/redirectToURL.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;url=%2Fresources%2F203B064CBB5FE3CBAE2B%2Fform%2Fleer" value="Speichern" title="Speichern" class="btn__save formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:280px; top:4px; width:231px; height:50px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default29" class="ffw_segmentInstance" style="position:absolute; left:519px; top:938px; width:481px; height:67px; background-color:white;">
+					<input id="btnTest10" type="submit" name="$action:/form/redirectToURL.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;url=%2Fresources%2F203B064CBB5FE3CBAE2B%2Fform%2Fleer" value="X" title="X" class="btn__close formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:10px; top:5px; width:52px; height:52px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default7" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1005px; width:1000px; height:48px; background-color:white;">
+					<div id="lblText69" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:14px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefelder</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default8" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1053px; width:1000px; height:105px; background-color:RGB(238,238,238);">
+					<div id="lblText70" class="lbl__label__100 formControl formControlLabel" style="position:absolute; left:62px; top:14px; width:867px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 100%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest12">
+						txtTest12
+					</label>
+					<input id="txtTest12" type="text" name="txtTest12" class="txt__100 formControl formControlText" style="position: absolute; left: 62px; top: 43px; width: 836px; height: 47px; border-radius: 0px;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default9" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1158px; width:1000px; height:95px; background-color:RGB(238,238,238);">
+					<div id="lblText71" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:62px; top:5px; width:424px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 50%</p></div></div>
+					</div>
+					<div id="lblText72" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:505px; top:5px; width:424px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 50%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest13">
+						txtTest13
+					</label>
+					<input id="txtTest13" type="text" name="txtTest13" class="txt__50 formControl formControlText" style="position:absolute; left:62px; top:33px; width:394px; height:47px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<label class="ffw_invisible" for="txtTest14">
+						txtTest14
+					</label>
+					<input id="txtTest14" type="text" name="txtTest14" class="txt__50 formControl formControlText" style="position:absolute; left:505px; top:33px; width:394px; height:49px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default10" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1253px; width:1000px; height:95px; background-color:RGB(238,238,238);">
+					<div id="lblText73" class="lbl__label__30 formControl formControlLabel" style="position:absolute; left:62px; top:5px; width:257px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 30%</p></div></div>
+					</div>
+					<div id="lblText74" class="lbl__label__70 formControl formControlLabel" style="position:absolute; left:338px; top:5px; width:590px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 70%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest15">
+						txtTest15
+					</label>
+					<input id="txtTest15" type="text" name="txtTest15" class="txt__30 formControl formControlText" style="position:absolute; left:62px; top:33px; width:227px; height:47px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<label class="ffw_invisible" for="txtTest16">
+						txtTest16
+					</label>
+					<input id="txtTest16" type="text" name="txtTest16" class="txt__70 formControl formControlText" style="position:absolute; left:338px; top:33px; width:560px; height:47px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default11" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1348px; width:486px; height:105px; background-color:RGB(238,238,238);">
+					<div id="lblText75" class="lbl__label__100 formControl formControlLabel" style="position:absolute; left:62px; top:5px; width:414px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 100%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest17">
+						txtTest17
+					</label>
+					<input id="txtTest17" type="text" name="txtTest17" class="txt__100 formControl formControlText" style="position:absolute; left:62px; top:33px; width:384px; height:47px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default30" class="ffw_segmentInstance" style="position:absolute; left:486px; top:1348px; width:514px; height:105px; background-color:RGB(238,238,238);">
+					<div id="lblText76" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:10px; top:5px; width:190px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 50%</p></div></div>
+					</div>
+					<div id="lblText77" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:219px; top:5px; width:224px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Eingabefeld 50%</p></div></div>
+					</div>
+					<div id="txtTest18" class="txt__50 ffw_notEditable formControl formControlText" style="position:absolute; left:10px; top:33px; width:160px; height:47px; -webkit-border-radius:0;">
+					</div>
+					<label class="ffw_invisible" for="txtTest19">
+						txtTest19
+					</label>
+					<input id="txtTest19" type="text" name="txtTest19" class="txt__50 formControl formControlText" style="position:absolute; left:219px; top:33px; width:194px; height:47px; -webkit-border-radius:0;" maxlength="42" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default12" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1453px; width:1000px; height:67px; background-color:white;">
+					<div id="lblText78" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:29px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Spezielle Felder</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default13" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1520px; width:1000px; height:100px; background-color:RGB(238,238,238);">
+					<div id="lblText79" class="lbl__label__100 formControl formControlLabel" style="position:absolute; left:64px; top:10px; width:867px; height:27px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Datepicker 100%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest20">
+						txtTest20
+					</label>
+					<input id="txtTest20" type="text" name="txtTest20" class="date__100 formControl formControlText" style="position:absolute; left:64px; top:38px; width:836px; height:47px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<script type="text/javascript">
+					<!--
+						Calendar.setup({"firstDay":1,"closeOnBlur":true,"inputField":"txtTest20","ifFormat":"%d.%m.%Y","eventName":"focus"});
+					//-->
+					</script>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default14" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1620px; width:1000px; height:95px; background-color:RGB(238,238,238);">
+					<div id="lblText80" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:67px; top:5px; width:424px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Datepicker 50%</p></div></div>
+					</div>
+					<div id="lblText81" class="lbl__label__50 formControl formControlLabel" style="position:absolute; left:510px; top:5px; width:424px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Datepicker 50%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="txtTest21">
+						txtTest21
+					</label>
+					<input id="txtTest21" type="text" name="txtTest21" class="date__50 formControl formControlText" style="position:absolute; left:67px; top:33px; width:394px; height:47px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<script type="text/javascript">
+					<!--
+						Calendar.setup({"firstDay":1,"closeOnBlur":true,"inputField":"txtTest21","ifFormat":"%d.%m.%Y","eventName":"focus"});
+					//-->
+					</script>
+					<label class="ffw_invisible" for="txtTest22">
+						txtTest22
+					</label>
+					<input id="txtTest22" type="text" name="txtTest22" class="date__50 formControl formControlText" style="position:absolute; left:510px; top:33px; width:394px; height:47px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<script type="text/javascript">
+					<!--
+						Calendar.setup({"firstDay":1,"closeOnBlur":true,"inputField":"txtTest22","ifFormat":"%d.%m.%Y","eventName":"focus"});
+					//-->
+					</script>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default15" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1715px; width:500px; height:67px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_ckbTest5" style="position:absolute; left:67px; top:10px; width:52px; height:52px; z-index:0;" class="">
+						<input id="ckbTest5" type="checkbox" name="ckbTest5" class="ckb formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="ckbTest5">
+							ckbTest5
+						</label>
+					</span>
+					<div id="lblText82" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:133px; top:19px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Checkbox 1</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default32" class="ffw_segmentInstance" style="position:absolute; left:500px; top:1715px; width:500px; height:67px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_ckbTest7" style="position:absolute; left:10px; top:10px; width:52px; height:52px; z-index:0;" class="">
+						<input id="ckbTest7" type="checkbox" name="ckbTest7" class="ckb formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="ckbTest7">
+							ckbTest7
+						</label>
+					</span>
+					<div id="lblText84" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:76px; top:19px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Checkbox 2</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default31" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1782px; width:500px; height:62px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_ckbTest6" style="position:absolute; left:67px; top:0px; width:52px; height:52px; z-index:0;" class="">
+						<input id="ckbTest6" type="checkbox" name="ckbTest6" class="ckb formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="ckbTest6">
+							ckbTest6
+						</label>
+					</span>
+					<div id="lblText83" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:133px; top:10px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Checkbox 3</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default33" class="ffw_segmentInstance" style="position:absolute; left:500px; top:1782px; width:500px; height:62px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_ckbTest8" style="position:absolute; left:10px; top:0px; width:52px; height:52px; z-index:0;" class="">
+						<input id="ckbTest8" type="checkbox" name="ckbTest8" class="ckb formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="ckbTest8">
+							ckbTest8
+						</label>
+					</span>
+					<div id="lblText85" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:76px; top:10px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Checkbox 4</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default16" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1844px; width:1000px; height:67px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_rbtnTest6" style="position:absolute; left:67px; top:10px; width:52px; height:52px; z-index:0;" class="">
+						<input id="rbtnTest6" type="radio" name="rbgRadiotest" value="1" class="rbtn formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleCheckGroupSelection (this, event); ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="rbtnTest6">
+							rbtnTest6
+						</label>
+					</span>
+					<div id="lblText87" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:133px; top:21px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Radiobutton 1</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default34" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1911px; width:1000px; height:62px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_rbtnTest7" style="position:absolute; left:67px; top:0px; width:52px; height:52px; z-index:0;" class="">
+						<input id="rbtnTest7" type="radio" name="rbgRadiotest" value="2" class="rbtn formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:44px; height:44px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleCheckGroupSelection (this, event); ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="rbtnTest7">
+							rbtnTest7
+						</label>
+					</span>
+					<div id="lblText86" class="lbl__ckb__rbtn formControl formControlLabel" style="position:absolute; left:133px; top:12px; width:357px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Radiobutton 2</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default17" class="ffw_segmentInstance" style="position:absolute; left:0px; top:1973px; width:1000px; height:95px; background-color:RGB(238,238,238);">
+					<div id="sigTest3" class="lbl__label__100 formControl formControlLabel" style="position:absolute; left:62px; top:5px; width:421px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Signatur 50%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="sigTest2">
+						sigTest2
+					</label>
+					<input readonly="" id="sigTest2" type="text" name="sigTest2" class="sig__50 formControl formControlSignature" style="position:absolute; left:63px; top:33px; width:372px; height:47px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+					<input id="sign:sigTest2" type="image" name="$action:/form/signField.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;iPath=%2F%2FsigTest2" src="theme/images/action/signField.png" title="Feld unterschreiben" alt="Feld unterschreiben" class="button" style="position:absolute; left:437px; top:64px;" onclick="return ajaxUpdate ('/form/signField.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;iPath=%2F%2FsigTest2');" onmouseout="ffw.animate (this, 0);" onmouseover="ffw.animate (this, 1);">
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default18" class="ffw_segmentInstance" style="position:absolute; left:0px; top:2068px; width:1000px; height:105px; background-color:RGB(238,238,238);">
+					<div id="lblTest32" class="lbl__label__100 formControl formControlLabel" style="position:absolute; left:67px; top:5px; width:867px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Selectbox 100%</p></div></div>
+					</div>
+					<label class="ffw_invisible" for="slctTest2">
+						slctTest2
+					</label>
+					<input id="slctTest2" type="text" name="slctTest2" class="txt__100 formControl formControlText" style="position:absolute; left:67px; top:33px; width:818px; height:47px; -webkit-border-radius:0;" maxlength="108" onblur="ffw.handleBlur (this, event);" onchange="ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);" readonly="readonly">
+					<a id="opener:slctTest2" href="javascript:ffw.toggleSelectBox%20%28ffw.getControl%20%28%22slctTest2%22%29%29%3B" style="position:absolute; left:887px; top:64px;">
+						<img src="theme/images/action/selectbox.png" title="Wert auswählen" alt="Wert auswählen" class="selectBoxOpener" style="border:none;" onmouseout="ffw.animate (this, 0);" onmouseover="ffw.animate (this, 1);">
+					</a>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default19" class="ffw_segmentInstance" style="position:absolute; left:0px; top:2173px; width:1000px; height:57px; background-color:white;">
+					<div id="lblText89" class="lbl__text formControl formControlLabel" style="position:absolute; left:33px; top:19px; width:929px; height:29px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Verzweigungen</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default20" class="ffw_segmentInstance" style="position:absolute; left:0px; top:2230px; width:1000px; height:114px; background-color:RGB(238,238,238);">
+					<span id="lip_FFCheckboxFix_rbtnTest8" style="position:absolute; left:57px; top:14px; width:262px; height:81px; z-index:0;" class="">
+						<input id="rbtnTest8" type="radio" name="rbgRadiotest" value="1" class="rbtn__verzweigung formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:254px; height:73px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleCheckGroupSelection (this, event); ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="rbtnTest8">
+							Arbeitnehmer
+						</label>
+					</span>
+					<span id="lip_FFCheckboxFix_rbtnTest9" style="position:absolute; left:367px; top:14px; width:262px; height:81px; z-index:0;" class="">
+						<input id="rbtnTest9" type="radio" name="rbgRadiotest" value="1" class="rbtn__verzweigung formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:254px; height:73px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleCheckGroupSelection (this, event); ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="rbtnTest9">
+							Student
+						</label>
+					</span>
+					<span id="lip_FFCheckboxFix_rbtnTest10" style="position:absolute; left:671px; top:14px; width:262px; height:79px; z-index:0;" class="">
+						<input id="rbtnTest10" type="radio" name="rbgRadiotest" value="1" class="rbtn__verzweigung formControl formControlCheckbox" style="position:relative; left:4px; top:4px; width:254px; height:71px; -webkit-border-radius:0;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleCheckGroupSelection (this, event); ffw.handleChange (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<label class="ffw_invisible" for="rbtnTest10">
+							Rentner
+						</label>
+					</span>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default21" class="ffw_segmentInstance" style="position:absolute; left:0px; top:2344px; width:1000px; height:67px; background-color:RGB(238,238,238);">
+					<div id="lblText90" class="lbl__info formControl formControlLabel" style="position:absolute; left:205px; top:10px; width:590px; height:38px; -webkit-border-radius:0; overflow:hidden;" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+						<div style="position: relative; width: 100%; height: 100%;"><div style="position:absolute; width:100%; bottom:0;"><p style="overflow:hidden; margin:0; width:100%;">Infotext (mit Info-Icon)</p></div></div>
+					</div>
+				</div>
+				<div id="lip_segment-instance:Elementsammlung_ResponsiveViaSegement:Default22" class="ffw_segmentInstance" style="position:absolute; left:0px; top:2411px; width:1000px; height:438px; background-color:RGB(238,238,238);">
+					<input id="btnTest12" type="submit" name="$action:/form/redirectToURL.do?%24csrf=7NS5L1V2YIQZMQY1W6MNBYV58&amp;url=%2Fresources%2F203B064CBB5FE3CBAE2B%2Fform%2Fleer" value="Weiter" title="Weiter" class="btn__next__rbtnOption formControl formControlButton" style="-webkit-border-radius:0; position:absolute; left:380px; top:14px; width:235px; height:52px;" onblur="ffw.handleBlur (this, event);" onclick="ffw.handleClick (this, event);" onfocus="ffw.handleFocus (this, event);" onmousemove="ffw.handleMove (this, event);" onmouseout="ffw.handleOut (this, event);" onmouseover="ffw.handleOver (this, event);">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+		var attributesMap = {"txtTest12":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest13":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest14":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest15":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest16":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest17":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest18":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest19":{"maxLength":42,"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"txtTest20":{"centuryBorder":"30","autoComplete":true,"mandatory":false,"mask":"dd.MM.yyyy","type":"date","acceptRelative":false},"txtTest21":{"centuryBorder":"30","autoComplete":true,"mandatory":false,"mask":"dd.MM.yyyy","type":"date","acceptRelative":false},"txtTest22":{"centuryBorder":"30","autoComplete":true,"mandatory":false,"mask":"dd.MM.yyyy","type":"date","acceptRelative":false},"ckbTest5":{"falseRepresentation":"false","focusStyleFix":true,"trueRepresentation":"true","mandatory":false,"type":"boolean","serverErrorStyleFix":true},"ckbTest7":{"falseRepresentation":"false","focusStyleFix":true,"trueRepresentation":"true","mandatory":false,"type":"boolean","serverErrorStyleFix":true},"ckbTest6":{"falseRepresentation":"false","focusStyleFix":true,"trueRepresentation":"true","mandatory":false,"type":"boolean","serverErrorStyleFix":true},"ckbTest8":{"falseRepresentation":"false","focusStyleFix":true,"trueRepresentation":"true","mandatory":false,"type":"boolean","serverErrorStyleFix":true},"rbtnTest6":{"maxLength":50,"focusStyleFix":true,"minLength":1,"checkGroup":"rbgRadiotest","maxLines":1,"mandatory":false,"caseConvMode":"none","type":"string","serverErrorStyleFix":true,"trimMode":"none"},"rbtnTest7":{"maxLength":50,"focusStyleFix":true,"minLength":1,"checkGroup":"rbgRadiotest","maxLines":1,"mandatory":false,"caseConvMode":"none","type":"string","serverErrorStyleFix":true,"trimMode":"none"},"sigTest2":{"mandatory":false,"type":"signature"},"slctTest2":{"maxLength":108,"select":{"autoComplete":true,"width":849,"showId":true,"caseSensitive":true,"lines":8,"sortItems":true,"mode":"validation"},"maxLines":0,"mandatory":false,"caseConvMode":"none","type":"string","trimMode":"none"},"rbtnTest8":{"maxLength":50,"focusStyleFix":true,"minLength":1,"checkGroup":"rbgRadiotest","maxLines":1,"mandatory":false,"caseConvMode":"none","type":"string","serverErrorStyleFix":true,"trimMode":"none"},"rbtnTest9":{"maxLength":50,"focusStyleFix":true,"minLength":1,"checkGroup":"rbgRadiotest","maxLines":1,"mandatory":false,"caseConvMode":"none","type":"string","serverErrorStyleFix":true,"trimMode":"none"},"rbtnTest10":{"maxLength":50,"focusStyleFix":true,"minLength":1,"checkGroup":"rbgRadiotest","maxLines":1,"mandatory":false,"caseConvMode":"none","type":"string","serverErrorStyleFix":true,"trimMode":"none"}};
+		ffw.setAttributesMap (attributesMap);
+
+		var checkGroupMap = {"rbgRadiotest":["rbtnTest10","rbtnTest7","rbtnTest6","rbtnTest8","rbtnTest9"]};
+		ffw.setCheckGroupMap (checkGroupMap);
+
+		var dataIncludeMap = {"slctTest2":["Option 1","Option 2","Option 3","Option 4","Option 5","Option 6"]};
+		ffw.setDataIncludeMap (dataIncludeMap);
+
+		var scrollbarControls = [];
+		ffw.setScrollbarControls (scrollbarControls);
+
+		ffw.validateAll (getForm());
+		recalc();
+
+		function postProcessing() {
+			var viewSettings = {"ffw.zoomFactor":1,"ffw.ppi":120.95238095238093,"ffw.focusControlId":"txtTest12"};
+			ffw.setViewSettings (viewSettings);
+			ffw.applyViewSettings ();
+		}
+
+		Ext.onReady (postProcessing);
+	//-->
+	</script>
+
+
+
+					<br>
+					<div id="lip_formBottomPadding"></div>
+					<div>
+						<a name="lip_bottomAnchor" id="lip_bottomAnchor"></a>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div id="goToTop" title="Nach oben" class="goToTop" style="display: none;"></div>
+
+
+			<div>
+				<input type="hidden" id="$stage" name="$stage" value="1">
+				<input type="hidden" id="$finalizer" name="$finalizer" value="1">
+			</div>
+
+
+				</div>
+			</div>
+
+		</form>
+
+
+			<script type="text/javascript">
+				<!--
+
+				if (moveFollowingContent) {
+					var container = Ext.get ("ffw.viewEmbeddings");
+					if (!Ext.isEmpty (container))
+						moveFollowingContent (container);
+				}
+
+				//-->
+			</script>
+
+
+
+
+	<script type="text/javascript">
+	<!--
+
+	function ajaxUpdate (actionCode, params, evt) {
+
+		if (!evt)
+			evt = window.event;
+
+		if (ffw.debug.ajaxProcessing)
+			console.log ("ajaxUpdate: " + actionCode + ", params=" + params);
+
+		ffw.updateViewSettings ();
+		var form = getForm ();
+
+		var additionalFormData = {};
+
+		form.elements["$viewSettings"].value =
+			Ext.encode (ffw.getViewSettings ());
+
+		if (Ext.isEmpty (actionCode))
+			form.elements["$action"].value = "";
+		else
+			// Store action code in additionalFormData object to make sure the
+			// ajax request uses the correct code.
+			// If another request is still pending thus request is queued and
+			// will not be executed until all pending requests are completed.
+			// The response of a pending request will reset the "$action"-field
+			// and the action code would be lost!
+			additionalFormData["$action"] = actionCode;
+
+		var body = Ext.getBody ();
+		var requestParams = {};
+		// add given params
+		if (typeof params === 'object')
+			Ext.apply (requestParams, params);
+		// add ajax hint param
+		Ext.apply (requestParams, {
+			"$requestType" :
+				"ajax"
+		});
+
+		if (typeof window.orientation != 'undefined') {
+			Ext.apply (requestParams, {
+				'$screenOrientation' : window.orientation
+			});
+		}
+
+		var options = {
+			url: ffw.getURLPattern ().replace ("@", "form/update.do"),
+			form: form,
+			params: requestParams,
+			success: handleAjaxUpdateSuccess,
+			failure: handleAjaxFailure,
+			timeout: ffw.ajaxTimeout,
+			showLoadingNotification: true,
+			additionalFormData: additionalFormData
+		};
+
+		// clean up
+		ffw.hideBox ();
+		if (typeof ffw_toolbar == 'object')
+			ffw_toolbar.hideBox ();
+
+		ffw.execAjaxRequest (options);
+
+		if (!Ext.isEmpty (evt)) {
+			if (evt.stopEvent)
+				evt.stopEvent ();
+			evt.cancelBubble = true;
+		}
+
+
+		return false;	// convenient behaviour, to be used as return value in JS event handler to stop further processing of the event
+	}
+
+	// update the stage!
+	function updateStage (result) {
+		var stage = result["$stage"];
+		Ext.fly ("$stage").set ({ "value" : stage });
+	}
+
+	function getStage () {
+		return Ext.fly ("$stage").dom.value;
+	}
+
+	function updateGotoRowIndices () {
+
+		var index = Ext.fly ("$instanceIndex").getValue (true);	// return as number!
+
+		if (Ext.fly ('$hasNextInstance').getValue () == 'true')
+			updateGotoRowIndex (Ext.get ("lip_toolbar_nextRow"), 'name', index + 1);
+		updateGotoRowIndex (Ext.get ("lip_toolbar_previousRow"), 'name', index - 1);
+	}
+
+	function updateGotoRowIndex (btn, attributeName, newIndex) {
+
+		if (Ext.isEmpty (btn))
+			return;
+
+		if (newIndex < 0)
+			return;
+
+		var newName = getNewGotoRowName (btn, newIndex);
+		if (newName != null)
+			btn.set ({ name: newName });
+
+		if (typeof FormMenu == 'object') {
+			FormMenu.removeListener (btn.id);
+
+			var params = { index: newIndex };
+			var csrf = ffw.getCSRFToken ();
+			if (csrf)
+				params['$csrf'] = csrf;
+			FormMenu.registerOnClick (btn.id, '/form/gotoRow.do', params);
+		}
+	}
+
+	function getNewGotoRowName (btn, newIndex) {
+
+		var name = btn.getAttribute ('name');
+		if (Ext.isEmpty (name) || name.indexOf ('/form/gotoRow.do?') < 0)
+			return null;
+
+		var startPos = name.indexOf ('?index=');
+		if (startPos < 0)
+			startPos = name.indexOf ('&index=');
+
+		if (startPos < 0)
+			return null;
+
+		startPos += 7;
+
+		var endPos = name.indexOf ('&', startPos);
+		if (endPos < 0)
+			endPos = name.length;
+
+		var newName = name.substring (0, startPos);
+		newName += newIndex;
+		newName += name.substring (endPos, name.length);
+		return newName;
+	}
+
+	function requestUpdateView (updateResult, opts) {
+
+		var index = updateResult["info"]["instanceIndex"];
+		if (!Ext.isEmpty (index)) {
+			Ext.fly ("$instanceIndex").set ({ value: index });
+			Ext.fly ("$hasNextInstance").set ({ value: updateResult["info"]["hasNextInstance"] });
+
+			updateGotoRowIndices ();
+		}
+
+		if (ffw.mouseDown) {
+
+			// update view immediately if request was not a notify model request
+			var action = opts.params['$action'];
+			if (!action || action.indexOf ('pre:notify:') != 0)
+				updateView (updateResult);
+
+			// delay execution until mouse button is released again, this prevents
+			// from exchanging the toolbar button before the user releases the
+			// mouse button again (that would cause the onclick event to be lost)
+			// (see also event handler "handleMouseUp()" in ffw.js)
+			if (ffw.debug.ajaxProcessing)
+				console.log ("enqueue request for updateView()");
+			ffw.registerMouseUpEvent (updateView, updateResult);
+		} else
+			updateView (updateResult);
+	}
+
+	function updateView (updateResult) {
+
+		if (ffw.debug.ajaxProcessing)
+			console.log ("updateView()");
+
+		var html = updateResult["html"];
+		var info = updateResult["info"];
+		var clientConfig = updateResult["clientConfig"];
+
+		if (Ext.isEmpty (info))
+			return;
+
+		ffw.updateConfiguration (clientConfig);
+
+		var container = Ext.get (info["containerId"]);
+
+		if (def (container)) {
+			container = Ext.get (container);
+
+			if (Ext.isEmpty (html))
+				html = renderNoPageMessage (info["containerId"]);
+
+			var where = 'beforeBegin';
+			var contextElement = container.next ();
+			if (Ext.isEmpty (contextElement)) {
+				contextElement = container.prev ();
+				where = 'afterEnd';
+				if (Ext.isEmpty (contextElement)) {
+					contextElement = container.parent ();
+					where = 'afterBegin';
+				}
+			}
+			ffw.removeBackgroundImages (container);
+			container.remove ();
+			contextElement.insertHtml (where, html);
+		} else {
+			// if we haven't found the form div, we have to re-display the form
+			// without ajax to clean up the html!
+			redisplay (false);
+			return;
+		}
+
+		var styleClasses = updateResult["styleClasses"];
+		if (def (styleClasses)) {
+			container = document.getElementById ("lip_formStyles");
+			if (def (container)) {
+				var styleSheet = document.createElement ("style");
+				styleSheet.setAttribute('id', 'lip_formStyles');
+				styleSheet.setAttribute('type', 'text/css');
+				container.parentNode.replaceChild (styleSheet, container);
+				try {
+					styleSheet.innerHTML = styleClasses;
+				} catch (e) {
+					var parts = styleClasses.split (/\s*[{}]\s*/);
+					for (var i = 0; i < parts.length; i += 2)
+						styleSheet.styleSheet.addRule (parts[i], parts[i + 1]);
+				}
+			}
+		}
+
+		var centeredContent = Ext.DomQuery.selectNode ("form.centered .padding .centeredContent");
+		if (!Ext.isEmpty (centeredContent) && updateResult["formSize"].width) {
+			Ext.fly (centeredContent).setWidth (updateResult["formSize"].width);
+
+			var goToTop = Ext.fly (centeredContent).down (".goToTop");
+			if (!Ext.isEmpty (goToTop))
+				goToTop.setStyle ({ "margin-left": (updateResult["formSize"].width + 20) + "px" });
+		}
+
+		var clientResources = updateResult["clientResources"];
+		if (def (clientResources)) {
+			var additions = clientResources.add;
+			for (i = 0; additions && i < additions.length; i++) {
+				var resource = additions[i];
+				if (resource.type == "stylesheet")
+					ffw.addStylesheet (resource);
+				else if (resource.type == "script")
+					ffw.addScript (resource);
+			}
+			var removals = clientResources.remove;
+			for (i = 0; removals && i < removals.length; i++) {
+				resource = removals[i];
+				if (resource.type == "stylesheet")
+					ffw.removeStylesheet (resource);
+				else if (resource.type == "script")
+					ffw.removeScript (resource);
+			}
+		}
+
+		var headerSegmentsContainer = Ext.get ('lip_headerSegmentsContainer');
+		if (!Ext.isEmpty (headerSegmentsContainer)) {
+			// clear container
+			var child = headerSegmentsContainer.first ();
+			while (!Ext.isEmpty (child)) {
+				ffw.removeBackgroundImages (child);
+				child.remove ();
+				child = headerSegmentsContainer.first ();
+			}
+
+			var scrollAreaTop = 67;
+			var headerSegments = updateResult['headerSegments'];
+			if (!Ext.isEmpty (headerSegments)) {
+				headerSegmentsContainer.insertHtml ('afterBegin', headerSegments['html']);
+
+				if (ffw.fixHeaderSegments) {
+					scrollAreaTop += headerSegments['height'];
+					if (!headerSegments['attachToToolbar']) {
+						headerSegmentsOffset = headerSegments['offset'];
+						scrollAreaTop += headerSegmentsOffset;
+					}
+				}
+			}
+
+			var scrollArea = Ext.get ('lip_ScrollArea');
+			if (!Ext.isEmpty (scrollArea)) {
+				scrollArea.setStyle ('top', scrollAreaTop + 'px');
+			}
+		}
+
+		var options = updateResult['options'];
+		if (!Ext.isEmpty (options) && ['view.embeddings.useFormWidth'] == 'true') {
+			var embeddings = Ext.get ('ffw.viewEmbeddings');
+			if (embeddings) {
+				var currentWidth = embeddings.getWidth (true);
+				var newWidth = updateResult['formSize']['width'];
+				var borderWidth = 0;
+				if (updateResult['pageBorderWidths'] &&
+						updateResult['pageBorderWidths'].length &&
+						updateResult['pageBorderWidths'].length > 1)
+					borderWidth = updateResult['pageBorderWidths'][0] + updateResult['pageBorderWidths'][1];
+				newWidth += borderWidth;
+				if (currentWidth != newWidth)
+					embeddings.setWidth (newWidth);
+			}
+		}
+
+		// remove old DownloadInfo-Div
+		var infoElement = Ext.fly (Ext.fly ('lip_ScrollArea').down ('div.info'));
+		if (!Ext.isEmpty (infoElement)) {
+			ffw.removeBackgroundImages (infoElement);
+			infoElement.remove ();
+		}
+
+		var formSet = updateResult['formSet'];
+		if (formSet && typeof updateFormSetTree === "function")
+			updateFormSetTree (formSet);
+
+		var pageTree = updateResult['pageTree'];
+		if (pageTree && typeof updatePageTree === "function")
+			updatePageTree (pageTree);
+
+		ffw.setAttributesMap (updateResult["controlAttribs"]);
+		ffw.setCheckGroupMap (updateResult["checkGroups"]);
+		ffw.setDataIncludeMap (updateResult["dataIncludes"]);
+		ffw.setScrollbarControls (updateResult["scrollbarControls"]);
+		ffw.setViewSettings (updateResult["viewSettings"]);
+
+		ffw.validateAll (getForm ());
+
+		if (def (clientResources)) {
+			additions = clientResources.add;
+			for (i = 0; additions && i < additions.length; i++) {
+				resource = additions[i];
+				if (resource.type == "invocation") {
+					ffw.addInvocation (resource);
+				}
+			}
+			removals = clientResources.remove;
+			for (i = 0; removals && i < removals.length; i++) {
+				resource = removals[i];
+				if (resource.type == "invocation")
+					ffw.removeInvocation (resource);
+			}
+		}
+
+		recalc ();
+		ffw.applyViewSettings ();
+	}
+
+	function renderNoPageMessage (containerId) {
+		var noPageMessage = 'Keine aktive Seite vorhanden.';
+		return '<div class="alert" id="' + containerId + '">' + noPageMessage + '</div>';
+	}
+
+	function requestUpdateMenuBar () {
+
+		if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+			if (ffw.debug.ajaxProcessing)
+				console.log ("(found pending update-task; skipping refreshing of modal form overlay)");
+			return;
+		}
+
+		if (ffw.mouseDown) {
+			// delay execution until mouse button is released again, this prevents
+			// from exchanging the toolbar button before the user releases the
+			// mouse button again (that would cause the onclick event to be lost)
+			// (see also event handler "handleMouseUp()" in ffw.js)
+			if (ffw.debug.ajaxProcessing)
+				console.log ("enqueue request for updateMenuBar()");
+			ffw.registerMouseUpEvent (updateMenuBar);
+		} else
+			updateMenuBar ();
+	}
+
+	function updateMenuBar () {
+
+		if (ffw.debug.ajaxProcessing)
+			console.log ("updateMenuBar()");
+
+		if (ffw.ajaxRequestBuffer.hasPendingUpdateTask() || ffw.hasPendingFormSubmit ()) {
+			if (ffw.debug.ajaxProcessing)
+				console.log ("(found pending update-task; skipping refreshing of modal form overlay)");
+			return;
+		}
+
+		if (ffw.debug.ajaxProcessing)
+			console.log ("(refreshing menu bar)");
+
+		var requestParams = {
+			"$context": "203B064CBB5FE3CBAE2B",
+			"$requestType": "ajax"
+		};
+		var csrf = ffw.getCSRFToken ();
+		if (!Ext.isEmpty (csrf))
+			requestParams["$csrf"] = csrf;
+
+		ffw.execAjaxRequest ({
+			url: ffw.getURLPattern ().replace ("@", "form/getMenuBar.do"),
+			method: "POST",
+			params: requestParams,
+			timeout: ffw.ajaxTimeout,
+			callback: function (opts, success, response) {
+				if (success) {
+					if (handleAjaxRedirectResponse (response.responseText))
+						return;
+
+					var container = Ext.get ('lip_header');
+					if (def (container)) {
+						// any direct children of container
+						var children = container.select('> *', true);
+						children.each (function (el) {
+							ffw.removeBackgroundImages (el);
+							el.remove ();
+						});
+						container.insertHtml ('afterBegin', response.responseText);
+
+						if (typeof FormMenu == "object") {
+							FormMenu.initPageSelector ();
+							FormMenu.setButtonPanelWidth ();
+							if (typeof FormMenu.registerButtonEvents == "function")
+								FormMenu.registerButtonEvents ();
+						}
+					}
+				} else
+					handleAjaxFailure (response, opts);
+
+				updateRefreshButton ();
+			}
+		});
+	}
+
+
+	function updateRefreshButton () {
+
+		// remove button
+		var refresh = Ext.get ("lip_refresh");
+		if (!Ext.isEmpty(refresh)) {
+			ffw.removeBackgroundImages (refresh);
+			refresh.remove ();
+		}
+
+		// insert button again
+		var config = {
+			tag: 'input',
+			type: 'submit',
+			id: 'lip_refresh',
+			name: 'lip_refresh',
+			cls: 'invisible',
+			value: 'Submit',
+			onclick: 'return ajaxUpdate();'
+		};
+
+		var formEl = Ext.get ('lip_formBean');
+		if (!Ext.isEmpty (formEl)) {
+			var insertBefore = formEl.first ();
+			if (!Ext.isEmpty (insertBefore))
+				formEl.createChild (config, insertBefore);
+		}
+	}
+
+
+	if (typeof FormMenu == "object") {
+		Ext.onReady (function () {
+			FormMenu.initPageSelector ();
+			FormMenu.setButtonPanelWidth ();
+			FormMenu.setToolbarWidth ();
+			if (typeof FormMenu.registerButtonEvents == "function")
+				FormMenu.registerButtonEvents ();
+		}, FormMenu);
+	}
+	//-->
+	</script>
+
+
+
+
+
+
+
+
+	<script type="text/javascript">
+	<!--
+		loadingNotificationTask.cancel ();
+		ffw.removeLoadingNotification ();
+
+		Ext.onReady (function () {
+			Ext.fly (getForm ()).on ('submit', checkSubmit, this);
+			ffw.initHandleResize ();
+			ffw.initHandleOrientationChange ();
+
+			if (true)
+				ffw.initGoToTop (100);
+		}, this);
+
+	//-->
+	</script>
+
+
+
+
+
+</body></html>

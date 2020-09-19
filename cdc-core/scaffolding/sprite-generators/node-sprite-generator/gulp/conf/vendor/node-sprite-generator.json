@@ -1,0 +1,11 @@
+{
+  "sprite_src": "src/assets/img/sprites-src",
+  "sprite_target": "src/assets/img/sprites",
+  "sprite_prefix": "nsg-generated-sprite-",
+  "sprite_suffix": "",
+  "sprite_extension": ".png",
+  "stylesheet_target": "src/assets/scss/sprites/nsg-generated-sprite",
+  "stylesheet_prefix": "_sprite-",
+  "stylesheet_suffix": "-style",
+  "stylesheet_extension": ".scss"
+}

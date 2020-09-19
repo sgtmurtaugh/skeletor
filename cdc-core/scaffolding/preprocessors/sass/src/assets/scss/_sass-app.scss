@@ -1,0 +1,23 @@
+// SASS/SCSS Base File
+// --------------------------------------------------
+
+// Variables
+@import "settings";
+
+// Vendors / Dependencies
+@import "scaffolding/preprocessors/sass/src/assets/scss/vendors/vendors";
+@import "scaffolding/preprocessors/sass/src/assets/scss/dependencies/dependencies";
+
+// Utils / Mixins / etc.
+@import "scaffolding/preprocessors/sass/src/assets/scss/helpers/helpers";
+@import "scaffolding/preprocessors/sass/src/assets/scss/utils/utils";
+@import "scaffolding/preprocessors/sass/src/assets/scss/mixins/mixins";
+
+// Reformatting (e.g. for Vendor definitions)
+@import "scaffolding/preprocessors/sass/src/assets/scss/reformattings/reformattings";
+
+// Module Definitions
+@import "scaffolding/preprocessors/sass/src/assets/scss/modules/modules";
+
+// Print Stlyes (enable to include print styles in app file)
+//@import "print/print";

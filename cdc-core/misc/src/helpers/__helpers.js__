@@ -1,0 +1,74 @@
+let typeChecks = require('../../gulp/functions/type-checks');
+
+/**
+ * helper
+ */
+module.exports = {
+    'test' : function(options) {
+        return 'BAM!';
+    },
+
+    'htmlAttrs' : function(jsonKey, options) {
+        let METHOD = "htmlAttrs( jsonKey, options)";
+console.log('HERE I AM!');
+console.log(jsonKey);
+        if ( arguments.length < 2 ) {
+            throw METHOD + " [ERROR] Es muss ein JSON Key uebergeben werden.";
+        }
+
+        let val = module.exports.jsonValue(options.data.root.html_attributes, jsonKey, options);
+
+        return val;
+    },
+
+    'jsonValue' : function(jsonObject, jsonKey, options) {
+        let METHOD = "jsonValue(jsonObject, jsonKey, options)";
+
+        if ( arguments.length < 3 ) {
+            throw METHOD + " [ERROR] Es muessen ein JSON Objekt und der JSON Key uebergeben werden.";
+        }
+        else {
+            if ( !typeChecks.isTypeObject(jsonObject) ) {
+                throw METHOD + " [ERROR] Der JSON Objekt Parameter ist kein Object.";
+            }
+            else {
+                if ( jsonKey.length < 1 ) {
+                    throw METHOD + " [ERROR] Der JSON Key Parameter ist leer.";
+                }
+                else {
+
+                    let jsonPath;
+
+                    if ( ! typeChecks.isTypeArray(jsonKey) ) {
+                        jsonPath = jsonKey.split(".");
+                    }
+                    else {
+                        jsonPath = jsonKey;
+                    }
+
+                    return getNestedJSON(jsonObject, jsonPath);
+                }
+            }
+        }
+    }
+
+};
+
+function getNestedJSON(jsonObject, jsonPath) {
+    let jsonValue = null;
+    if (typeChecks.isTypeObject(jsonObject)) {
+        if (typeChecks.isTypeArray(jsonPath)) {
+            jsonValue = jsonObject;
+            jsonPath.forEach(function(jsonKey) {
+                if (jsonValue.hasOwnProperty(jsonKey)) {
+                    jsonValue = jsonValue[jsonKey];
+                }
+                else {
+                    jsonValue = null;
+                    return false;
+                }
+            });
+        }
+    }
+    return jsonValue;
+}

@@ -1,0 +1,61 @@
+@include breakpoint($breakpoint-fms-desktop-only) {
+
+}
+
+@include breakpoint($breakpoint-fms-mobile-only) {
+
+  .ffw_segmentInstance {
+    .date__100,
+    .date__90,
+    .date__80,
+    .date__70,
+    .date__60,
+    .date__50,
+    .date__40,
+    .date__30,
+    .date__20,
+    .date__10 {
+
+    }
+
+    .date__100 {
+      @extend .txt__100;
+    }
+
+    .date__90 {
+      @extend .txt__90;
+    }
+
+    .date__80 {
+      @extend .txt__80;
+    }
+
+    .date__70 {
+      @extend .txt__70;
+    }
+
+    .date__60 {
+      @extend .txt__60;
+    }
+
+    .date__50 {
+      @extend .txt__50;
+    }
+
+    .date__40 {
+      @extend .txt__40;
+    }
+
+    .date__30 {
+      @extend .txt__30;
+    }
+
+    .date__20 {
+      @extend .txt__20;
+    }
+
+    .date__10 {
+      @extend .txt__10;
+    }
+  }
+}

@@ -2,7 +2,41 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/clickdummy-creator.iml" filepath="$PROJECT_DIR$/.idea/clickdummy-creator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--preprocessor--less/cdc--preprocessor--less.iml" filepath="$PROJECT_DIR$/cdc--preprocessor--less/cdc--preprocessor--less.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--preprocessor--sass/cdc--preprocessor--sass.iml" filepath="$PROJECT_DIR$/cdc--preprocessor--sass/cdc--preprocessor--sass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--sprite-generator--nsg/cdc--sprite-generator--nsg.iml" filepath="$PROJECT_DIR$/cdc--sprite-generator--nsg/cdc--sprite-generator--nsg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--sprite-generator--svg-sprite/cdc--sprite-generator--svg-sprite.iml" filepath="$PROJECT_DIR$/cdc--sprite-generator--svg-sprite/cdc--sprite-generator--svg-sprite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--template-engine--express-handlebars/cdc--template-engine--express-handlebars.iml" filepath="$PROJECT_DIR$/cdc--template-engine--express-handlebars/cdc--template-engine--express-handlebars.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--template-engine--handlebarsjs/cdc--template-engine--handlebarsjs.iml" filepath="$PROJECT_DIR$/cdc--template-engine--handlebarsjs/cdc--template-engine--handlebarsjs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--template-engine--nunjucks/cdc--template-engine--nunjucks.iml" filepath="$PROJECT_DIR$/cdc--template-engine--nunjucks/cdc--template-engine--nunjucks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--template-engine--panini/cdc--template-engine--panini.iml" filepath="$PROJECT_DIR$/cdc--template-engine--panini/cdc--template-engine--panini.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--test-framework--ava/cdc--test-framework--ava.iml" filepath="$PROJECT_DIR$/cdc--test-framework--ava/cdc--test-framework--ava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--test-framework--jest/cdc--test-framework--jest.iml" filepath="$PROJECT_DIR$/cdc--test-framework--jest/cdc--test-framework--jest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--test-framework--mocha/cdc--test-framework--mocha.iml" filepath="$PROJECT_DIR$/cdc--test-framework--mocha/cdc--test-framework--mocha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--test-framework--selenium-webdriver/cdc--test-framework--selenium-webdriver.iml" filepath="$PROJECT_DIR$/cdc--test-framework--selenium-webdriver/cdc--test-framework--selenium-webdriver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--app-framework/cdc--ui-framework--app-framework.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--app-framework/cdc--ui-framework--app-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--bootstrap/cdc--ui-framework--bootstrap.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--bootstrap/cdc--ui-framework--bootstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--bootstrap-vue/cdc--ui-framework--bootstrap-vue.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--bootstrap-vue/cdc--ui-framework--bootstrap-vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--buefy/cdc--ui-framework--buefy.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--buefy/cdc--ui-framework--buefy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--bulma/cdc--ui-framework--bulma.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--bulma/cdc--ui-framework--bulma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--element-ui/cdc--ui-framework--element-ui.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--element-ui/cdc--ui-framework--element-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--express/cdc--ui-framework--express.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--express/cdc--ui-framework--express.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--foundation-apps/cdc--ui-framework--foundation-apps.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--foundation-apps/cdc--ui-framework--foundation-apps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--foundation-emails/cdc--ui-framework--foundation-emails.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--foundation-emails/cdc--ui-framework--foundation-emails.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--foundation-sites/cdc--ui-framework--foundation-sites.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--foundation-sites/cdc--ui-framework--foundation-sites.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--framework7/cdc--ui-framework--framework7.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--framework7/cdc--ui-framework--framework7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--framework7-react/cdc--ui-framework--framework7-react.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--framework7-react/cdc--ui-framework--framework7-react.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--framework7-svelte/cdc--ui-framework--framework7-svelte.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--framework7-svelte/cdc--ui-framework--framework7-svelte.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--framework7-vue/cdc--ui-framework--framework7-vue.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--framework7-vue/cdc--ui-framework--framework7-vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--ionic-framework/cdc--ui-framework--ionic-framework.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--ionic-framework/cdc--ui-framework--ionic-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--react-bootstrap/cdc--ui-framework--react-bootstrap.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--react-bootstrap/cdc--ui-framework--react-bootstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--reactstrap/cdc--ui-framework--reactstrap.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--reactstrap/cdc--ui-framework--reactstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--svelte/cdc--ui-framework--svelte.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--svelte/cdc--ui-framework--svelte.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--tailwindcss/cdc--ui-framework--tailwindcss.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--tailwindcss/cdc--ui-framework--tailwindcss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--vue/cdc--ui-framework--vue.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--vue/cdc--ui-framework--vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--vuetify/cdc--ui-framework--vuetify.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--vuetify/cdc--ui-framework--vuetify.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc-cli/cdc-cli.iml" filepath="$PROJECT_DIR$/cdc-cli/cdc-cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc-core/cdc-core.iml" filepath="$PROJECT_DIR$/cdc-core/cdc-core.iml" />
     </modules>
   </component>
 </project>
