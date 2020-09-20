@@ -152,6 +152,15 @@
     "url": "https://github.com/reactstrap/reactstrap#readme"
   },
 
+  "Skeleton SASS": {
+    "description": "Skeleton Sass is a highly modular version of Skeleton CSS.",
+    "npm": {
+      "skeleton-sass-official": "^4.0.0"
+    },
+    "repository": "https://github.com/atomicpages/skeleton-sass",
+    "url": "https://github.com/atomicpages/skeleton-sass#readme"
+  },
+
   "Svelte": {
     "description": "Cybernetically enhanced web apps.",
     "npm": {

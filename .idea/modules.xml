@@ -31,6 +31,9 @@
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--ionic-framework/cdc--ui-framework--ionic-framework.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--ionic-framework/cdc--ui-framework--ionic-framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--react-bootstrap/cdc--ui-framework--react-bootstrap.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--react-bootstrap/cdc--ui-framework--react-bootstrap.iml" />
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--reactstrap/cdc--ui-framework--reactstrap.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--reactstrap/cdc--ui-framework--reactstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--skeleton/cdc--ui-framework--skeleton.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--skeleton/cdc--ui-framework--skeleton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--skeleton-less/cdc--ui-framework--skeleton-less.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--skeleton-less/cdc--ui-framework--skeleton-less.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--skeleton-sass/cdc--ui-framework--skeleton-sass.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--skeleton-sass/cdc--ui-framework--skeleton-sass.iml" />
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--svelte/cdc--ui-framework--svelte.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--svelte/cdc--ui-framework--svelte.iml" />
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--tailwindcss/cdc--ui-framework--tailwindcss.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--tailwindcss/cdc--ui-framework--tailwindcss.iml" />
       <module fileurl="file://$PROJECT_DIR$/cdc--ui-framework--vue/cdc--ui-framework--vue.iml" filepath="$PROJECT_DIR$/cdc--ui-framework--vue/cdc--ui-framework--vue.iml" />
