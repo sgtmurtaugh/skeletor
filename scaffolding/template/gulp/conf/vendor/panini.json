@@ -1,7 +1,0 @@
-{
-  "root": "pages/",
-  "layouts": "layouts/",
-  "partials": "partials/",
-  "helpers": "helpers/",
-  "data": "data/"
-}
