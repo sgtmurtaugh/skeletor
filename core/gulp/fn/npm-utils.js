@@ -1,6 +1,6 @@
 'use strict';
 
-let typeChecks = require('./type-checks');
+let typechecks = require('../../lib/typechecks');
 
 module.exports = {
 
@@ -28,16 +28,16 @@ module.exports = {
      * The boolean return value will also returned. If the initial empty check fails false is returned.
      */
     'hasOwnProperty' : function (json, key) {
-        if (!typeChecks.isEmpty(json)
-            && !typeChecks.isEmpty(key)) {
+        if (!typechecks.isEmpty(json)
+            && !typechecks.isEmpty(key)) {
 
             return json.hasOwnProperty(key);
         }
         else {
-            if (typeChecks.isEmpty(json)) {
+            if (typechecks.isEmpty(json)) {
                 console.log('[warn] hasOwnProperty: json parameter is null/empty.');
             }
-            if (typeChecks.isEmpty(key)) {
+            if (typechecks.isEmpty(key)) {
                 console.log('[warn] hasOwnProperty: key parameter is null/empty.');
             }
         }
@@ -49,10 +49,10 @@ module.exports = {
      * @param json
      * @param key
      * <p>Delegate to <code>getOwnPropertyValue(json, key)</code> and determines the return type. This value is delegated
-     * to <code>typeChecks.isEmpty(obj)</code> analyse for emptyness. The inverted boolean is returned.
+     * to <code>typechecks.isEmpty(obj)</code> analyse for emptyness. The inverted boolean is returned.
      */
     'hasOwnPropertyValue' : function (json, key) {
-        return (! typeChecks.isEmpty( getOwnPropertyValue(json, key)));
+        return (! typechecks.isEmpty( getOwnPropertyValue(json, key)));
     }
 
 };

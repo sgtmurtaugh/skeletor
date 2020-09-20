@@ -20,7 +20,6 @@ module.exports = function (_gulp, _plugins, _app) {
         'messages' : require('./messages'),
         'helper' : require('./helper-utils'),
         'npm' : require('./npm-utils'),
-        'typeChecks' : require('./type-checks'),
         'wizard' : require('./install-wizard'),
 
         'framework' : require('./framework-utils')(gulp, plugins, app),

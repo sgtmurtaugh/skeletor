@@ -3,9 +3,9 @@
 
 //TODO
 
-var nopt              = require('nopt');
-var fs                = require('fs');
-var clickdummycreator = require('../lib');
+var nopt     = require('nopt');
+var fs       = require('fs');
+var skeletor = require('../lib');
 
 // import gulp              from 'gulp';
 // import plugins           from 'gulp-load-plugins';
@@ -26,19 +26,19 @@ var clickdummycreator = require('../lib');
 // Load settings from settings.yml
 // const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
 // const config = loadConfig();
-const config = clickdummycreator.utils.functions.loadConfig();
+const config = skeletor.utils.functions.loadConfig();
 
 
 
 // Options that can be passed to commands
-var options = {
+let options = {
     "directory": String,
     "frameworks": Boolean,
     "install": Boolean
 };
 
 // Shorthands for the above commands
-var shorthands = {
+let shorthands = {
     "v": "--version",
     "h": "--help",
     "d": "--directory",
@@ -46,11 +46,11 @@ var shorthands = {
     "i": "--install"
 };
 
-var parsed = nopt(options, shorthands, process.argv);
+let parsed = nopt(options, shorthands, process.argv);
 
 // cmd.args contains basic commands like "new" and "help"
 // cmd.opts contains options, like --libsass and --version
-var cmd = {
+let cmd = {
     args: parsed.argv.remain,
     opts: parsed
 };
@@ -64,7 +64,7 @@ if (typeof cmd.args[0] === 'undefined') {
     }
     // Otherwise, just show the help screen
     else {
-        clickdummycreator.help();
+        skeletor.help();
     }
 }
 
@@ -72,11 +72,11 @@ if (typeof cmd.args[0] === 'undefined') {
 else {
     // If the command typed in doesn't exist, show the help screen
     if (typeof cmd.args[0] == 'undefined') {
-        clickdummycreator.help();
+        skeletor.help();
     }
     // Otherwise, just run it already!
     else {
-        clickdummycreator.clone(cmd, config);
+        skeletor.clone(cmd, config);
     }
 }
 

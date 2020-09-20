@@ -15,8 +15,24 @@
     "svg-sprite": "^1.5.0"
   },
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "yargs": "^15.3.1",
+    "config": "^3.3.1",
+    "js-yaml": "^3.13.1",
+    "gulp": "^4.0.2",
+    "gulp-load-plugins": "^2.0.2",
+    "require-dir": "^1.2.0",
     "colors": "^1.4.0",
+    "underscore": "^1.9.2",
+    "console-logging": "^2019.1.0",
+    "flat": "^5.0.0",
+    "array-sort": "^1.0.0",
+    "camel-case": "^4.1.1",
+    "is-root": "^2.1.0"
+  },
+  "__dependencies": {
     "es6-promise": "^4.2.8",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
@@ -32,7 +48,6 @@
     "gulp-prompt": "^1.2.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
-    "is-root": "^2.1.0",
     "merge2": "^1.4.1",
     "require-dir": "^1.2.0"
   },
@@ -43,11 +58,6 @@
   "bugs": {
     "url": "https://github.com/zurb/foundation-sites/issues",
     "email": "foundation@zurb.com"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   },
   "private": true
 }

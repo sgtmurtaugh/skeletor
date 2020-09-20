@@ -1,6 +1,6 @@
 'use strict';
 
-let typeChecks = require('./type-checks');
+let typechecks = require('../../lib/typechecks');
 
 module.exports = {
 
@@ -14,8 +14,8 @@ module.exports = {
     'getMergedArray': function (obj1, obj2) {
         let mergedArray = [];
 
-        if (typeChecks.isNotEmpty(obj1)) {
-            if (typeChecks.isArray(obj1)) {
+        if (typechecks.isNotEmpty(obj1)) {
+            if (typechecks.isArray(obj1)) {
                 mergedArray = mergedArray.concat(obj1);
             }
             else {
@@ -23,8 +23,8 @@ module.exports = {
             }
         }
 
-        if (typeChecks.isNotEmpty(obj2)) {
-            if (typeChecks.isArray(obj2)) {
+        if (typechecks.isNotEmpty(obj2)) {
+            if (typechecks.isArray(obj2)) {
                 mergedArray = mergedArray.concat(obj2);
             }
             else {

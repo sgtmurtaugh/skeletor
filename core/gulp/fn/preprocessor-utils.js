@@ -22,7 +22,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             // when preprocessor support is enabled
             if (app.wizard.preprocessorSupport) {
                 // and preprocessor selected
-                if (!app.fn.typeChecks.isEmpty(app.wizard.preprocessor)) {
+                if (!app.fn.typechecks.isEmpty(app.wizard.preprocessor)) {
                     return app.fn.json.addNPMEntryToPackageConfiguration(
                         app.config.preprocessors[app.wizard.preprocessor],
                         cb

@@ -22,7 +22,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             // when spritegenerator support is enabled
             if (app.wizard.spriteGeneratorSupport) {
                 // and spriteGenerators selected
-                if (!app.fn.typeChecks.isEmpty(app.wizard.spriteGenerators)) {
+                if (!app.fn.typechecks.isEmpty(app.wizard.spriteGenerators)) {
                     return app.fn.json.addMultipleNPMEntriesToPackageConfiguration(
                         app.config.spriteGenerators,
                         app.wizard.spriteGenerators,

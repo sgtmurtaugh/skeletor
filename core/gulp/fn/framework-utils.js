@@ -22,7 +22,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             // when framework support is enabled
             if (app.wizard.frameworkSupport) {
                 // and framework selected
-                if (!app.fn.typeChecks.isEmpty(app.wizard.framework)) {
+                if (!app.fn.typechecks.isEmpty(app.wizard.framework)) {
                     return app.fn.json.addNPMEntryToPackageConfiguration(
                         app.config.frameworks[app.wizard.framework][app.wizard.frameworkVersion],
                         cb

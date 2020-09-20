@@ -21,7 +21,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
         'addNPMSupport' : function (cb) {
             // when template engine is selected
 
-            if (!app.fn.typeChecks.isEmpty(app.wizard.templateEngine)) {
+            if (!app.fn.typechecks.isEmpty(app.wizard.templateEngine)) {
                 return app.fn.json.addNPMEntryToPackageConfiguration(
                     app.config.templateEngines[app.wizard.templateEngine],
                     app.wizard.templateEngine,
@@ -53,7 +53,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
             let src = null;
 
             // when templateEngine is selected
-            if (!app.fn.typeChecks.isEmpty(app.wizard.templateEngine)) {
+            if (!app.fn.typechecks.isEmpty(app.wizard.templateEngine)) {
                 src = path.join(
                     app.config.paths.templateEngines,
                     app.wizard.templateEngine,
