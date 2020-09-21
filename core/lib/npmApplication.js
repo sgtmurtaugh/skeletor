@@ -2,7 +2,7 @@
 
 let path = require('path');
 
-export default class NPMApplication {
+export default class npmApplication {
 
     initialized = false;
 // TODO : extract app json to config file. location ./ or ./conf/default etc...
@@ -239,7 +239,7 @@ export default class NPMApplication {
                     }
 
                     // format flattened key to path
-                    let folderKey = key.replace(this.config.get('options.flatten.delimiter'), this.modules.path.sep);
+                    let folderKey = key.replace(this.config.get('foptions.flatten.delimiter'), this.modules.path.sep);
                     this.logger.warning('failed'.red + ' to register gulp tasks >>' + `${folderKey}`.red + '<<');
                 });
             }

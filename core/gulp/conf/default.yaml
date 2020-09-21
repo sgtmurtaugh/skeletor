@@ -1,0 +1,39 @@
+# delimiters
+delimiters:
+  tasks:
+    subtasks: ' :: '
+
+# environment definitions
+env:
+  default: 'development'
+
+# file encodings
+fileEncoding: 'utf-8'
+
+# predefined json options
+options:
+  flatten:
+    'delimiter': '.'
+
+# relative path definitions
+paths:
+#  assets: assets
+#  data: data
+#  fonts: fonts
+#  graphics: gfx
+#  helpers: helpers
+#  images: img
+#  javascript: js
+#  layouts: layouts
+#  pages: pages
+#  partials: partials
+#  scss: scss
+
+# regex
+regex:
+  stringSeparator: ',; '
+
+# logger
+logger:
+  logLevel: debug
+

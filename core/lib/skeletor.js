@@ -1,8 +1,8 @@
 'use strict';
 
-import NPMApplication from './NPMApplication';
+import npmApplication from './npmApplication';
 
-export default class skeletor extends NPMApplication {
+export default class skeletor extends npmApplication {
 
     /**
      * Constructor

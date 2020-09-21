@@ -4,35 +4,43 @@ let gulp;
 let plugins;
 let app;
 let self;
+let selfFolder;
 
-module.exports = function ( _gulp, _plugins, _app ) {
+module.exports = function (_gulp, _plugins, _app) {
     gulp = _gulp;
     plugins = _plugins;
     app = _app;
     self = app.fn.tasks.taskname(__filename);
+    selfFolder = app.fn.tasks.subtasksFolder(__filename);
 
-    // if necessary - register depending tasks
-    let self_tasks = app.fn.tasks.registerDependingTasks(self, app.tasks);
-
-    // define Task
-    app.fn.tasks.defineTask(self, self_tasks, usage);
+    // define Task function
+    app.fn.tasks.defineTask(self, [], usage);
 };
 
 /**
  * usage
- * @param cb
+ * @param {fn} callback
  */
-function usage(cb) {
-    console.log('\r\nList of all registred tasks:\r\n');
+function usage(callback) {
+    console.log(
+        '\nList of all registered tasks:\n'.bold.underline);
 
-    let tasks = app.fn.tasks.lookupTasknames(app.tasks);
+    let tasks = app.fn.tasks.getRegisteredGulpTasks();
 
-    if (null !== tasks) {
+    if (app.fn.typechecks.isNotEmpty(tasks)) {
+        // sort tasks alphabetically
+        app.modules.arraySort(tasks);
+
         for (let task of tasks) {
-            console.log(' - ' + task);
+            console.log(' - '.bold + task.yellow);
         }
     }
-    console.log('');
-    console.log('npm start {taskname}\r\n');
-    cb();
+
+    console.log(
+        '\nusage:'.bold +
+        '\n  npm start '.green + '{taskname}'.italic.yellow +
+        '\nor'.italic +
+        '\n  gulp '.green + '{taskname}\n'.italic.yellow
+    );
+    callback();
 }
