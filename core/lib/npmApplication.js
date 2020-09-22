@@ -4,7 +4,7 @@ let path = require('path');
 
 export default class npmApplication {
 
-    initialized = false;
+    _initialized = false;
 // TODO : extract app json to config file. location ./ or ./conf/default etc...
 
     config = null;
@@ -39,24 +39,24 @@ export default class npmApplication {
     constructor(gulp, plugins) {
         this.gulp = gulp;
         this.plugins = plugins;
-
+this.run();
         // initializes the specific app
-        this.init();
+        this._init();
     }
 
     /**
      * @private
      */
-    init() {
-        if (!this.initialized) {
+    _init = () => {
+        if (!this._initialized) {
             // preset evironment variables
             this._preInitConfigEnvironmentVariables();
 
             // initialize and add required modules
-            this.initModules();
+            this._initModules();
 
             // init additional objects
-            this.initAdditionalObjects();
+            this._initAdditionalObjects();
 
             /* ### logger is now avaible ### */
 
@@ -64,13 +64,13 @@ export default class npmApplication {
             this._loadGulpFunctions();
 
             // load dynamically all tasks
-            this.initGulpTasks();
+            this._initGulpTasks();
 
             // postset environment variables
             this._postInitConfigEnvironmentVariables();
 
             // set initialized flag to true
-            this.initialized = true;
+            this._initialized = true;
 
             // optional log output for 'must have' objects
 
@@ -87,7 +87,7 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    _preInitConfigEnvironmentVariables() {
+    _preInitConfigEnvironmentVariables = () => {
         // set NODE_CONFIG_DIR for module config to ./config/:./gulp/conf
         process.env.NODE_CONFIG_DIR = this.core.paths.gulpConfig
             + this.modules.path.delimiter
@@ -98,7 +98,7 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    _postInitConfigEnvironmentVariables() {
+    _postInitConfigEnvironmentVariables = () => {
         this.fn.env.setEnvironment( this.modules.yargs.argv._ );
         // TODO: cleanup
         // if ( !!(this.modules.yargs.argv.production) ) {
@@ -123,7 +123,9 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    initModules() {
+    _initModules = () => {
+console.log('##### npmApplication.initModules #######');
+
         this.modules['colors'] = require('colors');
         this.modules['config'] = require('config');
         this.modules['flat'] = require('flat');
@@ -144,12 +146,12 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    initAdditionalObjects() {
+    _initAdditionalObjects = () => {
         // initialize app config
-        this.initAppConfig();
+        this._initAppConfig();
 
         // initalize app logger;
-        this.initLogger();
+        this._initLogger();
 
         this.instances.logger.debug('successful '.green + 'initialized additional objects.' );
     }
@@ -159,7 +161,7 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    initAppConfig() {
+    _initAppConfig = () => {
         // link loaded config module to additional alias 'this.config'
         this.config = this.modules.config;
 
@@ -171,7 +173,7 @@ export default class npmApplication {
      * @private
      * TODO
      */
-    initLogger() {
+    _initLogger = () => {
         let logger = this.modules.logging.logger;
 
         if ( null !== logger ) {
@@ -194,9 +196,9 @@ export default class npmApplication {
      * loads all defined gulp functions @link this.const.paths.gulpFunctions
      * @private
      */
-    _loadGulpFunctions() {
+    _loadGulpFunctions = () => {
         this.fn = this.modules['underscore'].extend(this.fn,
-            require( this.core.paths.gulpFunctions )(this.gulp, this.plugins, this.app));
+            require( this.core.paths.gulpFunctions )(this.gulp, this.plugins, this));
         this.logger.debug('successful '.green + 'loaded gulp functions.' );
     }
 
@@ -204,7 +206,7 @@ export default class npmApplication {
      * loads all defined task configurations (@link this.fn.tasks.loadTaskConfigs) and registers them in gulp (@link this.fn.tasks.registerTasks)
      * @private
      */
-    initGulpTasks() {
+    _initGulpTasks = () => {
         // load task files
         this.tasks = this.fn.tasks.loadTaskConfigs();
         // this.fn.log.traceObject( 'this.tasks', this.tasks );
@@ -248,24 +250,9 @@ export default class npmApplication {
     }
 
     /**
-     * getter for the app object
-     * @returns {{core: {paths: {gulpTasks: *, gulpConfig: *, src: string, root: Promise<void> | void | Q.Promise<any>, dist: string, config: string, gulpFunctions: *}}, instances: {logger: Console}, fn: {}, config: null, modules: {path: *}, tasks: {}}}
-     */
-    get app() {
-        return {
-            'config': this.config,
-            'core': this.core,
-            'fn': this.fn,
-            'instances': this.instances,
-            'modules': this.modules,
-            'tasks': this.tasks
-        };
-    }
-
-    /**
      * runs application
      */
-    run() {
+    run = () => {
         console.log('NPMApplication!')
     }
 

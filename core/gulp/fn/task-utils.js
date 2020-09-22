@@ -372,7 +372,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
          * @param {boolean} bParallelTasks
          * @returns {*}
          */
-        'defineTask': function ( taskname, dependingTasks, taskFunction, bParallelTasks = false ) {
+        'defineTask': function ( taskname, dependingTasks, taskFunction = () => {}, bParallelTasks = false ) {
             if (app.fn.typechecks.isNotEmptyString( taskname ) ) {
                 if (app.fn.typechecks.isNotEmpty( dependingTasks ) ) {
                     if (this.isEachTaskDefined( dependingTasks ) ) {

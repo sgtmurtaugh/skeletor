@@ -17,8 +17,9 @@ export default class skeletor extends npmApplication {
      * @private
      * TODO
      */
-    initModules() {
-        super.initModules();
+    _initModules = () =>  {
+console.log('##### skeleton.initModules #######');
+        super._initModules();
 
         // this.modules['arraySort'] = require('array-sort');
         // this.modules['camelCase'] = require('camel-case');
@@ -35,7 +36,7 @@ export default class skeletor extends npmApplication {
         // this.modules['yargs'] = require('yargs');
     }
 
-    run() {
+    run = () => {
         console.log('skeletor!')
     }
 }
