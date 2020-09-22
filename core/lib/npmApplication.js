@@ -39,7 +39,7 @@ export default class npmApplication {
     constructor(gulp, plugins) {
         this.gulp = gulp;
         this.plugins = plugins;
-this.run();
+
         // initializes the specific app
         this._init();
     }
@@ -99,7 +99,7 @@ this.run();
      * TODO
      */
     _postInitConfigEnvironmentVariables = () => {
-        this.fn.env.setEnvironment( this.modules.yargs.argv._ );
+//        this.fn.env.setEnvironment( this.modules.yargs.argv._ );
         // TODO: cleanup
         // if ( !!(this.modules.yargs.argv.production) ) {
         //     process.env.NODE_ENV = 'production';
@@ -126,10 +126,12 @@ this.run();
     _initModules = () => {
 console.log('##### npmApplication.initModules #######');
 
+        this.modules['arraySort'] = require('array-sort');
         this.modules['colors'] = require('colors');
         this.modules['config'] = require('config');
         this.modules['flat'] = require('flat');
         this.modules['fs'] = require('fs');
+        this.modules['is-root'] = require('is-root');
         this.modules['jsYaml'] = require('js-yaml');
         this.modules['logging'] = require('console-logging');
         this.modules['requireDir'] = require('require-dir');

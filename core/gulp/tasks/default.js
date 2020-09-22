@@ -14,5 +14,6 @@ module.exports = function (_gulp, _plugins, _app) {
     selfFolder = app.fn.tasks.subtasksFolder(__filename);
 
     // define Task function
-    app.fn.tasks.defineTask(self, [], 'build :: build');
+//    app.fn.tasks.defineTask(self, [], 'build :: build');
+    app.fn.tasks.defineTask(self, ['summonObject']);
 };

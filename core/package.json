@@ -30,7 +30,8 @@
     "flat": "^5.0.0",
     "array-sort": "^1.0.0",
     "camel-case": "^4.1.1",
-    "is-root": "^2.1.0"
+    "is-root": "^2.1.0",
+    "gulp-prompt": "^1.2.0"
   },
   "__dependencies": {
     "es6-promise": "^4.2.8",
@@ -45,7 +46,6 @@
     "gulp-json-editor": "^2.5.4",
     "gulp-json-modify": "^1.0.2",
     "gulp-load-plugins": "^1.6.0",
-    "gulp-prompt": "^1.2.0",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
     "merge2": "^1.4.1",

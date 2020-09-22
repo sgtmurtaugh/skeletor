@@ -16,15 +16,15 @@ module.exports = function ( _gulp, _plugins, _app ) {
         /*
          * addNPMSupport
          * @param cb
-         * <p>Delegates to separate framework specific addFramework-Methods
+         * <p>Delegates to separate testFramework specific addFramework-Methods
          */
         'addNPMSupport' : function (cb) {
-            // when framework support is enabled
-            if (app.wizard.frameworkSupport) {
-                // and framework selected
-                if (!app.fn.typechecks.isEmpty(app.wizard.framework)) {
+            // when testFramework support is enabled
+            if (app.wizard.testFrameworkSupport) {
+                // and testFramework selected
+                if (!app.fn.typechecks.isEmpty(app.wizard.testFramework)) {
                     return app.fn.json.addNPMEntryToPackageConfiguration(
-                        app.config.frameworks[app.wizard.framework][app.wizard.frameworkVersion],
+                        app.config.testFrameworks[app.wizard.testFramework][app.wizard.testFrameworkVersion],
                         cb
                     );
                 }
@@ -39,16 +39,16 @@ module.exports = function ( _gulp, _plugins, _app ) {
         /*
          * copyDependencies
          * @param cb
-         * <p>Copies the framework dependencies (e.g. preprocessor template).
+         * <p>Copies the testFramework dependencies (e.g. preprocessor template).
          */
         'copyDependencies' : function (cb) {
             let src = null;
         // TODO!!!!!
-            // when framework support is enabled
-            if (app.wizard.frameworkSupport) {
+            // when testFramework support is enabled
+            if (app.wizard.testFrameworkSupport) {
                 // check dependencies
                 let jsonDependencies = app.fn.npm.getOwnPropertyValue(
-                    app.config.frameworks[app.wizard.framework][app.wizard.frameworkVersion],
+                    app.config.testFrameworks[app.wizard.testFramework][app.wizard.testFrameworkVersion],
                     'dependencies'
                 );
 
@@ -69,12 +69,12 @@ module.exports = function ( _gulp, _plugins, _app ) {
 
 
 
-                // // create framework src path variable with user selected framework informations
+                // // create testFramework src path variable with user selected testFramework informations
                 // src = [
                 //     path.join(
-                //         app.config.paths.frameworks,
-                //         app.wizard.framework,
-                //         app.wizard.frameworkVersion,
+                //         app.config.paths.testFrameworks,
+                //         app.wizard.testFramework,
+                //         app.wizard.testFrameworkVersion,
                 //         app.config.paths.recursive
                 //     )
                 // ];
@@ -90,19 +90,19 @@ module.exports = function ( _gulp, _plugins, _app ) {
         /*
          * copyTemplates
          * @param cb
-         * <p>Copies the framework template for the user selected framework type to the default installation directory.
+         * <p>Copies the testFramework template for the user selected testFramework type to the default installation directory.
          */
         'copyTemplates' : function (cb) {
             let src = null;
 
-            // when framework support is enabled
-            if (app.wizard.frameworkSupport) {
-                // create framework src path variable with user selected framework informations
+            // when testFramework support is enabled
+            if (app.wizard.testFrameworkSupport) {
+                // create testFramework src path variable with user selected testFramework informations
                 src = [
                     path.join(
-                        app.config.paths.frameworks,
-                        app.wizard.framework,
-                        app.wizard.frameworkVersion,
+                        app.config.paths.testFrameworks,
+                        app.wizard.testFramework,
+                        app.wizard.testFrameworkVersion,
                         app.config.paths.recursive
                     )
                 ];

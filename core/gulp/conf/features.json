@@ -71,6 +71,15 @@
     "url": "https://github.com/csstools/sanitize.css#readme"
   },
 
+  "strapi": {
+    "description": "The Strapi HTTP layer sits on top of Koa. Its ensemble of small modules work together to provide simplicity, maintainability, and structural conventions to Node.js applications.",
+    "npm": {
+      "sanitize.css": "^3.1.5"
+    },
+    "repository": "https://github.com/strapi/strapi",
+    "url": "http://strapi.io/"
+  },
+
   "stylelint-scss": {
     "description": "A collection of SCSS specific rules for stylelint",
     "npm": {
