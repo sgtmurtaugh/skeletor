@@ -2,13 +2,16 @@
 
 let gulp = require('gulp');
 let gulpPlugins = require('gulp-load-plugins');
-let yargs = require('yargs');
+// let yargs = require('yargs');
+
+
+import pwd from './lib/skeletor';
 import skeletor from './lib/skeletor';
 
 // Load all Gulp plugins into one variable
 const plugins = gulpPlugins();
 
-const skelet = new skeletor(gulp, plugins);
+const skelet = new skeletor(gulp, plugins, __dirname);
 skelet.run();
 
 // var promise = require('es6-promise');

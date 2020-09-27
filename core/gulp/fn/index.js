@@ -13,9 +13,10 @@ module.exports = function (_gulp, _plugins, _app) {
     app = _app;
 
     return {
-        'fs' : fs,
-        'path' : path,
+        'path' : require('./path-utils'),
 
+        'app' : require('./app-utils'),
+        'environment' : require('./environment-utils'),
         'config' : require('./config-utils'),
         'messages' : require('./messages'),
         'helper' : require('./helper-utils'),

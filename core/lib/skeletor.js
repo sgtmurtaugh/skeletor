@@ -9,8 +9,8 @@ export default class skeletor extends npmApplication {
      * @param gulp
      * @param plugins
      */
-    constructor(gulp, plugins) {
-        super(gulp, plugins);
+    constructor(gulp, plugins, cwd) {
+        super(gulp, plugins, cwd);
     }
 
     /**

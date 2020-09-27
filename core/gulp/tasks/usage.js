@@ -14,7 +14,7 @@ module.exports = function (_gulp, _plugins, _app) {
     selfFolder = app.fn.tasks.subtasksFolder(__filename);
 
     // define Task function
-    app.fn.tasks.defineTask(self, [], usage);
+    app.fn.tasks.defineTask(self, gulp.series(usage));
 };
 
 /**

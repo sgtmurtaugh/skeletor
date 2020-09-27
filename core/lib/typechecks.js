@@ -153,6 +153,11 @@ module.exports = {
 		else if (this.isString(obj)) {
 			bIsEmpty = (obj.trim().length === 0);
 		}
+		else if (this.isObject(obj)) {
+			// because Object.keys(new Date()).length === 0;
+			// we have to do some additional check
+			bIsEmpty = (Object.keys(obj).length === 0 && obj.constructor === Object);
+		}
 
 		// log.return(METHOD, bIsEmpty);
 		return bIsEmpty;

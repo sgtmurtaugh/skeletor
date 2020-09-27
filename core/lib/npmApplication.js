@@ -8,18 +8,18 @@ export default class npmApplication {
 // TODO : extract app json to config file. location ./ or ./conf/default etc...
 
     config = null;
-    core = {
-        'paths': {
-            'root': path.join(path.resolve(__dirname), '..'),
-            'gulpConfig': path.join(path.resolve(__dirname), '..', 'gulp', 'conf'),
-            'gulpTasks': path.join(path.resolve(__dirname), '..', 'gulp', 'tasks'),
-            'gulpFunctions': path.join(path.resolve(__dirname), '..', 'gulp', 'fn'),
-
-            'config': 'conf',
-            'dist': 'dist',
-            'src': 'src',
-        },
-    };
+    core = {};
+    //     'paths': {
+    //         'root': __dirname,
+    //         'gulpConfig': path.join(path.resolve(__dirname), '..', 'gulp', 'conf'),
+    //         'gulpTasks': path.join(path.resolve(__dirname), '..', 'gulp', 'tasks'),
+    //         'gulpFunctions': path.join(path.resolve(__dirname), '..', 'gulp', 'fn'),
+    //
+    //         'config': 'conf',
+    //         'dist': 'dist',
+    //         'src': 'src',
+    //     },
+    // };
     fn = {};
     instances = {
         'logger': console
@@ -35,10 +35,22 @@ export default class npmApplication {
      * Constructor
      * @param gulp
      * @param plugins
+     * @param cwd
      */
-    constructor(gulp, plugins) {
+    constructor(gulp, plugins, cwd) {
         this.gulp = gulp;
         this.plugins = plugins;
+        this.core.paths = {
+            'root': cwd,
+
+            'gulpConfig': path.join(cwd, 'gulp', 'conf'),
+            'gulpTasks': path.join(cwd, 'gulp', 'tasks'),
+            'gulpFunctions': path.join(cwd, 'gulp', 'fn'),
+
+            'config': 'conf',
+            'dist': 'dist',
+            'src': 'src',
+        };
 
         // initializes the specific app
         this._init();
@@ -135,13 +147,11 @@ console.log('##### npmApplication.initModules #######');
         this.modules['jsYaml'] = require('js-yaml');
         this.modules['logging'] = require('console-logging');
         this.modules['requireDir'] = require('require-dir');
-        this.modules['underscore'] = require('underscore');
         this.modules['yargs'] = require('yargs');
+        this.modules['underscore'] = require('underscore');
 
         // TODO convert typechecks to npm module
         this.modules['typechecks'] = require('./typechecks');
-        // Add shortcut for typecheck functions
-        this.fn['typechecks'] = this.modules['typechecks'];
     }
 
     /**
@@ -149,6 +159,9 @@ console.log('##### npmApplication.initModules #######');
      * TODO
      */
     _initAdditionalObjects = () => {
+        // link shortcuts
+        this._linkShortcuts();
+
         // initialize app config
         this._initAppConfig();
 
@@ -156,6 +169,17 @@ console.log('##### npmApplication.initModules #######');
         this._initLogger();
 
         this.instances.logger.debug('successful '.green + 'initialized additional objects.' );
+    }
+
+    /**
+     * @returns {{}}
+     * @private
+     * TODO
+     */
+    _linkShortcuts = () => {
+        // Add shortcut for functions
+        this.fn['_'] = this.modules['underscore'];
+        this.fn['typechecks'] = this.modules['typechecks'];
     }
 
     /**

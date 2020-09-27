@@ -1,6 +1,6 @@
 'use strict';
 
-let fs = require('fs');
+// TODO Make this part of a global package for other projects
 
 let gulp;
 let plugins;
@@ -13,6 +13,7 @@ module.exports = function ( _gulp, _plugins, _app ) {
     app = _app;
 
     return {
+
         /**
          * file
          * @param file
@@ -26,6 +27,25 @@ module.exports = function ( _gulp, _plugins, _app ) {
                     console.log(data);
                 });
             }
+        },
+
+        /**
+         *
+         * @param msg
+         * @param obj
+         */
+        'traceObject': function (msg, obj) {
+            if ( app.fn.typechecks.isEmptyString( msg ) ) {
+                msg = ''; // TODO
+            }
+
+            app.logger.debug( "#################### > start " + msg + " ####################" );
+            app.logger.debug( "" );
+            app.logger.debug( obj );
+            app.logger.debug( "" );
+            app.logger.debug( "#################### < end " + msg + " ####################" );
+            app.logger.debug( "" );
         }
+
     };
 };
