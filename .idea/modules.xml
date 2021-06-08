@@ -22,6 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/template-engine.twig/template-engine.twig.iml" filepath="$PROJECT_DIR$/template-engine.twig/template-engine.twig.iml" />
       <module fileurl="file://$PROJECT_DIR$/template-engine.vash/template-engine.vash.iml" filepath="$PROJECT_DIR$/template-engine.vash/template-engine.vash.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-framework.ava/test-framework.ava.iml" filepath="$PROJECT_DIR$/test-framework.ava/test-framework.ava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-framework.backstopjs/test-framework.backstopjs.iml" filepath="$PROJECT_DIR$/test-framework.backstopjs/test-framework.backstopjs.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-framework.jest/test-framework.jest.iml" filepath="$PROJECT_DIR$/test-framework.jest/test-framework.jest.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-framework.mocha/test-framework.mocha.iml" filepath="$PROJECT_DIR$/test-framework.mocha/test-framework.mocha.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-framework.selenium-webdriver/test-framework.selenium-webdriver.iml" filepath="$PROJECT_DIR$/test-framework.selenium-webdriver/test-framework.selenium-webdriver.iml" />
