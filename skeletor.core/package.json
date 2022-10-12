@@ -12,7 +12,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.12",
     "node-sprite-generator": "^0.10.2",
-    "svg-sprite": "^1.5.0"
+    "svg-sprite": "^1.5.4"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
